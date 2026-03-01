@@ -2,7 +2,7 @@ MIT License
 
 :memo: **NOTE: This applies only for source codes, not logos and images. See [README#license](https://github.com/coderdojo-japan/teaser-template.coderdojo.jp#license) for details.**
 
-Copyright (c) 2024  [DojoCon Japan](https://dojocon.coderdojo.jp/) & [CoderDojo Japan](https://github.com/coderdojo-japan)
+Copyright (c) 2024 [DojoCon Japan](https://dojocon.coderdojo.jp/) & [CoderDojo Japan](https://github.com/coderdojo-japan)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
