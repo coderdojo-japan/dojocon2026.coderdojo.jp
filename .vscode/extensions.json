@@ -1,0 +1,9 @@
+{
+  // VS Code でこのプロジェクトを開くと、おすすめ拡張として提案されます。
+  "recommendations": [
+    "astro-build.astro-vscode",
+    "bradlc.vscode-tailwindcss",
+    "esbenp.prettier-vscode",
+    "marp-team.marp-vscode"
+  ]
+}

@@ -12,6 +12,21 @@
 
 <br>
 
+## :wave: はじめての方へ（Astro が初めてでも大丈夫）
+
+Astro を触るのが初めてのメンバー向けに、**入門スライド**を用意しています。
+「Astro とは何か」から「開発の始め方・コンポーネント・デプロイ」まで、
+これを一通り見れば開発に参加できます。
+
+- :sparkles: **入門スライド**: [`docs/astro-onboarding.md`](./docs/astro-onboarding.md)
+  - VS Code 拡張「[Marp for VS Code](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode)」を入れると、エディタ上でスライド表示できます
+  - もしくは `npm run slides` でブラウザにライブプレビュー表示
+  - PDF / HTML で配りたいときは `npm run slides:pdf` / `npm run slides:html`
+
+その後、下記の「開発環境のセットアップ」に進んでください。
+
+<br>
+
 ## :rocket: 公開 URL
 
 | 時期                   | 公開 URL                              | 配信元リポジトリ                      |
@@ -26,7 +41,7 @@
 
 ## :wrench: 開発環境のセットアップ
 
-Node.js 20 以上（推奨: 22+）が必要です。
+Node.js **22.12 以上**が必要です（Astro 6 の要件）。
 
 ```shell
 # 依存関係をインストール
@@ -45,6 +60,7 @@ npm run dev
 | `npm run preview` | ビルド結果をローカルでプレビュー     |
 | `npm run check`   | 型チェック・Astro の診断             |
 | `npm run format`  | Prettier で整形                      |
+| `npm run slides`  | 入門スライドをブラウザにライブ表示   |
 
 <br>
 
@@ -65,6 +81,8 @@ npm run dev
 │   │   └── index.astro  # トップページ
 │   └── styles/
 │       └── global.css   # Tailwind の読み込み・テーマ定義
+├── docs/                # チーム向けドキュメント
+│   └── astro-onboarding.md  # Astro 入門スライド（Marp）
 ├── astro.config.mjs     # Astro 設定（site URL・統合）
 └── .github/workflows/
     └── deploy.yml       # GitHub Pages への自動デプロイ

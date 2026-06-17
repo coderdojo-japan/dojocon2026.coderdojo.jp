@@ -2,6 +2,9 @@
 dist/
 # generated types
 .astro/
+# generated slides (source は docs/astro-onboarding.md)
+docs/*.html
+docs/*.pdf
 
 # dependencies
 node_modules/

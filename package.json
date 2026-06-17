@@ -13,6 +13,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
+    "slides": "marp docs/astro-onboarding.md --preview",
+    "slides:html": "marp docs/astro-onboarding.md -o docs/astro-onboarding.html",
+    "slides:pdf": "marp docs/astro-onboarding.md --pdf -o docs/astro-onboarding.pdf",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky"
@@ -29,6 +32,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@marp-team/marp-cli": "^4.4.0",
     "@tailwindcss/vite": "^4.3.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.3.1",
