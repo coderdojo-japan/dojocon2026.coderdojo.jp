@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+/*
+ * Tailwind v4 のテーマ定義。
+ * デザインのブランドカラーをトークン化し、`bg-navy` `text-navy-dark` のように使える。
+ * 必要に応じてここに色・フォント等を追加する。
+ */
+@theme {
+  --color-navy: #002244;
+  --color-navy-dark: #001a33;
+
+  --font-mono: "Space Mono", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}

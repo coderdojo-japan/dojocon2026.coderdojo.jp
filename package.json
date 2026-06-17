@@ -1,17 +1,38 @@
 {
+  "name": "dojocon2026.coderdojo.jp",
+  "type": "module",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "npx http-server",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{html,css,json,md,xml,webmanifest}": "prettier --write"
+    "*.{astro,js,jsx,ts,tsx,css,json,md,mdx,webmanifest}": "prettier --write"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^6.4.8"
+  },
+  "overrides": {
+    "vite": "^7.3.2"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@tailwindcss/vite": "^4.3.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.3.1",
-    "prettier": "^3"
+    "prettier": "^3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^6.0.3"
   }
 }

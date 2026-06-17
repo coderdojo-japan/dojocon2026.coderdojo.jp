@@ -1,148 +1,107 @@
-# :yin_yang: DojoCon Japan 2026 Teaser Site
+# :yin_yang: DojoCon Japan 2026 公式サイト
 
-[![Screenshot of Teaser Site](https://github.com/coderdojo-japan/teaser-template.coderdojo.jp/blob/main/images/readme-cover.gif?raw=true)](https://teaser-template.coderdojo.jp/)
+[DojoCon Japan 2026 in 岩手](https://dojocon2026.coderdojo.jp/) 公式サイトのソースコードです。
+[Astro](https://astro.build/) で構築し、[GitHub Pages](https://docs.github.com/ja/pages) で公開しています。
 
-<br>
-
-<div id='howto'></div>
-
-## [:beginner:](#howto) 本テンプレートの使い方
-
-[承認された CoderDojo](https://coderdojo.jp/#dojos) であれば、以下の手順で本テンプレートをお使いいただけます。
-
-### 1. [GitHub](https://github.co.jp/) のアカウントを作る
-
-[![GitHub Singup](https://github.com/coderdojo-japan/teaser-template.coderdojo.jp/blob/main/images/readme-github.png?raw=true)](https://github.co.jp/)
-[&raquo; https://github.co.jp/](https://github.co.jp/)
+| 項目     | 内容                        |
+| -------- | --------------------------- |
+| イベント | DojoCon Japan 2026 in 岩手  |
+| 開催日   | 2026年11月1日（日）         |
+| 会場     | 岩手県盛岡市 プラザおでって |
+| テーマ   | わかちあう、わかりあう      |
 
 <br>
 
-### 2. 本ページの画面右上にある `Use this template` -> `Create a new repository` を押す
+## :rocket: 公開 URL
 
-![Use this template](https://github.com/coderdojo-japan/teaser-template.coderdojo.jp/blob/main/images/readme-template.png?raw=true)
+| 時期                   | 公開 URL                              | 配信元リポジトリ                      |
+| ---------------------- | ------------------------------------- | ------------------------------------- |
+| 現在（ティザー期間中） | https://dojocon2026.coderdojo.jp/     | `dojocon2026-teaser.coderdojo.jp`     |
+| 開発中（ステージング） | https://dojocon2026-test.coderdojo.jp | 本リポジトリ（`public/CNAME` で指定） |
+| 公式サイト完成後       | https://dojocon2026.coderdojo.jp/     | 本リポジトリ（CNAME を切り替え）      |
 
-<br>
-
-### 3. 各項目に情報を入力し、本テンプレートから新しいリポジトリを作成する
-
-![Create with template](https://github.com/coderdojo-japan/teaser-template.coderdojo.jp/blob/main/images/readme-create.png?raw=true)
-
-<br>
-
-### 4. [README の動かす方法](#setup)にしたがって、適宜Webサイトを修正・確認する
-
-![Edit HTML](https://github.com/coderdojo-japan/teaser-template.coderdojo.jp/blob/main/images/readme-edit.png?raw=true)
+公式サイトが完成したら、`public/CNAME` を `dojocon2026.coderdojo.jp` に切り替えて公開を移行します。
 
 <br>
 
-### 5. 準備ができたら [GitHub Pages](https://www.google.com/search?q=GitHub+Pages) から公開する
+## :wrench: 開発環境のセットアップ
 
-- `Settings` -> `Pages` に行き、`Branch` 欄にある `None` を `main` に変更し、`Save` を押す
-- `Custom domain` 欄が表示されたらドメイン名 (例: `dojocon2024.coderdojo.jp`) を入力し、`Save` を押す
-- :warning: ドメインの適用には DNS 設定が必要です。ココまで設定できたら [@yasulab](https://github.com/yasulab) までご連絡ください! :email: :dash:
-  ![GitHub Pages Settings](https://github.com/coderdojo-japan/teaser-template.coderdojo.jp/blob/main/images/readme-domain.png?raw=true)
-
-<br>
-
-### 6. DNS 設定が完了したら、ティザーサイトが公開できているはずです!
-
-- 公開例 (1/2): [https://dojocon2024-teaser.coderdojo.jp/](https://dojocon2024-teaser.coderdojo.jp/)
-- 公開例 (2/2): [https://teaser-template.coderdojo.jp/](https://teaser-template.coderdojo.jp/)  
-  [![Teaser Site Screenshot](https://github.com/coderdojo-japan/teaser-template.coderdojo.jp/blob/main/images/readme-cover.gif?raw=true)](https://teaser-template.coderdojo.jp/)
-
-<br>
-
-<div id='setup'></div>
-
-<br>
-
-## [:wrench:](#setup) Ruby / Python / Node.js / PHP で動かす方法
-
-### 共通
-
-下記の手順でティザーサイトをローカル環境で確認できます。無事に立ち上げられると、ブラウザで [http://localhost:8080/](http://localhost:8080/) にアクセスした際、上記のようなティザーサイトが表示されます。
-
-### Ruby で動かす方法
+Node.js 20 以上（推奨: 22+）が必要です。
 
 ```shell
-# Ruby がインストールされていることを確認する (無ければインストールする)
-$ ruby --version
+# 依存関係をインストール
+npm install
 
-# ローカルサーバーを立ち上げる
-$ ruby -run -e httpd
+# 開発サーバーを起動（http://localhost:4321/）
+npm run dev
 ```
 
+### npm スクリプト
+
+| コマンド          | 内容                                 |
+| ----------------- | ------------------------------------ |
+| `npm run dev`     | 開発サーバーを起動（ホットリロード） |
+| `npm run build`   | 本番ビルドを `dist/` に出力          |
+| `npm run preview` | ビルド結果をローカルでプレビュー     |
+| `npm run check`   | 型チェック・Astro の診断             |
+| `npm run format`  | Prettier で整形                      |
+
 <br>
 
-### Python で動かす方法
+## :file_folder: ディレクトリ構成
 
-```shell
-# Python がインストールされていることを確認する (無ければインストールする)
-$ python --version
-
-# ローカルサーバーを立ち上げる
-$ python -m SimpleHTTPServer 8080
+```
+.
+├── public/              # そのまま配信される静的ファイル
+│   ├── CNAME            # GitHub Pages のカスタムドメイン
+│   ├── images/          # 画像・OGP・ファビコン類
+│   ├── favicon.ico
+│   └── site.webmanifest
+├── src/
+│   ├── layouts/         # ページ共通の枠（<head>・OGP など）
+│   │   └── BaseLayout.astro
+│   ├── components/      # 再利用するコンポーネント
+│   ├── pages/           # ルーティング（ファイル＝URL）
+│   │   └── index.astro  # トップページ
+│   └── styles/
+│       └── global.css   # Tailwind の読み込み・テーマ定義
+├── astro.config.mjs     # Astro 設定（site URL・統合）
+└── .github/workflows/
+    └── deploy.yml       # GitHub Pages への自動デプロイ
 ```
 
-<br>
-
-### Node.js で動かす方法
-
-```shell
-# Node.js の npx がインストールされていることを確認する (無ければインストールする)
-$ npx --version
-
-# ローカルサーバーを立ち上げる
-$ npx http-server
-```
+ページを追加するには `src/pages/` に `.astro` ファイルを置きます（例: `src/pages/about.astro` → `/about`）。
 
 <br>
 
-### PHP で動かす方法
+## :art: 技術スタック
 
-```shell
-# PHP がインストールされていることを確認する (無ければインストールする)
-$ php --version
+- [Astro](https://astro.build/) — 静的サイトジェネレーター
+- [Tailwind CSS v4](https://tailwindcss.com/) — ユーティリティ CSS（`@tailwindcss/vite` 経由）
+- [@astrojs/sitemap](https://docs.astro.build/ja/guides/integrations-guide/sitemap/) — `sitemap-index.xml` を自動生成
+- Prettier + husky + lint-staged — コミット時に自動整形
 
-# ローカルサーバーを立ち上げる
-$ php -S localhost:8080
-```
-
-<div id='customize'></div>
+> **メモ:** Astro 6 は rolldown 版 Vite (v7) を使うため、`package.json` の `overrides` で
+> `vite` を `^7.3.2` に固定し、Tailwind プラグインと Vite のバージョンを一致させています。
 
 <br>
 
-## [:memo:](#customize) 動かせたら、開催情報などを入力する
+## :package: デプロイ
 
-前項の手順で [http://localhost:8080/](http://localhost:8080/) からティザーサイトを表示できたら、以下のファイルにある各項目を修正して完成です。
+`main` ブランチへ push すると、GitHub Actions（`.github/workflows/deploy.yml`）が
+自動でビルドして GitHub Pages へデプロイします。
 
-- `index.html`: 開催場所、開催日、テーマ、OGP 画像のパスなど (必須)
-- `site.webmanifest`: [スマホでホーム画面に追加](https://www.google.com/search?q=スマホ+ホーム画面+追加)した際に表示されるサイト名 (任意)
-- `sitemap.xml`: ドメイン名 (必須)
-
-入力例: [:octocat: coderdojo-japan/dojocon2025-teaser.coderdojo.jp - fill date / location #1](https://github.com/coderdojo-japan/dojocon2025-teaser.coderdojo.jp/pull/1/files)
-
-<div id='references'></div>
+> **初回のみ:** リポジトリの `Settings` → `Pages` → `Build and deployment` の
+> `Source` を **GitHub Actions** に設定してください。
 
 <br>
 
-## [:octocat:](#references) 関連リポジトリ
+## :handshake: Credits & License
 
-- [GitHub - ティザーサイト用テンプレート](https://github.com/coderdojo-japan/teaser-template.coderdojo.jp)
-- [GitHub - DojoCon Japan リポジトリ一覧](https://github.com/search?q=org%3Acoderdojo-japan%20dojocon&type=repositories)
-- [GitHub - CoderDojo Japan organization](https://github.com/coderdojo-japan) (approved by [GitHub for Nonprofit](https://news.coderdojo.jp/2019/08/29/github-for-nonprofit/))
+- :yin_yang: The CoderDojo logo - See the [CoderDojo Charter](https://coderdojo.jp/charter).
+- :camera_flash: The CoderDojo object photo by [@yasulab](https://github.com/yasulab) ([DojoCon Japan 2016](https://dojocon2016.coderdojo.jp/) team).
 
-<br>
-
-<div id='license'></div>
-
-## [:handshake:](#license) Credits & Works
-
-- :yin_yang: The CoderDojo logo in header - See the [CoderDojo Charter](https://coderdojo.jp/charter).
-- :camera_flash: The CoderDojo object in footer is crafted by [DojoCon Japan 2016](https://dojocon2016.coderdojo.jp/) team and photo by [@yasulab](https://github.com/yasulab).
-- :art: This template is based on the [DojoCon Japan 2023](https://dojocon2023.coderdojo.jp/)'s teaser site, designed by [@kwaka1208](https://github.com/kwaka1208).
-
-Other than the logo and photo above, the source codes, such as HTML and CSS, are published under [The MIT License](https://github.com/coderdojo-japan/teaser-template.coderdojo.jp/blob/main/LICENSE.md). Feel free to refer, copy, or share them.
+ロゴ・写真を除くソースコード（HTML / CSS 等）は [The MIT License](./LICENSE.md) で公開しています。
 
 ---
 
