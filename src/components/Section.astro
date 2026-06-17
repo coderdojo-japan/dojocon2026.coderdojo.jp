@@ -1,0 +1,23 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+
+/**
+ * セクションの共通枠。見出し付きで中身（slot）を囲む。
+ * id を渡すとヘッダーのアンカーリンク先になる。
+ */
+interface Props {
+  id?: string;
+  title: string;
+  subtitle?: string;
+  /** 背景を薄いグレーにする（セクションを交互に塗り分けるとき用） */
+  alt?: boolean;
+}
+const { id, title, subtitle, alt = false } = Astro.props;
+---
+
+<section id={id} class:list={["scroll-mt-20 px-6 py-16 sm:py-20", alt && "bg-surface"]}>
+  <div class="mx-auto max-w-5xl">
+    <SectionHeading title={title} subtitle={subtitle} />
+    <slot />
+  </div>
+</section>

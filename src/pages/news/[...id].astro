@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatNewsDate } from "../../lib/news";
+
+// 全お知らせ記事を静的ページとして生成する
+export async function getStaticPaths() {
+  const posts = await getCollection("news");
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={`${post.data.title} | DojoCon Japan 2026`} description={post.data.title}>
+  <article class="px-6 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl">
+      <div class="mb-8 border-b border-black/5 pb-6">
+        <div class="flex items-center gap-3">
+          <time datetime={post.data.date.toISOString()} class="text-ink/60 font-mono text-sm">
+            {formatNewsDate(post.data.date)}
+          </time>
+          <span class="bg-accent-light text-accent rounded-full px-3 py-0.5 text-xs font-bold">
+            {post.data.category}
+          </span>
+        </div>
+        <h1 class="text-navy mt-3 text-2xl font-bold sm:text-3xl">{post.data.title}</h1>
+      </div>
+
+      <div
+        class="prose-news text-ink/90 [&_a]:text-accent [&_h2]:text-navy leading-relaxed [&_a]:underline [&_h2]:mt-8 [&_h2]:text-xl [&_h2]:font-bold [&_li]:my-1 [&_p]:my-4 [&_ul]:list-disc [&_ul]:pl-6"
+      >
+        <Content />
+      </div>
+
+      <p class="mt-12 text-center">
+        <a href="/news" class="text-accent underline">&laquo; お知らせ一覧に戻る</a>
+      </p>
+    </div>
+  </article>
+</BaseLayout>

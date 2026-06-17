@@ -1,0 +1,18 @@
+---
+import Section from "../Section.astro";
+import { site } from "../../data/site";
+---
+
+<Section id="about-dojocon" title="DojoCon Japan" subtitle="DojoCon Japan とは？" alt>
+  <div class="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
+    <p class="text-ink/80 text-base leading-relaxed">
+      DojoCon Japan は、全国の CoderDojo に関わる人たちが一堂に会する年次カンファレンスです。 2016
+      年に始まり、毎年開催地を変えながら続いています。
+      各地の取り組みの共有や、子ども・メンター・保護者・サポーター同士の交流を通じて、
+      コミュニティ全体で学び合う場となっています。
+    </p>
+    <a href={site.links.dojoconJapan} target="_blank" rel="noopener noreferrer" class="text-accent underline">
+      &raquo; これまでの DojoCon Japan を見る
+    </a>
+  </div>
+</Section>

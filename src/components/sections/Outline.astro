@@ -1,0 +1,31 @@
+---
+import Section from "../Section.astro";
+import { site } from "../../data/site";
+
+const rows = [
+  { label: "開催日時", value: `${site.event.dateText} ${site.event.timeLabel}` },
+  { label: "会場", value: `${site.event.venueArea} ${site.event.venueName}`, url: site.event.venueUrl },
+  { label: "参加費", value: site.event.isFree ? "無料" : "" },
+];
+---
+
+<Section id="outline" title="Outline" subtitle="開催概要" alt>
+  <dl class="mx-auto max-w-2xl divide-y divide-black/5 rounded-xl border border-black/5 bg-white">
+    {
+      rows.map((row) => (
+        <div class="flex flex-col gap-1 p-5 sm:flex-row sm:items-center sm:gap-6">
+          <dt class="text-navy w-28 shrink-0 font-bold">{row.label}</dt>
+          <dd class="text-ink/90">
+            {row.url ? (
+              <a href={row.url} target="_blank" rel="noopener noreferrer" class="text-accent underline">
+                {row.value}
+              </a>
+            ) : (
+              row.value
+            )}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</Section>

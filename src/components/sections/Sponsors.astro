@@ -1,0 +1,36 @@
+---
+import Section from "../Section.astro";
+import { sponsorTiers } from "../../data/sponsors";
+
+// スポンサーが 1 社でも登録されている tier だけ表示する
+const activeTiers = sponsorTiers.filter((tier) => tier.sponsors.length > 0);
+---
+
+<Section id="sponsors" title="Sponsor" subtitle="スポンサー" alt>
+  {
+    activeTiers.length === 0 ? (
+      <p class="text-ink/60 text-center">スポンサーは募集中です。決定し次第こちらでご紹介します。</p>
+    ) : (
+      <div class="space-y-12">
+        {activeTiers.map((tier) => (
+          <div class="text-center">
+            <p class="text-accent mb-5 font-mono text-sm tracking-widest">{tier.label}</p>
+            <ul class="flex flex-wrap items-center justify-center gap-8">
+              {tier.sponsors.map((sponsor) => (
+                <li>
+                  <a href={sponsor.url} target="_blank" rel="noopener noreferrer" class="hover:opacity-80">
+                    {sponsor.logo ? (
+                      <img src={sponsor.logo} alt={sponsor.name} class="max-h-16 w-auto" />
+                    ) : (
+                      <span class="text-navy font-bold">{sponsor.name}</span>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    )
+  }
+</Section>

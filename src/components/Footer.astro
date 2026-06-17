@@ -1,0 +1,33 @@
+---
+import { site } from "../data/site";
+---
+
+<footer class="bg-navy px-6 py-12 text-center text-white">
+  <div class="mx-auto max-w-4xl">
+    <img src="/images/logo.webp" alt="" class="mx-auto mb-4 h-12 w-12" />
+    <p class="font-mono text-lg font-bold">{site.shortTitle}</p>
+    <p class="mt-1 text-sm text-white/80">{site.theme}</p>
+
+    <nav class="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+      <a href={site.links.x} target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-white"
+        >X (Twitter)</a
+      >
+      <a href={site.links.github} target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-white"
+        >GitHub</a
+      >
+      <a
+        href={site.links.dojoconJapan}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-white/80 hover:text-white"
+      >
+        DojoCon Japan（全国イベント）
+      </a>
+    </nav>
+
+    <div class="mt-8 text-xs leading-relaxed text-white/60">
+      <p>DojoCon Japan 実行委員会</p>
+      <p>一般社団法人 CoderDojo Japan</p>
+    </div>
+  </div>
+</footer>

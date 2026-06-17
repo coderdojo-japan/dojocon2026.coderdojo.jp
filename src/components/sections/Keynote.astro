@@ -1,0 +1,35 @@
+---
+// 基調講演。登壇者情報はここで管理する。
+const keynote = {
+  name: "上田 信行",
+  nameKana: "ウエダ ノブユキ",
+  title: "同志社女子大学 名誉教授 / ネオミュージアム 館長",
+  photo: "/images/keynote-ueda.jpg",
+  profileUrl: "https://nobuyukiueda.com/about",
+};
+---
+
+<section id="keynote" class="bg-navy scroll-mt-20 px-6 py-16 text-center text-white sm:py-20">
+  <div class="mx-auto max-w-3xl">
+    <p class="font-mono text-sm tracking-widest text-white/60">KEYNOTE SPEAKER</p>
+    <h2 class="mt-2 text-2xl font-bold sm:text-3xl">基調講演</h2>
+
+    <img src={keynote.photo} alt={keynote.name} class="mx-auto mt-10 h-40 w-40 rounded-full object-cover object-top" />
+    <p class="mt-6 text-xl font-bold">
+      {keynote.name}
+      <span class="text-base font-normal text-white/70">/ {keynote.nameKana}</span>
+    </p>
+    <p class="mt-2 text-sm text-white/80">{keynote.title}</p>
+
+    <p class="mt-6">
+      <a
+        href={keynote.profileUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm text-white/80 underline hover:text-white"
+      >
+        &raquo; プロフィール詳細を見る
+      </a>
+    </p>
+  </div>
+</section>

@@ -1,0 +1,67 @@
+---
+import { site } from "../data/site";
+
+// ヘッダーのナビゲーション。リンク先はトップページのセクション (/#id) か別ページ。
+const nav = [
+  { href: "/#outline", label: "開催概要" },
+  { href: "/#about-coderdojo", label: "CoderDojoとは" },
+  { href: "/news", label: "お知らせ" },
+  { href: "/#keynote", label: "基調講演" },
+  { href: "/#sessions", label: "セッション" },
+  { href: "/#sponsors", label: "スポンサー" },
+  { href: "/#contact", label: "お問い合わせ" },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-black/5 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3">
+    <a href="/" class="text-navy flex items-center gap-2 font-bold">
+      <img src="/images/logo.webp" alt="" class="h-8 w-8" />
+      <span class="text-sm sm:text-base">{site.shortTitle}</span>
+    </a>
+
+    <!-- PC 用ナビ -->
+    <nav class="hidden items-center gap-5 text-sm lg:flex">
+      {
+        nav.map((item) => (
+          <a href={item.href} class="text-ink/80 hover:text-accent transition">
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- モバイル用ナビ（JS 不要の details メニュー） -->
+    <details class="relative lg:hidden">
+      <summary
+        class="text-navy flex cursor-pointer list-none items-center rounded-md p-2 [&::-webkit-details-marker]:hidden"
+      >
+        <span class="sr-only">メニューを開く</span>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </summary>
+      <nav
+        class="absolute right-0 mt-2 flex w-52 flex-col gap-1 rounded-lg border border-black/5 bg-white p-2 text-sm shadow-lg"
+      >
+        {
+          nav.map((item) => (
+            <a href={item.href} class="text-ink/80 hover:bg-surface hover:text-accent rounded px-3 py-2 transition">
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </details>
+  </div>
+</header>

@@ -1,30 +1,30 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/sections/Hero.astro";
+import Outline from "../components/sections/Outline.astro";
+import AboutCoderDojo from "../components/sections/AboutCoderDojo.astro";
+import AboutDojoCon from "../components/sections/AboutDojoCon.astro";
+import News from "../components/sections/News.astro";
+import Keynote from "../components/sections/Keynote.astro";
+import ProgramSection from "../components/sections/ProgramSection.astro";
+import Organizers from "../components/sections/Organizers.astro";
+import Sponsors from "../components/sections/Sponsors.astro";
+import Contact from "../components/sections/Contact.astro";
+import Staff from "../components/sections/Staff.astro";
+import { sessions, events } from "../data/program";
 ---
 
 <BaseLayout>
-  <main class="bg-navy flex min-h-screen flex-col items-center justify-center gap-6 px-6 py-16 text-center text-white">
-    <img src="/images/logo.webp" alt="CoderDojo Logo" class="w-32 sm:w-40" />
-
-    <h1 class="font-mono text-3xl font-bold tracking-wide sm:text-5xl">DojoCon Japan 2026 in 岩手</h1>
-
-    <p class="font-mono text-xl font-bold sm:text-2xl">2026.11.01 SUN</p>
-
-    <p class="text-base sm:text-lg">
-      岩手県盛岡市
-      <a
-        href="https://www.odette.or.jp/plaza-odette/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="underline underline-offset-4 hover:opacity-80">プラザおでって</a
-      >
-    </p>
-
-    <p class="font-mono tracking-widest opacity-85">テーマ: わかちあう、わかりあう</p>
-
-    <p class="mt-8 text-sm opacity-70">
-      公式サイトは現在制作中です。<br />
-      This is a minimal Astro starter — built with Astro + Tailwind CSS.
-    </p>
-  </main>
+  <Hero />
+  <Outline />
+  <AboutCoderDojo />
+  <AboutDojoCon />
+  <News />
+  <Keynote />
+  <ProgramSection id="sessions" title="Session" subtitle="セッション" items={sessions} alt />
+  <ProgramSection id="events" title="Event" subtitle="イベント" items={events} />
+  <Organizers />
+  <Sponsors />
+  <Contact />
+  <Staff />
 </BaseLayout>

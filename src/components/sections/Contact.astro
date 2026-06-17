@@ -1,0 +1,23 @@
+---
+import Section from "../Section.astro";
+import { site } from "../../data/site";
+---
+
+<Section id="contact" title="Contact" subtitle="お問い合わせ">
+  <div class="mx-auto max-w-2xl text-center">
+    <p class="text-ink/80 text-base leading-relaxed">
+      DojoCon Japan 2026 に関するお問い合わせは、CoderDojo Japan までお気軽にご連絡ください。
+      スポンサー・協賛のご相談も歓迎しています。
+    </p>
+    <p class="mt-6">
+      <a
+        href={site.links.x}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-accent inline-block rounded-full px-6 py-2.5 font-bold text-white transition hover:opacity-90"
+      >
+        X (Twitter) で連絡する
+      </a>
+    </p>
+  </div>
+</Section>

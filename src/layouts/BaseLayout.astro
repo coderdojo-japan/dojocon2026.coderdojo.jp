@@ -1,15 +1,15 @@
 ---
 import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../data/site";
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const {
-  title = "DojoCon Japan 2026 in 岩手",
-  description = "DojoCon Japan とは日本の CoderDojo コミュニティメンバーが全国から集まるカンファレンスイベント (CoderDojo Conference) です。2026年11月1日（日）、岩手県盛岡市 プラザおでってで開催します。",
-} = Astro.props;
+const { title = site.title, description = site.description } = Astro.props;
 
 // astro.config.mjs の site を基準に正規 URL を生成
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -44,9 +44,16 @@ const ogImage = new URL("/images/ogp.png", Astro.site);
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <slot />
+  <body class="font-sans">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
