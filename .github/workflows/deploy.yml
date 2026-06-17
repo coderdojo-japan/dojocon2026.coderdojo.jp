@@ -33,11 +33,15 @@ jobs:
           node-version: 22
           cache: npm
 
-      # npm ci は node_modules を作り直し、ロックファイルから厳密に
-      # インストールするため、プラットフォーム別ネイティブ依存
-      # (@rollup/rollup-linux-x64-gnu 等) も正しく解決される。
+      # npm/cli#4828 回避:
+      # コミット済み package-lock.json には生成した OS (macOS) 用の
+      # ネイティブ依存しか実体エントリが無く、Linux の npm ci/install では
+      # @rollup/rollup-linux-x64-gnu が入らずビルドが失敗する。
+      # CI ではロックファイルを作り直してから入れ、Linux 用バイナリを確実に取得する。
       - name: Install dependencies
-        run: npm ci
+        run: |
+          rm -f package-lock.json
+          npm install
 
       - name: Build site
         run: npm run build
