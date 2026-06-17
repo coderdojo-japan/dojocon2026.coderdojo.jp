@@ -403,6 +403,22 @@ git push -u origin feat/access-page
 
 ---
 
+## このサイトのコンテンツを編集する 📝
+
+「○○を直したい」ときの編集場所は決まっています（詳細は **`docs/content-editing.md`**）。
+
+| やりたいこと                     | 編集する場所                           |
+| -------------------------------- | -------------------------------------- |
+| 開催日・会場・テーマ・各種リンク | `src/data/site.ts`                     |
+| お知らせを追加                   | `src/content/news/` に Markdown を追加 |
+| セッション／イベントを追加       | `src/data/program.ts`                  |
+| スポンサー／スタッフを追加       | `src/data/sponsors.ts` / `staff.ts`    |
+
+> Session / Sponsor / Staff などは、データが空の間は自動で「準備中」と表示されます。
+> `src/data/` に追記すれば、そのままサイトに反映されます。
+
+---
+
 ## 困ったときは
 
 - 📖 **Astro 公式ドキュメント（日本語）**: https://docs.astro.build/ja/
