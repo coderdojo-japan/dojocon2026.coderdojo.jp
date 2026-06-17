@@ -294,26 +294,32 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 別ファイルに CSS を書かず、HTML の中で完結します。
 
 ```html
-<!-- 従来: CSS を別に書く -->
+<!-- 従来: 別ファイルに CSS を書く -->
 <div class="card">...</div>
 <style>
   .card {
     padding: 1rem;
     border-radius: 8px;
-    background: navy;
   }
 </style>
 
-<!-- Tailwind: クラスで指定 -->
-<div class="bg-navy rounded-lg p-4">...</div>
+<!-- Tailwind: クラスだけで指定 -->
+<div class="rounded-lg p-4">...</div>
 ```
+
+---
+
+## よく使う Tailwind クラスの例
 
 | クラス       | 意味                               |
 | ------------ | ---------------------------------- |
 | `p-4`        | padding: 1rem                      |
 | `rounded-lg` | 角丸                               |
 | `bg-navy`    | 背景色（このプロジェクトの定義色） |
+| `flex`       | 横並び（フレックスボックス）       |
 | `sm:text-lg` | 画面が広いとき文字を大きく         |
+
+> どんなクラスがあるかは [Tailwind 公式ドキュメント](https://tailwindcss.com/docs) で検索できます。
 
 ---
 
