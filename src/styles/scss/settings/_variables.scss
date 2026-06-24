@@ -1,0 +1,19 @@
+$main-pink: #ee859a;
+$text-color: #231815;
+
+
+$bp-up: (
+	'md': 'screen and (min-width: 600px)',
+	'lg': 'screen and (min-width: 960px)',
+	'xl': 'screen and (min-width: 1280px)',
+) !default;
+
+$bp-down: (
+	'md': 'screen and (max-width: 599px)',
+	'lg': 'screen and (max-width: 959px)',
+	'xl': 'screen and (max-width: 1279px)',
+) !default;
+
+$bp-between: (
+	'md': 'screen and (min-width:600px) and (max-width: 959px)',
+) !default;

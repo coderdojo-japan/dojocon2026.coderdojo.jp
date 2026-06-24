@@ -1,0 +1,72 @@
+@use "variables" as v;
+@use "function" as f;
+@use "sass:map";
+@use "sass:math";
+
+@mixin mq-up($bp-key: md) {
+	@media #{map.get(v.$bp-up, $bp-key)} {
+		@content;
+	}
+}
+
+@mixin mq-down($bp-key: md) {
+	@media #{map.get(v.$bp-down, $bp-key)} {
+		@content;
+	}
+}
+
+@mixin mq-between($bp-key: md) {
+	@media #{map.get(v.$bp-between, $bp-key)} {
+		@content;
+	}
+}
+
+
+// ボタンの矢印
+@mixin btn-arrow($width: 8px, $height: 12px, $bi-c: ffffff, $va: 0px) {
+	&::after {
+		content: "";
+		flex-shrink: 0;
+		display: inline-block;
+		width: $width;
+		height: $height;
+		background: no-repeat center center;
+		background-size: contain;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='12' fill='none' viewBox='0 0 8 12'%3E%3Cpath fill='%23#{$bi-c}' d='M4.6 6 0 1.4 1.4 0l6 6-6 6L0 10.6z'/%3E%3C/svg%3E");
+		vertical-align: $va;
+		transition: all .3s;
+	}
+}
+
+// 背景のデイジーの花
+@mixin bg-daisy($width: 431px, $height: 431px, $url: daisy, $top: -295px, $right: -80px, $rotate: 29.57deg) {
+	&::before {
+		content: "";
+		display: block;
+		width: $width;
+		height: $height;
+		background-image: url("images/#{$url}.svg");
+		background-repeat: no-repeat;
+		background-size: contain;
+		position: absolute;
+		top: $top;
+		right: $right;
+		transform: rotate($rotate);
+	}
+}
+
+
+// トップページセクションタイトル上の装飾
+@mixin top-section-title($width: 74px, $height: 38px, $url: title-instagram) {	
+	&::before {
+		content: "";
+		display: block;
+		width: $width;
+		height: $height;
+		margin-inline: auto;
+		background-image: url(images/#{$url}.svg);
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
+	
+}
