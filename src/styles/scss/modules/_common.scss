@@ -4,5 +4,94 @@
 	共通
 *****************************************************/
 body {
-	font-family: YuGothic,'Yu Gothic',sans-serif;
+  font-family: YuGothic,'Yu Gothic',
+    Arial,
+    "Helvetica Neue",
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    "Noto Sans JP",
+    sans-serif;
+  font-weight: 500;
+  font-feature-settings: "palt" 1;
+  letter-spacing: 0.1em;
+}
+
+a {
+  color: s.$main-blue;
+  text-decoration: underline;
+  transition: all 0.3s;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+/*****************************************************
+	カラーユーティリティ
+*****************************************************/
+.is-pink {
+	color: s.$main-pink;
+}
+
+.is-violet {
+	color: s.$main-violet;
+}
+
+.is-yellow {
+	color: s.$main-yellow;
+}
+
+.is-blue {
+	color: s.$main-blue;
+}
+
+.is-green {
+	color: s.$main-green;
+}
+
+/*****************************************************
+	ヘッダー
+*****************************************************/
+.l-header {
+	width: 100%;
+	background: #fff;
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	transition: box-shadow 0.3s;
+}
+
+.l-header.is-scrolled {
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.l-header__inner {
+	padding: 0 24px;
+}
+
+.l-header__nav {
+	display: flex;
+	justify-content: center;
+}
+
+.l-header__list {
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	gap: 32px;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.l-header__link {
+	display: block;
+	padding: 18px 0;
+	font-size: s.fz(16);
+	color: s.$text-color;
+	text-decoration: none;
+
+	&:hover {
+		color: s.$main-pink;
+	}
 }

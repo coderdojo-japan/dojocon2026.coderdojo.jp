@@ -3,15 +3,321 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DojoCon Japan 2016</title>
+  <title>DojoCon Japan 2026</title>
   <link rel="stylesheet" href="../styles/style.css">
+  <script src="js/main.js" defer></script>
 </head>
 <body>
-  <header></header>
-  <main>
-    テスト
-  </main>
-  <footer></footer>
+  <header class="l-header" id="js-header">
+    <div class="l-header__inner">
+      <nav class="l-header__nav">
+        <ul class="l-header__list">
+          <li><a class="l-header__link" href="#home">ホーム</a></li>
+          <li><a class="l-header__link" href="#outline">開催概要</a></li>
+          <li><a class="l-header__link" href="#session">セッション</a></li>
+          <li><a class="l-header__link" href="#event">イベント</a></li>
+          <li><a class="l-header__link" href="#news">お知らせ</a></li>
+          <li><a class="l-header__link" href="#sponsor">スポンサー</a></li>
+          <li><a class="l-header__link" href="#timetable">タイムテーブル</a></li>
+          <li><a class="l-header__link" href="#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
+  <main id="home">
+    <div class="p-hero">
+      <div class="p-hero__inner">
+        <h1 class="p-hero__heading">
+          <img class="p-hero__logo" src="../../public/images/common/logo.webp" alt="DojoCon Japan 2026" width="553" height="173">
+          <img class="p-hero__tagline" src="../../public/images/front/tagline.svg" alt="わかちあう、わかりあう" width="572" height="45">
+        </h1>
+        <p class="p-hero__date">
+          2026.11.01 |SUN|<br>
+          岩手県盛岡市中ノ橋通1丁目1-10プラザおでって
+        </p>
+      </div>
+    </div>
+
+    <section class="p-theme">
+      <div class="p-theme__inner">
+        <h2 class="p-theme__heading">DojoCon Japan 2026 Theme</h2>
+        <p class="p-theme__tagline">
+          <img src="../../public/images/front/tagline.svg" alt="わかちあう、わかりあう" width="855" height="67">
+        </p>
+        <div class="p-theme__body">
+          <p class="p-theme__text">CoderDojoには、地域も立場も違うさまざまな人たちが集まっています。<br>子どもたちの「やってみたい」を応援する人。<br>道場を続ける人。新しく始めようとする人。<br>それぞれの経験や思いを持ち寄り、話し、聞き、わかちあうことで、<br>少しずつお互いをわかりあっていきます。</p>
+          <p class="p-theme__text">ロゴは盛岡城跡の石垣とステンドグラスをイメージしました。<br>さまざまな色や形を持つ個々がその形を保ったまま1つの形を成す姿は、<br>多様な価値観を持つ人たちが集まり1つの場をつくるCoderDojoの姿にも重なります。</p>
+          <p class="p-theme__text">DojoCon Japan 2026は、全国のCoderDojoに関わる人たちが集い、<br>互いの思いと経験をわかちあう、わかりあう1日です。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="p-outline">
+      <div class="p-outline__inner">
+        <hgroup class="c-heading">
+          <h2 class="c-heading__title">Outline</h2>
+          <p class="c-heading__subtitle">開催概要</p>
+        </hgroup>
+        <div class="p-outline__content">
+          <p class="p-outline__free">
+            <span class="is-pink">参</span><span class="is-violet">加</span><span class="is-blue">無</span><span class="is-yellow">料</span>
+          </p>
+          <dl class="p-outline__detail">
+            <div class="p-outline__detail-item">
+              <dt class="p-outline__dt">開催日時</dt>
+              <dd class="p-outline__dd">
+                <p class="p-outline__dd-text">2026.11.01 SUN</p>
+                <p class="p-outline__dd-text">10:00-17:00</p>
+              </dd>
+            </div>
+            <div class="p-outline__detail-item">
+              <dt class="p-outline__dt p-outline__dt--wide">会場</dt>
+              <dd class="p-outline__dd">
+                <p class="p-outline__venue">盛岡市観光文化交流センター<span class="p-outline__venue-name">プラザおでって</span></p>
+                <p class="p-outline__address">岩手県盛岡市中ノ橋通1丁目1-10</p>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="p-about">
+      <div class="p-about__inner">
+        <hgroup class="c-heading">
+          <h2 class="c-heading__title">About CoderDojo</h2>
+          <p class="c-heading__subtitle">コーダー道場とは？</p>
+        </hgroup>
+
+        <figure class="p-about__logo">
+          <img src="../../public/images/front/coderdojo_logo.svg" alt="CoderDojo" width="490" height="137">
+        </figure>
+
+        <div class="p-about__coderdojo">
+          <p class="p-about__text">
+            CoderDojoは子ども達にプログラミングを学ぶ場を提供する、ボランティア主導の国際的な非営利活動です。（*1）<br>
+            CoderDojoは2011年にアイルランドから始まり、日本国内では全国に200以上の道場で毎年1,200回以上（*2）開催されています。
+          </p>
+          <p class="p-about__text">CoderDojoに参加する子ども達にとっては、エンジニアやデザイナー、各地域の保護者や学生、研究者や経営者など（メンター）と出会える場にもなっています。</p>
+          <ul class="p-about__footnote">
+            <li class="p-about__footnote-item">*1 地図で見る: <a class="p-about__footnote-link" href="https://map.coderdojo.jp/world" target="_blank" rel="noopener noreferrer">https://map.coderdojo.jp/world</a></li>
+            <li class="p-about__footnote-item">*2 統計を見る: <a class="p-about__footnote-link" href="https://coderdojo.jp/stats" target="_blank" rel="noopener noreferrer">https://coderdojo.jp/stats</a></li>
+          </ul>
+        </div>
+
+        <div class="p-about__dojocon">
+          <h3 class="p-about__dojocon-title">DojoCon Japanとは？</h3>
+          <div class="p-about__dojocon-body">
+            <p class="p-about__text">
+              DojoCon Japanは、全国のCoderDojoコミュニティメンバーが集まる年に1度のカンファレンスイベントです。<br>
+              2016年から開催されており、その年ごとに異なる地域の実行委員会が中心となって運営されています。<br>
+              各地のCoderDojoで活動するチャンピオン、メンター、保護者などが集まり、それぞれの取り組みや経験を共有しながら交流を深めます。
+            </p>
+            <p class="p-about__text">セッションやワークショップ、パネルディスカッションなどを通じて運営の工夫や課題、子どもたちとの関わり方、新しい技術やアイデアについて学び合う場となっています。また、普段は地域ごとに活動している仲間たちが直接顔を合わせ、新たなつながりを生み出す貴重な機会でもあります。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="p-news">
+      <div class="p-news__inner">
+        <hgroup class="c-heading">
+          <h2 class="c-heading__title">News</h2>
+          <p class="c-heading__subtitle">お知らせ</p>
+        </hgroup>
+        <ul class="p-news__list">
+          <li class="p-news__item">
+            <a href="#">
+              <time class="p-news__date" datetime="2026-05-11">2026.05.11</time>
+              <span class="p-news__category p-news__category--notice">お知らせ</span>
+              <p class="p-news__text">DojoCon Japan 2026の公式Webサイトを公開しました。</p>
+            </a>
+          </li>
+          <li class="p-news__item">
+            <a href="#">
+              <time class="p-news__date" datetime="2026-05-11">2026.05.11</time>
+              <span class="p-news__category p-news__category--workshop">ワークショップ</span>
+              <p class="p-news__text">DojoCon Japan 2026の公式Webサイトを公開しました。</p>
+            </a>
+          </li>
+          <li class="p-news__item">
+            <a href="#">
+              <time class="p-news__date" datetime="2026-05-11">2026.05.11</time>
+              <span class="p-news__category p-news__category--session">セッション</span>
+              <p class="p-news__text">DojoCon Japan 2026の公式Webサイトを公開しました。</p>
+            </a>
+          </li>
+          <li class="p-news__item">
+            <a href="#">
+              <time class="p-news__date" datetime="2026-05-11">2026.05.11</time>
+              <span class="p-news__category p-news__category--entry">募集</span>
+              <p class="p-news__text">DojoCon Japan 2026の公式Webサイトを公開しました。</p>
+            </a>
+          </li>
+          <li class="p-news__item">
+            <a href="#">
+              <time class="p-news__date" datetime="2026-05-11">2026.05.11</time>
+              <span class="p-news__category p-news__category--sponsor">スポンサー</span>
+              <p class="p-news__text">DojoCon Japan 2026の公式Webサイトを公開しました。</p>
+            </a>
+          </li>
+        </ul>
+        <div class="p-news__more">
+          <a class="front_btn" href="#">全てのお知らせをみる</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="p-keynote">
+      <div class="p-keynote__overlay">
+        <div class="p-keynote__inner">
+          <hgroup class="c-heading">
+            <h2 class="c-heading__title">Keynote</h2>
+            <p class="c-heading__subtitle">基調講演</p>
+          </hgroup>
+          <div class="p-keynote__content">
+            <h3 class="p-keynote__name">上田 信行 / ウエダ ノブユキ</h3>
+            <p class="p-keynote__role">同志社女子大学名誉教授、ネオミュージアム館長</p>
+            <div class="p-keynote__body">
+              <p class="p-keynote__text">1950年、奈良県生まれ。同志社大学卒業後、『セサミストリート』に触発され渡米し、セントラルミシガン大学大学院にてM.A.、ハーバード大学教育大学院にてEd.M., Ed.D. （教育学博士）取得。専門は教育工学。プレイフルラーニングをキーワードに、学習環境デザインとラーニングアートの先進的かつ独創的な学びの場づくりを数多く実施。</p>
+              <p class="p-keynote__text">1996〜1997 ハーバード大学教育大学院客員研究員、2010〜2011 MITメディアラボ客員教授。</p>
+            </div>
+            <div class="p-keynote__more">
+              <a class="front_btn" href="#">基調講演を詳しくみる</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <picture>
+        <img class="p-keynote__bg" src="../../public/images/front/keynote_ueda.jpg" alt="上田信行氏" width="2184" height="1273">
+      </picture>
+    </section>
+
+    <section class="p-session">
+      <div class="p-session__inner">
+        <hgroup class="c-heading">
+          <h2 class="c-heading__title">Session</h2>
+          <p class="c-heading__subtitle">セッション</p>
+        </hgroup>
+        <div class="p-session__grid">
+          <article class="p-session__item">
+            <a class="p-session__link" href="#">
+              <div class="p-session__img-wrap">
+                <img class="p-session__img" src="../../public/images/sessions/no_image.png" alt="" width="380" height="199">
+              </div>
+              <h3 class="p-session__title">みてきいて！世界を目指した私たちの5ヶ月！</h3>
+              <dl class="p-session__meta">
+                <div class="p-session__meta-row">
+                  <dt class="p-session__meta-key">登壇者：</dt>
+                  <dd class="p-session__meta-value">田中太郎</dd>
+                </div>
+                <div class="p-session__meta-row">
+                  <dt class="p-session__meta-key">対象：</dt>
+                  <dd class="p-session__meta-value">メンター</dd>
+                </div>
+              </dl>
+            </a>
+          </article>
+          <article class="p-session__item">
+            <a class="p-session__link" href="#">
+              <div class="p-session__img-wrap">
+                <img class="p-session__img" src="../../public/images/sessions/session_dammy01.png" alt="" width="380" height="199">
+              </div>
+              <h3 class="p-session__title">Getting Creative with Scratch スクラッチでクリエイティブになろう！</h3>
+              <dl class="p-session__meta">
+                <div class="p-session__meta-row">
+                  <dt class="p-session__meta-key">登壇者：</dt>
+                  <dd class="p-session__meta-value">山田花子</dd>
+                </div>
+                <div class="p-session__meta-row">
+                  <dt class="p-session__meta-key">対象：</dt>
+                  <dd class="p-session__meta-value">ニンジャ</dd>
+                </div>
+              </dl>
+            </a>
+          </article>
+          <article class="p-session__item">
+            <a class="p-session__link" href="#">
+              <div class="p-session__img-wrap">
+                <img class="p-session__img" src="../../public/images/sessions/no_image.png" alt="" width="380" height="199">
+              </div>
+              <h3 class="p-session__title">誰でもできる！CoderDojoを立ち上げてみよう！</h3>
+              <dl class="p-session__meta">
+                <div class="p-session__meta-row">
+                  <dt class="p-session__meta-key">登壇者：</dt>
+                  <dd class="p-session__meta-value">鈴木次郎</dd>
+                </div>
+                <div class="p-session__meta-row">
+                  <dt class="p-session__meta-key">対象：</dt>
+                  <dd class="p-session__meta-value">チャンピオン</dd>
+                </div>
+              </dl>
+            </a>
+          </article>
+          <article class="p-session__item">
+            <a class="p-session__link" href="#">
+              <div class="p-session__img-wrap">
+                <img class="p-session__img" src="../../public/images/sessions/no_image.png" alt="" width="380" height="199">
+              </div>
+              <h3 class="p-session__title">ITに憧れる、地方のNPOのCoderDojo</h3>
+              <dl class="p-session__meta">
+                <div class="p-session__meta-row">
+                  <dt class="p-session__meta-key">登壇者：</dt>
+                  <dd class="p-session__meta-value">佐藤三郎</dd>
+                </div>
+                <div class="p-session__meta-row">
+                  <dt class="p-session__meta-key">対象：</dt>
+                  <dd class="p-session__meta-value">チャンピオン</dd>
+                </div>
+              </dl>
+            </a>
+          </article>
+          <article class="p-session__item">
+            <a class="p-session__link" href="#">
+              <div class="p-session__img-wrap">
+                <img class="p-session__img" src="../../public/images/sessions/session_dammy02.png" alt="" width="380" height="199">
+              </div>
+              <h3 class="p-session__title">よちよちDojo -CoderDojo八戸のあゆみ-</h3>
+              <dl class="p-session__meta">
+                <div class="p-session__meta-row">
+                  <dt class="p-session__meta-key">登壇者：</dt>
+                  <dd class="p-session__meta-value">加藤智之、石崎陽介、船川友夫</dd>
+                </div>
+                <div class="p-session__meta-row">
+                  <dt class="p-session__meta-key">対象：</dt>
+                  <dd class="p-session__meta-value">チャンピオン</dd>
+                </div>
+              </dl>
+            </a>
+          </article>
+          <article class="p-session__item">
+            <a class="p-session__link" href="#">
+              <div class="p-session__img-wrap">
+                <img class="p-session__img" src="../../public/images/sessions/no_image.png" alt="" width="380" height="199">
+              </div>
+              <h3 class="p-session__title">CoderDojoの今を伝えるDoJoLetter編集部</h3>
+              <dl class="p-session__meta">
+                <div class="p-session__meta-row">
+                  <dt class="p-session__meta-key">登壇者：</dt>
+                  <dd class="p-session__meta-value">安藤研究部</dd>
+                </div>
+                <div class="p-session__meta-row">
+                  <dt class="p-session__meta-key">対象：</dt>
+                  <dd class="p-session__meta-value">メンター</dd>
+                </div>
+              </dl>
+            </a>
+          </article>
+        </div>
+        <div class="p-session__more">
+          <a class="front_btn" href="#">全てのセッションをみる</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer></footer>
 </body>
 </html>

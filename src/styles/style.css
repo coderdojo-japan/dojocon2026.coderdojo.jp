@@ -1,9 +1,606 @@
 @charset "UTF-8";
 /*****************************************************
+	Reset
+	based on Andy Bell's Modern CSS Reset
+	https://piccalil.li/blog/a-more-modern-css-reset/
+*****************************************************/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  line-height: 1.5;
+}
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  overflow-wrap: break-word;
+}
+
+p {
+  overflow-wrap: break-word;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/*****************************************************
 	共通
 *****************************************************/
 body {
-  font-family: YuGothic, "Yu Gothic", sans-serif;
+  font-family:
+    YuGothic, "Yu Gothic", Arial, "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP",
+    sans-serif;
+  font-weight: 500;
+  font-feature-settings: "palt" 1;
+  letter-spacing: 0.1em;
 }
 
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLmNzcyIsInNjc3MvbW9kdWxlcy9fY29tbW9uLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZ0JBQWdCO0FDRWhCOztxREFBQTtBQUdBO0VBQ0MsOENBQUE7QURBRCIsImZpbGUiOiJzdHlsZS5jc3MifQ== */
+a {
+  color: #00b1a9;
+  text-decoration: underline;
+  transition: all 0.3s;
+}
+a:hover {
+  text-decoration: none;
+}
+
+/*****************************************************
+	カラーユーティリティ
+*****************************************************/
+.is-pink {
+  color: #ee859a;
+}
+
+.is-violet {
+  color: #9699cb;
+}
+
+.is-yellow {
+  color: #fdd34e;
+}
+
+.is-blue {
+  color: #00b1a9;
+}
+
+.is-green {
+  color: #89c3a0;
+}
+
+/*****************************************************
+	ヘッダー
+*****************************************************/
+.l-header {
+  width: 100%;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: box-shadow 0.3s;
+}
+
+.l-header.is-scrolled {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.l-header__inner {
+  padding: 0 24px;
+}
+
+.l-header__nav {
+  display: flex;
+  justify-content: center;
+}
+
+.l-header__list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.l-header__link {
+  display: block;
+  padding: 18px 0;
+  font-size: 1rem;
+  color: #231815;
+  text-decoration: none;
+}
+.l-header__link:hover {
+  color: #ee859a;
+}
+
+/*****************************************************
+	メインビジュアル
+*****************************************************/
+.p-hero {
+  padding: 80px 24px 60px;
+}
+
+.p-hero__inner {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.p-hero__logo {
+  width: 100%;
+  max-width: 553px;
+  margin: 0 auto 34px;
+}
+
+.p-hero__tagline {
+  width: 100%;
+  max-width: 572px;
+  margin: 0 auto 42px;
+}
+
+.p-hero__date {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+/*****************************************************
+	テーマ
+*****************************************************/
+.p-theme {
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.p-theme__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.p-theme__heading {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 38px;
+}
+
+.p-theme__tagline {
+  max-width: 855px;
+  margin: 0 auto 54px;
+}
+
+.p-theme__text {
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+.p-theme__text + .p-theme__text {
+  margin-top: 40px;
+}
+
+/*****************************************************
+	セクション見出し（フロントページ共通）
+*****************************************************/
+.c-heading {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.c-heading__title {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.c-heading__subtitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+  margin-top: 8px;
+}
+
+/*****************************************************
+	開催概要
+*****************************************************/
+.p-outline {
+  margin-top: 350px;
+  padding: 0 24px;
+}
+
+.p-outline__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.p-outline__content {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-inline: auto;
+}
+
+.p-outline__free {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 38px;
+}
+
+.p-outline__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 74px;
+}
+
+.p-outline__dt {
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 4px;
+}
+
+.p-outline__dt--wide {
+  letter-spacing: 1em;
+}
+
+.p-outline__dd-text {
+  font-size: 2.625rem;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.p-outline__venue {
+  font-size: 1.875rem;
+  letter-spacing: 0;
+}
+
+.p-outline__venue-name {
+  font-size: 3.375rem;
+  font-weight: bold;
+}
+
+.p-outline__address {
+  font-size: 1.75rem;
+  letter-spacing: 0;
+  margin-top: 4px;
+}
+
+/*****************************************************
+	About CoderDojo
+*****************************************************/
+.p-about {
+  margin-top: 350px;
+  padding: 0 24px;
+}
+
+.p-about__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.p-about__logo {
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 490px;
+  margin: 0 auto 48px;
+}
+
+.p-about__coderdojo {
+  max-width: 970px;
+}
+
+.p-about__text {
+  font-size: 1.125rem;
+  line-height: 2.2;
+}
+
+.p-about__text + .p-about__text {
+  margin-top: 24px;
+}
+
+.p-about__footnote {
+  margin-top: 32px;
+}
+
+.p-about__footnote-item {
+  font-size: 0.875rem;
+  line-height: 1.8;
+}
+
+.p-about__dojocon {
+  margin-top: 80px;
+}
+
+.p-about__dojocon-title {
+  font-size: 2.375rem;
+  font-weight: bold;
+  text-align: right;
+  margin-bottom: 32px;
+}
+
+.p-about__dojocon-body {
+  max-width: 970px;
+  margin-left: auto;
+}
+
+/*****************************************************
+	ニュース
+*****************************************************/
+.p-news {
+  margin-top: 350px;
+  padding: 0 24px;
+}
+
+.p-news__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.p-news__list {
+  border-bottom: 1px solid #aaaaaa;
+}
+
+.p-news__item a {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 16px 0;
+  border-top: 1px solid #aaaaaa;
+  color: #231815;
+  text-decoration: none;
+}
+.p-news__item a:hover {
+  background-color: rgba(0, 177, 169, 0.1);
+}
+
+.p-news__date {
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.p-news__category {
+  min-width: 112px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  padding: 2px 12px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.p-news__category--notice {
+  background-color: #ee859a;
+}
+
+.p-news__category--workshop {
+  background-color: #9699cb;
+}
+
+.p-news__category--session {
+  background-color: #fdd34e;
+}
+
+.p-news__category--entry {
+  background-color: #00b1a9;
+}
+
+.p-news__category--sponsor {
+  background-color: #89c3a0;
+}
+
+.p-news__text {
+  font-size: 1rem;
+}
+
+.p-news__more {
+  margin-top: 40px;
+}
+
+.front_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  aspect-ratio: 600/65;
+  margin-inline: auto;
+  border-radius: 999px;
+  text-align: center;
+  color: #231815;
+  font-weight: bold;
+  background-image: url("../../public/images/front/btn.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-decoration: none;
+}
+.front_btn:hover {
+  background-color: rgba(0, 177, 169, 0.1);
+  transform: translateY(5px);
+}
+
+/*****************************************************
+	基調講演
+*****************************************************/
+.p-keynote {
+  position: relative;
+  margin-top: 230px;
+}
+.p-keynote .c-heading {
+  margin-bottom: 80px;
+}
+
+.p-keynote__bg {
+  width: 100%;
+  height: 1200px;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.p-keynote__overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.p-keynote__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 180px;
+}
+
+.p-keynote__content {
+  max-width: 770px;
+  margin-left: auto;
+}
+
+.p-keynote__name {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+.p-keynote__role {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+
+.p-keynote__text {
+  font-size: 1.125rem;
+  line-height: 2.2;
+}
+
+.p-keynote__text + .p-keynote__text {
+  margin-top: 24px;
+}
+
+.p-keynote__more {
+  margin-top: 48px;
+}
+.p-keynote__more .front_btn {
+  margin-inline: 0;
+}
+
+/*****************************************************
+	セッション
+*****************************************************/
+.p-session {
+  margin-top: 200px;
+  padding: 0 24px;
+}
+
+.p-session__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.p-session__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 292px), 1fr));
+  grid-auto-rows: auto 1fr auto;
+  gap: 40px;
+}
+
+.p-session__item {
+  display: grid;
+}
+
+.p-session__link {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+  row-gap: 16px;
+  color: #231815;
+  text-decoration: none;
+}
+.p-session__link:hover {
+  opacity: 0.8;
+  transform: translateY(5px);
+}
+
+.p-session__img-wrap {
+  aspect-ratio: 191/100;
+  overflow: hidden;
+  box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.1);
+}
+
+.p-session__img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.p-session__title {
+  font-size: 1.125rem;
+  font-weight: bold;
+  line-height: 1.6;
+}
+
+.p-session__meta {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  padding-bottom: 24px;
+}
+
+.p-session__meta-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.p-session__meta-key {
+  white-space: nowrap;
+}
+
+.p-session__more {
+  margin-top: 60px;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLmNzcyIsInNjc3MvbW9kdWxlcy9fcmVzZXQuc2NzcyIsInNjc3MvbW9kdWxlcy9fY29tbW9uLnNjc3MiLCJzY3NzL3NldHRpbmdzL192YXJpYWJsZXMuc2NzcyIsInNjc3MvbW9kdWxlcy9fZnJvbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxnQkFBZ0I7QUNBaEI7Ozs7cURBQUE7QUFNQTs7O0VBR0Msc0JBQUE7QURDRDs7QUNFQTtFQUNDLFNBQUE7RUFDQSxVQUFBO0FEQ0Q7O0FDRUE7RUFDQyw4QkFBQTtBRENEOztBQ0VBO0VBQ0Msa0JBQUE7RUFDQSxnQkFBQTtBRENEOztBQ0VBOzs7Ozs7OztFQVFDLGNBQUE7QURDRDs7QUNFQTs7RUFFQyxlQUFBO0VBQ0EsWUFBQTtBRENEOztBQ0VBOzs7O0VBSUMsYUFBQTtBRENEOztBQ0VBOzs7Ozs7RUFNQyxrQkFBQTtFQUNBLG9CQUFBO0VBQ0EseUJBQUE7QURDRDs7QUNFQTtFQUNDLHlCQUFBO0FEQ0Q7O0FDRUE7O0VBRUMsZ0JBQUE7QURDRDs7QUNFQTtFQUNDLGNBQUE7RUFDQSxxQkFBQTtBRENEOztBRXZFQTs7cURBQUE7QUFHQTtFQUNFLHFJQUFBO0VBT0EsZ0JBQUE7RUFDQSwrQkFBQTtFQUNBLHFCQUFBO0FGb0VGOztBRWpFQTtFQUNFLGNDaEJVO0VEaUJWLDBCQUFBO0VBQ0Esb0JBQUE7QUZvRUY7QUVsRUU7RUFDRSxxQkFBQTtBRm9FSjs7QUVoRUE7O3FEQUFBO0FBR0E7RUFDQyxjQ2hDVztBSG1HWjs7QUVoRUE7RUFDQyxjQ25DYTtBSHNHZDs7QUVoRUE7RUFDQyxjQ3RDYTtBSHlHZDs7QUVoRUE7RUFDQyxjQ3pDVztBSDRHWjs7QUVoRUE7RUFDQyxjQzVDWTtBSCtHYjs7QUVoRUE7O3FEQUFBO0FBR0E7RUFDQyxXQUFBO0VBQ0EsZ0JBQUE7RUFDQSxnQkFBQTtFQUNBLE1BQUE7RUFDQSxZQUFBO0VBQ0EsMkJBQUE7QUZtRUQ7O0FFaEVBO0VBQ0MseUNBQUE7QUZt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 */
