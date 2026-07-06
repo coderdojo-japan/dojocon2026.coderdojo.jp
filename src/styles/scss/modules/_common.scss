@@ -44,6 +44,45 @@ a {
   }
 }
 
+.br_pc_tab_none {
+  display: none;
+
+  @include s.mq-down() {
+    display: inline;
+  }
+}
+
+.br_sp_none {
+  @include s.mq-down() {
+    display: none;
+  }
+}
+
+/*****************************************************
+  表示非表示ユーティリティ
+*****************************************************/
+.is-pc_tab_none {
+  display: none;
+
+  @include s.mq-down() {
+    display: inline;
+  }
+}
+
+.is-sp_none {
+  @include s.mq-down() {
+    display: none;
+  }
+}
+
+/*****************************************************
+  レイアウトユーティリティ
+*****************************************************/
+.l-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 /*****************************************************
 	カラーユーティリティ
 *****************************************************/
@@ -257,11 +296,11 @@ a {
 	padding: 60px 24px 40px;
 	text-align: center;
   font-weight: bold;
-}
 
-.l-footer__inner {
-	max-width: 1200px;
-	margin: 0 auto;
+  @include s.mq-down() {
+    margin-top: 100px;
+    padding: 40px 24px 32px;
+  }
 }
 
 .l-footer__logo {
