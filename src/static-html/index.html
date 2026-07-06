@@ -10,16 +10,30 @@
 <body>
   <header class="l-header" id="js-header">
     <div class="l-header__inner">
-      <nav class="l-header__nav">
+      <div class="l-header__bar">
+        <a class="l-header__logo-link" href="#">
+          <img class="l-header__logo-img" src="../../public/images/common/logo.webp" alt="DojoCon Japan 2026" width="553" height="173">
+        </a>
+        <div class="l-header__bar-right">
+          <a class="l-header__link l-header__link--btn" href="#" target="_blank">参加登録</a>
+          <button class="l-header__hamburger" id="js-hamburger" type="button" aria-expanded="false" aria-label="メニューを開く">
+            <span class="l-header__hamburger-line"></span>
+            <span class="l-header__hamburger-line"></span>
+            <span class="l-header__hamburger-line"></span>
+          </button>
+        </div>
+      </div>
+      <nav class="l-header__nav" id="js-nav">
         <ul class="l-header__list">
-          <li><a class="l-header__link" href="#home">ホーム</a></li>
+          <li><a class="l-header__link" href="#">ホーム</a></li>
           <li><a class="l-header__link" href="#outline">開催概要</a></li>
-          <li><a class="l-header__link" href="#session">セッション</a></li>
-          <li><a class="l-header__link" href="#event">イベント</a></li>
-          <li><a class="l-header__link" href="#news">お知らせ</a></li>
+          <li><a class="l-header__link" href="#">セッション</a></li>
+          <li><a class="l-header__link" href="#">イベント</a></li>
+          <li><a class="l-header__link" href="#">お知らせ</a></li>
           <li><a class="l-header__link" href="#sponsor">スポンサー</a></li>
-          <li><a class="l-header__link" href="#timetable">タイムテーブル</a></li>
-          <li><a class="l-header__link" href="#contact">お問い合わせ</a></li>
+          <li><a class="l-header__link" href="#">タイムテーブル</a></li>
+          <li><a class="l-header__link" href="#">お問い合わせ</a></li>
+          <li><a class="l-header__link l-header__link--btn" href="#" target="_blank">参加登録</a></li>
         </ul>
       </nav>
     </div>
@@ -34,7 +48,7 @@
         </h1>
         <p class="p-hero__date">
           2026.11.01 |SUN|<br>
-          岩手県盛岡市中ノ橋通1丁目1-10プラザおでって
+          岩手県盛岡市中ノ橋通1丁目1-10<br class="br_pc_none">プラザおでって
         </p>
       </div>
     </div>
@@ -53,7 +67,7 @@
       </div>
     </section>
 
-    <section class="p-outline">
+    <section id="outline" class="p-outline">
       <div class="p-outline__inner">
         <hgroup class="c-heading">
           <h2 class="c-heading__title">Outline</h2>
@@ -438,7 +452,7 @@
       </div>
     </section>
 
-    <section class="p-sponsor">
+    <section id="sponsor" class="p-sponsor">
       <div class="p-sponsor__inner">
         <hgroup class="c-heading">
           <h2 class="c-heading__title">Sponsor</h2>
@@ -744,5 +758,11 @@
       <p class="l-footer__copyright">© 2026 DojoCon Japan実行委員会</p>
     </div>
   </footer>
+
+  <button class="c-back-to-top" id="js-back-to-top" type="button" aria-label="ページ上部へ戻る">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
 </body>
 </html>

@@ -9,13 +9,13 @@ $text-color: #231815;
 $bp-up: (
 	'md': 'screen and (min-width: 600px)',
 	'lg': 'screen and (min-width: 960px)',
-	'xl': 'screen and (min-width: 1280px)',
+	'xl': 'screen and (min-width: 1200px)',
 ) !default;
 
 $bp-down: (
 	'md': 'screen and (max-width: 599px)',
 	'lg': 'screen and (max-width: 959px)',
-	'xl': 'screen and (max-width: 1279px)',
+	'xl': 'screen and (max-width: 1199px)',
 ) !default;
 
 $bp-between: (

@@ -95,6 +95,10 @@
   padding: 0 24px;
   position: relative;
 
+  @include s.mq-down(lg) {
+    margin-top: 140px;
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -108,6 +112,16 @@
     background-size: contain;
     background-repeat: no-repeat;
     z-index: -1;
+
+    @include s.mq-down(xl) {
+      top: calc(-1000 / 1697 * 88.3vw);
+    }
+
+    @include s.mq-down() {
+      width: 150vw;
+      top: calc(100 / 1697 * 88.3vw);
+      left: -20vw;
+    }
   }
 }
 
@@ -131,6 +145,10 @@
 	display: flex;
 	flex-direction: column;
 	gap: 74px;
+
+  @include s.mq-down(lg) {
+    gap: 38px;
+  }
 }
 
 .p-outline__dt {
@@ -157,6 +175,11 @@
 .p-outline__venue-name {
 	font-size: s.fz(54);
 	font-weight: bold;
+
+  @include s.mq-down(lg) {
+    display: block;
+    font-size: s.fz(42);
+  }
 }
 
 .p-outline__address {
@@ -173,6 +196,10 @@
   padding: 0 24px;
   position: relative;
 
+  @include s.mq-down(lg) {
+    margin-top: 140px;
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -184,6 +211,11 @@
     background-size: contain;
     background-repeat: no-repeat;
     z-index: -1;
+
+    @include s.mq-down(xl) {
+      width: 33vw;
+      top: 40%;
+    }
   }
 }
 
@@ -242,6 +274,10 @@
 .p-news {
   margin-top: 280px;
 	padding: 0 24px;
+
+  @include s.mq-down(lg) {
+    margin-top: 140px;
+  }
 }
 
 .p-news__inner {
@@ -343,6 +379,10 @@
 	position: relative;
 	margin-top: 230px;
 
+  @include s.mq-down(lg) {
+    margin-top: 140px;
+  }
+
   .c-heading {
     margin-bottom: 80px;
   }
@@ -352,6 +392,10 @@
 	width: 100%;
 	height: 1200px;
   object-fit: cover;
+
+  @include s.mq-down(lg) {
+    height: 960px;
+  }
 }
 
 .p-keynote__overlay {
@@ -363,11 +407,23 @@
 	max-width: 1200px;
 	margin: 0 auto;
 	padding-top: 180px;
+
+  @include s.mq-down(xl) {
+    padding-inline: 24px;
+  }
+
+  @include s.mq-down(lg) {
+    padding-top: 100px;
+  }
 }
 
 .p-keynote__content {
 	max-width: 770px;
 	margin-left: auto;
+
+  @include s.mq-down(xl) {
+    max-width: 70%;
+  }
 }
 
 .p-keynote__name {
@@ -375,12 +431,21 @@
 	font-weight: bold;
 	line-height: 1.3;
 	margin-bottom: 10px;
+
+  @include s.mq-down(lg) {
+    font-size: s.fz(32);
+  }
 }
 
 .p-keynote__role {
 	font-size: s.fz(24);
   font-weight: bold;
 	margin-bottom: 50px;
+
+  @include s.mq-down(lg) {
+    font-size: s.fz(20);
+    margin-bottom: 30px;
+  }
 }
 
 .p-keynote__text {
@@ -406,6 +471,10 @@
 .p-session {
   margin-top: 200px;
 	padding: 0 24px;
+
+  @include s.mq-down(lg) {
+    margin-top: 140px;
+  }
 }
 
 .p-session__inner {
@@ -481,6 +550,10 @@
 .p-sponsor {
 	margin-top: 200px;
 	padding: 0 24px;
+
+  @include s.mq-down(lg) {
+    margin-top: 140px;
+  }
 }
 
 .p-sponsor__inner {
@@ -576,6 +649,10 @@
 	margin-top: 200px;
 	padding: 0 24px;
 	text-align: center;
+
+  @include s.mq-down(lg) {
+    margin-top: 140px;
+  }
 }
 
 .p-organizer__inner {
@@ -605,6 +682,10 @@
 	margin-top: 200px;
 	padding: 0 24px;
 	text-align: center;
+
+  @include s.mq-down(lg) {
+    margin-top: 140px;
+  }
 }
 
 .p-contact__inner {
@@ -627,6 +708,10 @@
 .p-staff {
 	margin-top: 200px;
 	padding: 0 24px;
+
+  @include s.mq-down(lg) {
+    margin-top: 140px;
+  }
 }
 
 .p-staff__inner {
@@ -636,7 +721,7 @@
 
 .p-staff__grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
 	gap: 56px 44px;
   max-width: 960px;
   margin-inline: auto;
