@@ -4,7 +4,10 @@
 	メインビジュアル
 *****************************************************/
 .p-hero {
-	padding: 80px 24px 60px;
+  height: 100svh;
+  display: grid;
+  place-items: center;
+	padding: 0 24px;
 }
 
 .p-hero__inner {
@@ -88,8 +91,24 @@
 	開催概要
 *****************************************************/
 .p-outline {
-  margin-top: 350px;
+  margin-top: 200px;
   padding: 0 24px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    // 盛岡エリアは画像の上端870pxの位置
+    // -(870/2869) × (88.3vw × 2869/1697) → 2869が約分されて -(870/1697) × 88.3vw
+    top: calc(-870 / 1697 * 88.3vw);
+    width: 88.3vw;
+    aspect-ratio: 1697 / 2869;
+    background-image: url('../../public/images/front/bg_iwate.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
 }
 
 .p-outline__inner {
@@ -147,11 +166,25 @@
 }
 
 /*****************************************************
-	About CoderDojo
+	コーダー道場とは？
 *****************************************************/
 .p-about {
-  margin-top: 350px;
+  margin-top: 280px;
   padding: 0 24px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45.3vw;
+    aspect-ratio: 870 / 945;
+    background-image: url('../../public/images/front/coderdojo_logo_mark.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
 }
 
 .p-about__inner {
@@ -207,7 +240,7 @@
 	ニュース
 *****************************************************/
 .p-news {
-  margin-top: 350px;
+  margin-top: 280px;
 	padding: 0 24px;
 }
 
@@ -383,12 +416,13 @@
 .p-session__grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(min(100%, 292px), 1fr));
-	grid-auto-rows: auto 1fr auto;
 	gap: 40px;
 }
 
 .p-session__item {
   display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
 }
 
 .p-session__link {
@@ -426,7 +460,6 @@
 .p-session__meta {
 	font-size: s.fz(14);
 	line-height: 1.7;
-	padding-bottom: 24px;
 }
 
 .p-session__meta-row {
@@ -441,3 +474,204 @@
 .p-session__more {
 	margin-top: 60px;
 }
+
+/*****************************************************
+	スポンサー
+*****************************************************/
+.p-sponsor {
+	margin-top: 200px;
+	padding: 0 24px;
+}
+
+.p-sponsor__inner {
+	max-width: 1200px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.p-sponsor__tier {
+	margin-top: 80px;
+}
+
+.p-sponsor__tier-heading {
+	margin-bottom: 40px;
+}
+
+.p-sponsor__tier-title {
+	font-size: s.fz(32);
+	font-weight: bold;
+	line-height: 1;
+}
+
+.p-sponsor__tier-subtitle {
+	font-size: s.fz(18);
+	font-weight: bold;
+	letter-spacing: 0.2em;
+	margin-top: 8px;
+}
+
+.p-sponsor__logos {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 40px;
+}
+
+.p-sponsor__logo-link {
+	display: block;
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.p-sponsor__logo-img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.p-sponsor__logos--gold .p-sponsor__logo-img {
+	max-width: 500px;
+  max-height: 300px;
+}
+
+.p-sponsor__logos--silver .p-sponsor__logo-img {
+	max-width: 400px;
+  max-height: 264px;
+}
+
+.p-sponsor__logos--bronze .p-sponsor__logo-img,
+.p-sponsor__logos--inkind .p-sponsor__logo-img {
+	max-width: 300px;
+  max-height: 198px;
+}
+
+.p-sponsor__names {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 16px 40px;
+}
+
+.p-sponsor__name-item:has(a) {
+  .p-sponsor__name {
+    color: s.$text-color;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.p-sponsor__name {
+  font-size: s.fz(20);
+	font-weight: bold;
+}
+
+/*****************************************************
+	主催・後援
+*****************************************************/
+.p-organizer {
+	margin-top: 200px;
+	padding: 0 24px;
+	text-align: center;
+}
+
+.p-organizer__inner {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.p-organizer__group {
+  .c-heading {
+    margin-bottom: 40px;
+  }
+}
+
+.p-organizer__group + .p-organizer__group {
+	margin-top: 100px;
+}
+
+.p-organizer__item {
+	font-size: s.fz(20);
+	line-height: 1.8;
+}
+
+/*****************************************************
+	お問い合わせ
+*****************************************************/
+.p-contact {
+	margin-top: 200px;
+	padding: 0 24px;
+	text-align: center;
+}
+
+.p-contact__inner {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.p-contact__text {
+	font-size: s.fz(18);
+	line-height: 1.8;
+}
+
+.p-contact__btn {
+	margin-top: 48px;
+}
+
+/*****************************************************
+	スタッフ
+*****************************************************/
+.p-staff {
+	margin-top: 200px;
+	padding: 0 24px;
+}
+
+.p-staff__inner {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.p-staff__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+	gap: 56px 44px;
+  max-width: 960px;
+  margin-inline: auto;
+}
+
+.p-staff__card {
+	display: block;
+	text-align: center;
+}
+
+a.p-staff__card {
+  color: s.$text-color;
+	text-decoration: none;
+
+  &:hover .p-staff__img-wrap {
+    transform: translateY(-5px);
+		box-shadow: 0 0 6px 1px rgba(s.$main-yellow, 0.8);
+	}
+}
+
+.p-staff__img-wrap {
+	border-radius: 50%;
+	overflow: hidden;
+	aspect-ratio: 1 / 1;
+	transition: all 0.3s;
+}
+
+.p-staff__img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.p-staff__name {
+	font-size: s.fz(14);
+	margin-top: 12px;
+}
+
