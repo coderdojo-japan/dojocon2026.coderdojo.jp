@@ -36,7 +36,7 @@ a {
 /*****************************************************
   改行の制御
 *****************************************************/
-.br_pc_none {
+.u-br--pc-none {
   display: none;
 
   @include s.mq-down(lg) {
@@ -44,7 +44,7 @@ a {
   }
 }
 
-.br_pc_tab_none {
+.u-br--pc-tab-none {
   display: none;
 
   @include s.mq-down() {
@@ -52,7 +52,7 @@ a {
   }
 }
 
-.br_sp_none {
+.u-br--sp-none {
   @include s.mq-down() {
     display: none;
   }
@@ -61,7 +61,7 @@ a {
 /*****************************************************
   表示非表示ユーティリティ
 *****************************************************/
-.is-pc_tab_none {
+.u-hidden--pc-tab {
   display: none;
 
   @include s.mq-down() {
@@ -69,7 +69,7 @@ a {
   }
 }
 
-.is-sp_none {
+.u-hidden--sp {
   @include s.mq-down() {
     display: none;
   }
@@ -86,23 +86,23 @@ a {
 /*****************************************************
 	カラーユーティリティ
 *****************************************************/
-.is-pink {
+.u-pink {
 	color: s.$main-pink;
 }
 
-.is-violet {
+.u-violet {
 	color: s.$main-violet;
 }
 
-.is-yellow {
+.u-yellow {
 	color: s.$main-yellow;
 }
 
-.is-blue {
+.u-blue {
 	color: s.$main-blue;
 }
 
-.is-green {
+.u-green {
 	color: s.$main-green;
 }
 
@@ -167,7 +167,7 @@ a {
   text-align: center;
 
   &:hover {
-    background: darken(s.$main-blue, 10%);
+    background: s.darken(s.$main-blue, 10%);
     color: #fff;
   }
 }
@@ -395,7 +395,7 @@ a {
   }
 
   &:hover {
-    background-color: darken(s.$main-blue, 10%);
+    background-color: s.darken(s.$main-blue, 10%);
   }
 
   @include s.mq-down() {

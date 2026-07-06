@@ -1,11 +1,13 @@
 const header = document.getElementById("js-header");
 
+// スクロールパディング: ヘッダー高さ + 余白をCSS変数に反映してアンカーリンクのオフセットを調整
 function updateScrollPadding() {
   document.documentElement.style.setProperty("--header-height", header.offsetHeight + 30 + "px");
 }
 updateScrollPadding();
 window.addEventListener("resize", updateScrollPadding);
 
+// スクロール時にヘッダーへ影をつける
 window.addEventListener("scroll", function () {
   if (window.scrollY > 0) {
     header.classList.add("is-scrolled");
@@ -19,6 +21,7 @@ const nav = document.getElementById("js-nav");
 
 const backToTop = document.getElementById("js-back-to-top");
 
+// ページトップへ戻るボタン: 300px以上スクロールで表示、クリックで先頭へ
 if (backToTop) {
   window.addEventListener("scroll", function () {
     if (window.scrollY > 300) {
@@ -33,6 +36,7 @@ if (backToTop) {
   });
 }
 
+// ハンバーガーメニュー: 開閉トグル・外クリックで閉じる・リンククリックで閉じる
 if (hamburger && nav) {
   function closeMenu() {
     nav.classList.remove("is-open");
