@@ -32,6 +32,10 @@
   }
 }
 
+.p-hero__heading {
+  margin-bottom: 42px;
+}
+
 .p-hero__logo {
 	width: 100%;
 	max-width: 553px;
@@ -41,7 +45,7 @@
 .p-hero__tagline {
 	width: 100%;
 	max-width: 572px;
-  margin: 0 auto 42px;
+  margin-inline: auto;
 }
 
 .p-hero__date {
@@ -157,7 +161,7 @@
     top: calc(-870 / 1697 * 88.3vw);
     width: 88.3vw;
     aspect-ratio: 1697 / 2869;
-    background-image: url('../../public/images/front/bg_iwate.png');
+    background-image: url('../../public/images/front/bg_iwate.webp');
     background-size: contain;
     background-repeat: no-repeat;
     z-index: -1;
@@ -284,7 +288,7 @@
     top: 0;
     width: 45.3vw;
     aspect-ratio: 870 / 945;
-    background-image: url('../../public/images/front/coderdojo_logo_mark.png');
+    background-image: url('../../public/images/front/coderdojo_logo_mark.webp');
     background-size: contain;
     background-repeat: no-repeat;
     z-index: -1;
