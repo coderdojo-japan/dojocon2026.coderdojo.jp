@@ -86,27 +86,6 @@
 	color: s.$text-color;
 }
 
-.p-single__badge--notice {
-	background-color: s.$main-pink;
-}
-
-.p-single__badge--workshop {
-	background-color: s.$main-violet;
-}
-
-.p-single__badge--news-session {
-	background-color: s.$main-yellow;
-	color: s.$text-color;
-}
-
-.p-single__badge--entry {
-	background-color: s.$main-blue;
-}
-
-.p-single__badge--sponsor {
-	background-color: s.$main-green;
-}
-
 .p-single__title {
 	font-size: s.fz(36);
 	font-weight: bold;

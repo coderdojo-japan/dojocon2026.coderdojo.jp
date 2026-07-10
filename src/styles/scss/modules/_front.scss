@@ -441,24 +441,25 @@
   }
 }
 
-.p-news__category--notice {
+.p-news__category--session {
 	background-color: s.$main-pink;
 }
 
-.p-news__category--workshop {
+.p-news__category--event {
 	background-color: s.$main-violet;
-}
-
-.p-news__category--session {
-	background-color: s.$main-yellow;
-}
-
-.p-news__category--entry {
-	background-color: s.$main-blue;
 }
 
 .p-news__category--sponsor {
 	background-color: s.$main-green;
+}
+
+.p-news__category--news {
+	background-color: s.$main-blue;
+}
+
+.p-news__category--highlight {
+	background-color: s.$main-yellow;
+	color: s.$text-color;
 }
 
 .p-news__text {
