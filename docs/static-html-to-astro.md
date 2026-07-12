@@ -225,6 +225,7 @@ public/images/
 ## 9. 申し送り・既知の注意点
 
 - **ダミーデータ**: カードの件数・タイトル・登壇者・日付・ダミー画像（`*_dammy*`）は仮。実データに差し替え前提。
+- **スポンサーのティア**: モックは現在 **Gold / Silver / Bronze / In-Kind / Individual** のみ。今後、上位ティアとして **Platinum・Diamond**（**Diamond が最上位**）が追加される可能性がある。順位は上から `Diamond → Platinum → Gold → Silver → Bronze → In-Kind → Individual`。ティアはデータ駆動（`src/data/sponsors.ts`）で扱い、ロゴ表示サイズは `.p-sponsor__logos--*` を1つ足すだけで拡張できるようにしておくとよい。
 - **`no_image.webp` はダミーではなく「画像未設定時のフォールバック」**: 記事に画像を入れなかったときに各カテゴリ（`sessions/` `events/`）の `no_image.webp` を出す、という**仕様上の既定画像**。差し替えて消すものではない。Astro でも実現可能で、frontmatter の `image` を**任意**にして、コンポーネント側で既定値を与えればよい（例：`const image = post.data.image ?? '/images/sessions/no_image.webp'`）。
 - **未接続リンク（`href="#"`）**: 参加登録・お問い合わせ・タイムテーブル・フッターの行動規範/プライバシーポリシー・詳細ページのスラッグなどは未設定。Astro化時に実URL/ルートへ。（※フッターのSNSアイコン3種は実URL設定済み）
 - **固定ページ**: `page/index.html` は**どこからもリンクされていない**テンプレート。プライバシーポリシー・行動規範等はまだ作っていない（`page/` を複製して本文差し替え＋フッターリンク接続する想定）。
