@@ -214,8 +214,9 @@ public/images/
    - **セッション・イベントも frontmatter＋Markdown 化**（現在は空の `src/data/program.ts`）。`title` / `category`（種別）/ `target`（対象）/ `image` / イベントは `needsReservation`（要申し込み）などを frontmatter に。`image` は**任意**にして、未指定なら `no_image.webp` を既定値にする（`post.data.image ?? '/images/sessions/no_image.webp'`）。
    - 一覧（カードグリッド）と詳細を collection から生成。動的ルート例：`src/pages/sessions/[...id].astro`、`src/pages/events/[...id].astro`。カードのマークアップは `p-program__*` / `p-event__*` をそのまま使う。
 
-4. **固定ページ**
-   - プライバシーポリシー・行動規範などは、`page/index.html` を型に **Markdown＋共通レイアウト**（例 `src/pages/privacy.md` に `layout:` を指定）で作るのが素直。本文は `.c-prose` を当てる。
+4. **固定ページ（用途で2種類）**
+   - **(a) 文章主体**（プライバシーポリシー・行動規範など）→ `page/index.html` を型に **Markdown＋共通レイアウト**（例 `src/pages/privacy.md` に `layout:` を指定）で作る。本文は `.c-prose` を当てる。
+   - **(b) 複雑・独自レイアウト**（タイムテーブルの時間割表・グリッドなど、Markdown に載らないもの）→ **専用の `.astro` ページ**を作る（`src/pages/timetable.astro` → `/timetable`）。`BaseLayout` で包み、中身はモックの SCSS クラス（`c-heading` など）＋新規の `p-timetable__*`（専用 `_timetable.scss` を追加）で組む。データは `src/data/` の配列を `.map()` で描画。`page/`（プロース）テンプレは使わない。
 
 5. **メタ / OGP / favicon**
    - `BaseLayout.astro` に集約（既存実装がベース）。favicon は `public/images/common/` のものに差し替え。
@@ -229,6 +230,7 @@ public/images/
 - **`no_image.webp` はダミーではなく「画像未設定時のフォールバック」**: 記事に画像を入れなかったときに各カテゴリ（`sessions/` `events/`）の `no_image.webp` を出す、という**仕様上の既定画像**。差し替えて消すものではない。Astro でも実現可能で、frontmatter の `image` を**任意**にして、コンポーネント側で既定値を与えればよい（例：`const image = post.data.image ?? '/images/sessions/no_image.webp'`）。
 - **未接続リンク（`href="#"`）**: 参加登録・お問い合わせ・タイムテーブル・フッターの行動規範/プライバシーポリシー・詳細ページのスラッグなどは未設定。Astro化時に実URL/ルートへ。（※フッターのSNSアイコン3種は実URL設定済み）
 - **固定ページ**: `page/index.html` は**どこからもリンクされていない**テンプレート。プライバシーポリシー・行動規範等はまだ作っていない（`page/` を複製して本文差し替え＋フッターリンク接続する想定）。
+- **タイムテーブル**: ナビに項目はあるがページは**未作成（現状ダミー、リンクは `#`）**。上記 8章(b) の**専用 `.astro` ページ**として作る（Markdown・`page/` テンプレは使わない）。内容がセッション／イベント確定に依存するため、**ラインナップが固まってから公開**する。
 - **相対パス**: 前述の通りモック専用。Astro では絶対パス/importに変換。
 - **命名**: FLOCSS を維持。`p-program`（セッション/イベント共通カード）と `p-event`（イベント固有）の使い分け、`p-single` を固定ページにも流用している点に注意。
 
