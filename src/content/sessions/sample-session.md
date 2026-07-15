@@ -4,7 +4,7 @@ type: セミナー
 speaker: 田中太郎
 target: メンター
 image: /images/sessions/session_dammy02.png
-draft: true
+draft: false
 ---
 
 CoderDojoで出会った子どもたちが、世界大会を目指して挑戦した5ヶ月間の記録です。日々の活動でぶつかった壁、それをどう乗り越えたのか、メンターとしてどう寄り添ったのかを、実際のエピソードを交えてお話しします。

@@ -4,7 +4,7 @@ type: ワークショップ
 target: ニンジャ
 needsReservation: true
 image: /images/events/event_dammy02.png
-draft: true
+draft: false
 ---
 
 小さなコンピューター「micro:bit」を使って、光ったり音が鳴ったりする作品をつくってみよう！プログラミングがはじめての子でも大丈夫。スタッフがそばでサポートします。
