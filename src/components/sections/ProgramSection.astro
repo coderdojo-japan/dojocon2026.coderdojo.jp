@@ -1,39 +1,51 @@
 ---
-import Section from "../Section.astro";
-import type { ProgramItem } from "../../data/program";
+// セッション/イベントのカードグリッドセクション（p-program）。
+// variant で種別を切り替え、items はコレクションのエントリを渡す。
+import type { CollectionEntry } from "astro:content";
+import Heading from "../Heading.astro";
+import FrontButton from "../FrontButton.astro";
+import ProgramCard from "../ProgramCard.astro";
+import { SESSION_NO_IMAGE, EVENT_NO_IMAGE } from "../../lib/program";
 
 interface Props {
-  id: string;
+  variant: "session" | "event";
   title: string;
-  subtitle?: string;
-  items: ProgramItem[];
-  alt?: boolean;
+  subtitle: string;
+  items: CollectionEntry<"sessions">[] | CollectionEntry<"events">[];
+  moreHref: string;
+  moreLabel: string;
 }
-const { id, title, subtitle, items, alt = false } = Astro.props;
+const { variant, title, subtitle, items, moreHref, moreLabel } = Astro.props;
+
+const basePath = variant === "session" ? "/sessions/" : "/events/";
+const noImage = variant === "session" ? SESSION_NO_IMAGE : EVENT_NO_IMAGE;
 ---
 
-<Section id={id} title={title} subtitle={subtitle} alt={alt}>
-  {
-    items.length === 0 ? (
-      <p class="text-ink/60 text-center">{subtitle ?? title}は準備中です。お楽しみに！</p>
-    ) : (
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((item) => (
-          <article class="overflow-hidden rounded-xl border border-black/5 bg-white shadow-sm">
-            {item.image && <img src={item.image} alt="" class="aspect-video w-full object-cover" />}
-            <div class="p-5">
-              <h3 class="text-navy font-bold">{item.title}</h3>
-              {item.speaker && <p class="text-ink/70 mt-1 text-sm">{item.speaker}</p>}
-              {item.description && <p class="text-ink/80 mt-3 text-sm leading-relaxed">{item.description}</p>}
-              {item.url && (
-                <a href={item.url} class="text-accent mt-3 inline-block text-sm underline">
-                  詳しく見る
-                </a>
-              )}
-            </div>
-          </article>
-        ))}
-      </div>
-    )
-  }
-</Section>
+<section class="p-program">
+  <div class="p-program__inner l-inner">
+    <Heading title={title} subtitle={subtitle} />
+    {
+      items.length === 0 ? (
+        <p class="p-program__empty">{subtitle}は準備中です。お楽しみに！</p>
+      ) : (
+        <div class="p-program__grid">
+          {items.map((item) => (
+            <ProgramCard
+              variant={variant}
+              href={`${basePath}${item.id}`}
+              title={item.data.title}
+              image={item.data.image ?? noImage}
+              type={item.data.type}
+              target={item.data.target}
+              speaker={variant === "session" ? (item as CollectionEntry<"sessions">).data.speaker : undefined}
+              needsReservation={variant === "event" ? (item as CollectionEntry<"events">).data.needsReservation : false}
+            />
+          ))}
+        </div>
+      )
+    }
+    <div class="p-program__more">
+      <FrontButton href={moreHref}>{moreLabel}</FrontButton>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,29 @@
+---
+import { render } from "astro:content";
+import SingleLayout from "../../layouts/SingleLayout.astro";
+import { getSessions, SESSION_NO_IMAGE } from "../../lib/program";
+
+// 公開対象のセッションを静的ページとして生成する（draft は本番で除外）
+export async function getStaticPaths() {
+  const items = await getSessions();
+  return items.map((item) => ({ params: { id: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+const eyecatch = item.data.image ?? SESSION_NO_IMAGE;
+---
+
+<SingleLayout
+  title={item.data.title}
+  ogType="article"
+  ogImage={item.data.image}
+  eyecatch={{ src: eyecatch, alt: item.data.title }}
+  back={{ href: "/sessions/", label: "セッション一覧に戻る" }}
+>
+  <Fragment slot="meta">
+    <span class="p-single__badge p-single__badge--session">{item.data.type}</span>
+    <span class="p-single__meta-text">対象：{item.data.target}</span>
+  </Fragment>
+  <Content />
+</SingleLayout>

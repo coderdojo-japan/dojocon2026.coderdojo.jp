@@ -1,67 +1,71 @@
 ---
-import { site } from "../data/site";
+// サイト共通ヘッダー（モックの l-header を移植。相対パスは絶対パスに変換）
+const REGISTER_URL = "https://dojocon-japan.doorkeeper.jp/events/198206";
+const CONTACT_URL = "https://forms.gle/TMX7WMkjz2tADSGe6";
 
-// ヘッダーのナビゲーション。リンク先はトップページのセクション (/#id) か別ページ。
-const nav = [
+// ナビ項目。href はサイトルート基準の絶対パス。external は別タブで開く外部リンク。
+const navItems = [
+  { href: "/", label: "ホーム" },
   { href: "/#outline", label: "開催概要" },
-  { href: "/#about-coderdojo", label: "CoderDojoとは" },
-  { href: "/news", label: "お知らせ" },
-  { href: "/#keynote", label: "基調講演" },
-  { href: "/#sessions", label: "セッション" },
-  { href: "/#sponsors", label: "スポンサー" },
-  { href: "/#contact", label: "お問い合わせ" },
+  { href: "/sessions/", label: "セッション" },
+  { href: "/events/", label: "イベント" },
+  { href: "/news/", label: "お知らせ" },
+  { href: "/#sponsor", label: "スポンサー" },
+  { href: "#", label: "タイムテーブル" },
+  { href: CONTACT_URL, label: "お問い合わせ", external: true },
 ];
 ---
 
-<header class="sticky top-0 z-50 border-b border-black/5 bg-white/90 backdrop-blur">
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3">
-    <a href="/" class="text-navy flex items-center gap-2 font-bold">
-      <img src="/images/logo.webp" alt="" class="h-8 w-8" />
-      <span class="text-sm sm:text-base">{site.shortTitle}</span>
-    </a>
-
-    <!-- PC 用ナビ -->
-    <nav class="hidden items-center gap-5 text-sm lg:flex">
-      {
-        nav.map((item) => (
-          <a href={item.href} class="text-ink/80 hover:text-accent transition">
-            {item.label}
-          </a>
-        ))
-      }
-    </nav>
-
-    <!-- モバイル用ナビ（JS 不要の details メニュー） -->
-    <details class="relative lg:hidden">
-      <summary
-        class="text-navy flex cursor-pointer list-none items-center rounded-md p-2 [&::-webkit-details-marker]:hidden"
-      >
-        <span class="sr-only">メニューを開く</span>
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          aria-hidden="true"
+<header class="l-header" id="js-header">
+  <div class="l-header__inner">
+    <div class="l-header__bar">
+      <a class="l-header__logo-link" href="/">
+        <img
+          class="l-header__logo-img"
+          src="/images/common/logo.webp"
+          alt="DojoCon Japan 2026"
+          width="553"
+          height="173"
+        />
+      </a>
+      <div class="l-header__bar-right">
+        <a class="l-header__link l-header__link--btn" href={REGISTER_URL} target="_blank" rel="noopener noreferrer"
+          >参加登録</a
         >
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </summary>
-      <nav
-        class="absolute right-0 mt-2 flex w-52 flex-col gap-1 rounded-lg border border-black/5 bg-white p-2 text-sm shadow-lg"
-      >
+        <button
+          class="l-header__hamburger"
+          id="js-hamburger"
+          type="button"
+          aria-expanded="false"
+          aria-label="メニューを開く"
+        >
+          <span class="l-header__hamburger-line"></span>
+          <span class="l-header__hamburger-line"></span>
+          <span class="l-header__hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+    <nav class="l-header__nav" id="js-nav">
+      <ul class="l-header__list">
         {
-          nav.map((item) => (
-            <a href={item.href} class="text-ink/80 hover:bg-surface hover:text-accent rounded px-3 py-2 transition">
-              {item.label}
-            </a>
+          navItems.map((item) => (
+            <li>
+              <a
+                class="l-header__link"
+                href={item.href}
+                {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
+                {item.label}
+              </a>
+            </li>
           ))
         }
-      </nav>
-    </details>
+        <li>
+          <a class="l-header__link l-header__link--btn" href={REGISTER_URL} target="_blank" rel="noopener noreferrer"
+            >参加登録</a
+          >
+        </li>
+      </ul>
+    </nav>
   </div>
 </header>

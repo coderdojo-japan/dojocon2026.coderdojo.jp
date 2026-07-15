@@ -1,7 +1,8 @@
 ---
 title: 開催日・会場が決定しました（SAVE THE DATE）
 date: 2026-03-01
-category: お知らせ
+label: お知らせ
+color: news
 ---
 
 DojoCon Japan 2026 の開催日と会場が決定しました 🎉

@@ -18,7 +18,11 @@
     "slides:pdf": "marp docs/astro-onboarding.md --pdf -o docs/astro-onboarding.pdf",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "sass-compile": "sass src/styles/scss:src/styles",
+    "autoprefixer": "postcss src/styles/style.css --use autoprefixer --replace",
+    "sass-all": "npm run sass-compile && npm run autoprefixer",
+    "sass": "npm run sass-all && onchange src/styles/scss/ -- npm run sass-all"
   },
   "lint-staged": {
     "*.{astro,js,jsx,ts,tsx,css,json,md,mdx,webmanifest}": "prettier --write"
@@ -33,13 +37,16 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@marp-team/marp-cli": "^4.4.0",
-    "@tailwindcss/vite": "^4.3.1",
+    "autoprefixer": "^10.5.1",
+    "cssnano": "^7.1.9",
     "husky": "^9.1.7",
     "lint-staged": "^16.3.1",
+    "onchange": "^7.1.0",
+    "postcss-cli": "^11.0.1",
     "prettier": "^3",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.6.14",
-    "tailwindcss": "^4.3.1",
+    "sass": "^1.101.0",
+    "sass-embedded": "^1.100.0",
     "typescript": "^6.0.3"
   }
 }

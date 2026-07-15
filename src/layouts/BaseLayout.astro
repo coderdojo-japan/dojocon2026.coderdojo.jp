@@ -1,25 +1,37 @@
 ---
-import "../styles/global.css";
+import "../styles/scss/style.scss";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import BackToTop from "../components/BackToTop.astro";
 import { site } from "../data/site";
 
 interface Props {
+  /** ページの <title>。省略時はサイト名 */
   title?: string;
+  /** meta description。省略時はサイト説明 */
   description?: string;
+  /** OGP タイプ。一覧・トップ・固定ページは "website"、記事詳細は "article" */
+  ogType?: "website" | "article";
+  /** OGP 画像のパス（サイトルート基準）。省略時は共通の ogp.webp */
+  ogImage?: string;
 }
 
-const { title = site.title, description = site.description } = Astro.props;
+const {
+  title = site.shortTitle,
+  description = site.description,
+  ogType = "website",
+  ogImage = "/images/common/ogp.webp",
+} = Astro.props;
 
-// astro.config.mjs の site を基準に正規 URL を生成
+// astro.config.mjs の site を基準に正規 URL / 絶対 URL を生成
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL("/images/ogp.png", Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
 ---
 
 <!doctype html>
-<html lang="ja" dir="ltr">
+<html lang="ja">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
@@ -28,32 +40,92 @@ const ogImage = new URL("/images/ogp.png", Astro.site);
     <link rel="canonical" href={canonicalURL} />
 
     <!-- OGP / Twitter Card -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={site.shortTitle} />
+    <meta property="og:locale" content="ja_JP" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageURL} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@DojoConJapan" />
 
-    <!-- Icons / Manifest -->
-    <link rel="icon" href="/images/coderdojo.svg" sizes="any" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Favicon -->
+    <link rel="icon" href="/images/common/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/images/common/apple-touch-icon-180x180.png" />
+    <meta name="theme-color" content="#ffffff" />
   </head>
-  <body class="font-sans">
+  <body>
     <Header />
-    <main>
-      <slot />
-    </main>
+    <slot />
     <Footer />
+    <BackToTop />
+
+    <script>
+      // ヘッダー・ハンバーガー・トップへ戻るの最小限の挙動（モックの js/main.js を移植）
+      const header = document.getElementById("js-header");
+
+      // スクロールパディング: ヘッダー高さ + 余白を CSS変数に反映してアンカーのオフセットを調整
+      function updateScrollPadding() {
+        if (!header) return;
+        document.documentElement.style.setProperty("--header-height", header.offsetHeight + 30 + "px");
+      }
+      updateScrollPadding();
+      window.addEventListener("resize", updateScrollPadding);
+
+      // スクロール時にヘッダーへ影をつける
+      window.addEventListener("scroll", function () {
+        if (!header) return;
+        if (window.scrollY > 0) {
+          header.classList.add("is-scrolled");
+        } else {
+          header.classList.remove("is-scrolled");
+        }
+      });
+
+      const hamburger = document.getElementById("js-hamburger");
+      const nav = document.getElementById("js-nav");
+      const backToTop = document.getElementById("js-back-to-top");
+
+      // ページトップへ戻るボタン: 300px以上スクロールで表示、クリックで先頭へ
+      if (backToTop) {
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 300) {
+            backToTop.classList.add("is-visible");
+          } else {
+            backToTop.classList.remove("is-visible");
+          }
+        });
+
+        backToTop.addEventListener("click", function () {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+
+      // ハンバーガーメニュー: 開閉トグル・外クリックで閉じる・リンククリックで閉じる
+      if (hamburger && nav) {
+        const closeMenu = () => {
+          nav.classList.remove("is-open");
+          hamburger.setAttribute("aria-expanded", "false");
+          hamburger.setAttribute("aria-label", "メニューを開く");
+        };
+
+        hamburger.addEventListener("click", function () {
+          const isOpen = nav.classList.toggle("is-open");
+          hamburger.setAttribute("aria-expanded", String(isOpen));
+          hamburger.setAttribute("aria-label", isOpen ? "メニューを閉じる" : "メニューを開く");
+        });
+
+        document.addEventListener("click", function (e) {
+          if (header && !header.contains(e.target as Node)) {
+            closeMenu();
+          }
+        });
+
+        nav.querySelectorAll(".l-header__link").forEach(function (link) {
+          link.addEventListener("click", closeMenu);
+        });
+      }
+    </script>
   </body>
 </html>

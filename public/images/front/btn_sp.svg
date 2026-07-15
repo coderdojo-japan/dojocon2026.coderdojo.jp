@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_2" data-name="レイヤー 2" xmlns="http://www.w3.org/2000/svg" width="2749" height="431.2" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2749 431.2">
+  <defs>
+    <clipPath id="clippath">
+      <rect width="2749" height="431.2" fill="none"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect width="2749" height="431.2" fill="none"/>
+    </clipPath>
+    <clipPath id="clippath-2">
+      <rect x="171.4" y="10" width="267" height="249.2" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="_レイヤー_1-2" data-name=" レイヤー 1">
+    <g isolation="isolate">
+      <g id="_レイヤー_11" data-name=" レイヤー 11">
+        <g clip-path="url(#clippath)">
+          <g>
+            <polygon points="2467.8 228.1 2473.4 10 2277.3 10 2352.7 245.5 2467.8 228.1" fill="#909acd"/>
+            <polygon points="253.6 259.3 293.4 420.1 483.9 420.1 362.3 187.7 253.6 259.3" fill="#d1c8e2"/>
+            <g clip-path="url(#clippath-1)">
+              <g>
+                <path d="M215.6,10C102.3,10,10.5,101.8,10.5,215.1h0c0,20.5,3,40.2,8.6,58.8,3.8,12.8,8.9,25.1,15.1,36.8l137.2-95.6L229.7,10h-14.1,0Z" fill="#fff095"/>
+                <path d="M253.6,259.3l-82.2-44.2-137.2,95.6c34.4,65.1,102.7,109.4,181.4,109.4h77.8l-39.8-160.8h0Z" fill="#5dc1cf"/>
+                <polygon points="229.7 10 171.4 215.1 253.6 259.3 362.3 187.7 438.4 10 229.7 10" fill="#f8d2e2"/>
+                <g mix-blend-mode="multiply">
+                  <g clip-path="url(#clippath-2)">
+                    <polygon points="229.7 10 171.4 215.1 253.6 259.3 362.3 187.7 438.4 10 229.7 10" fill="#f8d2e2"/>
+                  </g>
+                </g>
+                <path d="M2533.4,10h-60l-5.6,218,61.3,31.2,201.9-98.9c-23.9-86.7-103.4-150.3-197.6-150.3" fill="#ef9098"/>
+                <path d="M2658.5,376.3l-129.4-117.1-61.3-31.2-115.1,17.5-27.7,174.6h208.5c47.2,0,90.7-16,125.3-42.8l-.2-1h-.1Z" fill="#bde0d1"/>
+                <path d="M2731.1,160.4h0l-201.9,98.9,130.1,117.7c48.2-37.5,79.2-96.1,79.2-161.9s-2.6-37.3-7.4-54.7" fill="#fcd24d"/>
+                <path d="M2533.4,420.6H215.6c-92.8,0-171.2-61.6-196.5-146.2-5.6-18.6-8.6-38.4-8.6-58.8h0C10.5,102.3,102.3,10.5,215.6,10.5h2317.9c113.2,0,205,91.8,205,205h0c0,113.2-91.8,205-205,205h-.1v.1Z" fill="none" stroke="#231815" stroke-miterlimit="10" stroke-width="21.1"/>
+                <polyline points="229.7 10.5 171.4 215.6 34.2 311.2" fill="none" stroke="#231815" stroke-miterlimit="10" stroke-width="21.1"/>
+                <polyline points="171.4 215.6 253.6 259.8 293.4 420.6" fill="none" stroke="#231815" stroke-miterlimit="10" stroke-width="21.1"/>
+                <polyline points="438.4 10.5 362.3 188.2 253.6 259.8" fill="none" stroke="#231815" stroke-miterlimit="10" stroke-width="21.1"/>
+                <line x1="483.9" y1="420.6" x2="362.3" y2="188.2" fill="none"/>
+                <line x1="483.9" y1="420.6" x2="362.3" y2="188.2" fill="none" stroke="#231815" stroke-miterlimit="10" stroke-width="21.1"/>
+                <polyline points="2659.2 377.5 2529.1 259.8 2731.1 160.9" fill="none" stroke="#231815" stroke-miterlimit="10" stroke-width="21.1"/>
+                <polyline points="2529.1 259.8 2467.8 228.6 2473.4 10.5" fill="none" stroke="#231815" stroke-miterlimit="10" stroke-width="21.1"/>
+                <polyline points="2325 420.6 2352.7 246 2467.8 228.6" fill="none" stroke="#231815" stroke-miterlimit="10" stroke-width="21.1"/>
+                <line x1="2277.3" y1="10.5" x2="2352.7" y2="246" fill="none"/>
+                <line x1="2277.3" y1="10.5" x2="2352.7" y2="246" fill="none" stroke="#231815" stroke-miterlimit="10" stroke-width="21.1"/>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

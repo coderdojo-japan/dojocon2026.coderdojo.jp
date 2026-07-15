@@ -1,31 +1,35 @@
 ---
-import Section from "../Section.astro";
-import { site } from "../../data/site";
-
-const rows = [
-  { label: "開催日時", value: `${site.event.dateText} ${site.event.timeLabel}` },
-  { label: "会場", value: `${site.event.venueArea} ${site.event.venueName}`, url: site.event.venueUrl },
-  { label: "参加費", value: site.event.isFree ? "無料" : "" },
-];
+// 開催概要セクション（p-outline）
+import Heading from "../Heading.astro";
 ---
 
-<Section id="outline" title="Outline" subtitle="開催概要" alt>
-  <dl class="mx-auto max-w-2xl divide-y divide-black/5 rounded-xl border border-black/5 bg-white">
-    {
-      rows.map((row) => (
-        <div class="flex flex-col gap-1 p-5 sm:flex-row sm:items-center sm:gap-6">
-          <dt class="text-navy w-28 shrink-0 font-bold">{row.label}</dt>
-          <dd class="text-ink/90">
-            {row.url ? (
-              <a href={row.url} target="_blank" rel="noopener noreferrer" class="text-accent underline">
-                {row.value}
-              </a>
-            ) : (
-              row.value
-            )}
+<section id="outline" class="p-outline">
+  <div class="p-outline__inner l-inner">
+    <Heading title="Outline" subtitle="開催概要" />
+    <div class="p-outline__content">
+      <p class="p-outline__free">
+        <span class="u-pink">参</span><span class="u-violet">加</span><span class="u-blue">無</span><span
+          class="u-yellow">料</span
+        >
+      </p>
+      <dl class="p-outline__detail">
+        <div class="p-outline__detail-item">
+          <dt class="p-outline__dt">開催日時</dt>
+          <dd class="p-outline__dd">
+            <p class="p-outline__dd-text">2026.11.01 SUN</p>
+            <p class="p-outline__dd-text">10:00-17:00</p>
           </dd>
         </div>
-      ))
-    }
-  </dl>
-</Section>
+        <div class="p-outline__detail-item">
+          <dt class="p-outline__dt p-outline__dt--wide">会場</dt>
+          <dd class="p-outline__dd">
+            <p class="p-outline__venue">
+              盛岡市観光文化交流センター<span class="p-outline__venue-name">プラザおでって</span>
+            </p>
+            <p class="p-outline__address">岩手県盛岡市中ノ橋通1丁目1-10</p>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>

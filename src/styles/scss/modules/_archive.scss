@@ -1,0 +1,19 @@
+@use '../settings/settings' as s;
+
+/*****************************************************
+	一覧ページ共通
+*****************************************************/
+.p-archive {
+	margin-top: 80px;
+	padding: 0 24px;
+
+  @include s.mq-down() {
+    margin-top: 48px;
+  }
+
+  .p-program__grid {
+    @include s.mq-up(lg) {
+      gap: 56px 40px;
+    }
+  }
+}

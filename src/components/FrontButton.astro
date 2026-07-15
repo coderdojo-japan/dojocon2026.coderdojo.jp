@@ -1,0 +1,12 @@
+---
+// 大きめの丸ボタン（c-front-btn）。ラベルはスロットで渡す。
+interface Props {
+  href: string;
+  external?: boolean;
+}
+const { href, external = false } = Astro.props;
+---
+
+<a class="c-front-btn" href={href} {...external ? { target: "_blank", rel: "noopener noreferrer" } : {}}>
+  <slot />
+</a>

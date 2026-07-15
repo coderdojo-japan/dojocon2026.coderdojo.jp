@@ -1,0 +1,30 @@
+---
+import { render } from "astro:content";
+import SingleLayout from "../../layouts/SingleLayout.astro";
+import { getEvents, EVENT_NO_IMAGE } from "../../lib/program";
+
+// 公開対象のイベントを静的ページとして生成する（draft は本番で除外）
+export async function getStaticPaths() {
+  const items = await getEvents();
+  return items.map((item) => ({ params: { id: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+const eyecatch = item.data.image ?? EVENT_NO_IMAGE;
+---
+
+<SingleLayout
+  title={item.data.title}
+  ogType="article"
+  ogImage={item.data.image}
+  eyecatch={{ src: eyecatch, alt: item.data.title }}
+  back={{ href: "/events/", label: "イベント一覧に戻る" }}
+>
+  <Fragment slot="meta">
+    <span class="p-single__badge p-single__badge--event">{item.data.type}</span>
+    {item.data.needsReservation && <span class="p-single__badge p-single__badge--required">要申し込み</span>}
+    <span class="p-single__meta-text">対象：{item.data.target}</span>
+  </Fragment>
+  <Content />
+</SingleLayout>

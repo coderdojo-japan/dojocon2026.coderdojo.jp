@@ -1,30 +1,49 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/sections/Hero.astro";
+import Theme from "../components/sections/Theme.astro";
 import Outline from "../components/sections/Outline.astro";
-import AboutCoderDojo from "../components/sections/AboutCoderDojo.astro";
-import AboutDojoCon from "../components/sections/AboutDojoCon.astro";
+import About from "../components/sections/About.astro";
 import News from "../components/sections/News.astro";
 import Keynote from "../components/sections/Keynote.astro";
 import ProgramSection from "../components/sections/ProgramSection.astro";
-import Organizers from "../components/sections/Organizers.astro";
 import Sponsors from "../components/sections/Sponsors.astro";
+import Organizers from "../components/sections/Organizers.astro";
 import Contact from "../components/sections/Contact.astro";
 import Staff from "../components/sections/Staff.astro";
-import { sessions, events } from "../data/program";
+import { getSessions, getEvents } from "../lib/program";
+
+const sessions = await getSessions(6);
+const events = await getEvents(6);
 ---
 
 <BaseLayout>
-  <Hero />
-  <Outline />
-  <AboutCoderDojo />
-  <AboutDojoCon />
-  <News />
-  <Keynote />
-  <ProgramSection id="sessions" title="Session" subtitle="セッション" items={sessions} alt />
-  <ProgramSection id="events" title="Event" subtitle="イベント" items={events} />
-  <Organizers />
-  <Sponsors />
-  <Contact />
-  <Staff />
+  <main id="home">
+    <Hero />
+    <Theme />
+    <Outline />
+    <About />
+    <News />
+    <Keynote />
+    <ProgramSection
+      variant="session"
+      title="Session"
+      subtitle="セッション"
+      items={sessions}
+      moreHref="/sessions/"
+      moreLabel="全てのセッションをみる"
+    />
+    <ProgramSection
+      variant="event"
+      title="Event"
+      subtitle="イベント"
+      items={events}
+      moreHref="/events/"
+      moreLabel="全てのイベントをみる"
+    />
+    <Sponsors />
+    <Organizers />
+    <Contact />
+    <Staff />
+  </main>
 </BaseLayout>

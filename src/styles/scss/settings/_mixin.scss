@@ -1,0 +1,22 @@
+@use "variables" as v;
+@use "function" as f;
+@use "sass:map";
+@use "sass:math";
+
+@mixin mq-up($bp-key: md) {
+	@media #{map.get(v.$bp-up, $bp-key)} {
+		@content;
+	}
+}
+
+@mixin mq-down($bp-key: md) {
+	@media #{map.get(v.$bp-down, $bp-key)} {
+		@content;
+	}
+}
+
+@mixin mq-between($bp-key: md) {
+	@media #{map.get(v.$bp-between, $bp-key)} {
+		@content;
+	}
+}

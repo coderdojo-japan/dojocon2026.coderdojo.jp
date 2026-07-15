@@ -10,22 +10,17 @@ const { posts } = Astro.props;
 
 {
   posts.length === 0 ? (
-    <p class="text-ink/60 text-center">お知らせは準備中です。</p>
+    <p class="p-news__empty">お知らせは準備中です。</p>
   ) : (
-    <ul class="mx-auto max-w-3xl divide-y divide-black/5">
+    <ul class="p-news__list">
       {posts.map((post) => (
-        <li>
-          <a
-            href={`/news/${post.id}`}
-            class="hover:bg-surface flex flex-col gap-1 py-4 transition sm:flex-row sm:items-center sm:gap-4"
-          >
-            <time datetime={post.data.date.toISOString()} class="text-ink/60 w-24 shrink-0 font-mono text-sm">
+        <li class="p-news__item">
+          <a href={`/news/${post.id}`}>
+            <time class="p-news__date" datetime={post.data.date.toISOString().slice(0, 10)}>
               {formatNewsDate(post.data.date)}
             </time>
-            <span class="bg-accent-light text-accent shrink-0 rounded-full px-3 py-0.5 text-xs font-bold">
-              {post.data.category}
-            </span>
-            <span class="text-ink/90 font-medium">{post.data.title}</span>
+            <span class={`p-news__category p-news__category--${post.data.color}`}>{post.data.label}</span>
+            <p class="p-news__text">{post.data.title}</p>
           </a>
         </li>
       ))}

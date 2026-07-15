@@ -1,0 +1,15 @@
+---
+// セクション見出し（c-heading）。英題 + 日本語サブタイトル。
+// 一覧ページなど、ページ主見出しにするときは as="h1" を渡す。
+interface Props {
+  title: string;
+  subtitle: string;
+  as?: "h1" | "h2";
+}
+const { title, subtitle, as: Tag = "h2" } = Astro.props;
+---
+
+<hgroup class="c-heading">
+  <Tag class="c-heading__title">{title}</Tag>
+  <p class="c-heading__subtitle">{subtitle}</p>
+</hgroup>

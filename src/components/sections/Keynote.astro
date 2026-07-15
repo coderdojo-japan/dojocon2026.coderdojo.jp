@@ -1,35 +1,26 @@
 ---
-// 基調講演。登壇者情報はここで管理する。
-const keynote = {
-  name: "上田 信行",
-  nameKana: "ウエダ ノブユキ",
-  title: "同志社女子大学 名誉教授 / ネオミュージアム 館長",
-  photo: "/images/keynote-ueda.jpg",
-  profileUrl: "https://nobuyukiueda.com/about",
-};
+// 基調講演セクション（p-keynote）。登壇者情報は data/keynote.ts。
+import Heading from "../Heading.astro";
+import FrontButton from "../FrontButton.astro";
+import { keynote } from "../../data/keynote";
 ---
 
-<section id="keynote" class="bg-navy scroll-mt-20 px-6 py-16 text-center text-white sm:py-20">
-  <div class="mx-auto max-w-3xl">
-    <p class="font-mono text-sm tracking-widest text-white/60">KEYNOTE SPEAKER</p>
-    <h2 class="mt-2 text-2xl font-bold sm:text-3xl">基調講演</h2>
-
-    <img src={keynote.photo} alt={keynote.name} class="mx-auto mt-10 h-40 w-40 rounded-full object-cover object-top" />
-    <p class="mt-6 text-xl font-bold">
-      {keynote.name}
-      <span class="text-base font-normal text-white/70">/ {keynote.nameKana}</span>
-    </p>
-    <p class="mt-2 text-sm text-white/80">{keynote.title}</p>
-
-    <p class="mt-6">
-      <a
-        href={keynote.profileUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-sm text-white/80 underline hover:text-white"
-      >
-        &raquo; プロフィール詳細を見る
-      </a>
-    </p>
+<section class="p-keynote">
+  <div class="p-keynote__overlay">
+    <div class="p-keynote__inner l-inner">
+      <Heading title="Keynote" subtitle="基調講演" />
+      <img class="p-keynote__img u-hidden--pc-tab" src={keynote.imageSp} alt="上田信行氏" width="414" height="470" />
+      <div class="p-keynote__content">
+        <h3 class="p-keynote__name">{keynote.name}</h3>
+        <p class="p-keynote__role">{keynote.role}</p>
+        <div class="p-keynote__body">
+          {keynote.profile.map((paragraph) => <p class="p-keynote__text">{paragraph}</p>)}
+        </div>
+        <div class="p-keynote__more">
+          <FrontButton href={keynote.moreUrl}>基調講演を詳しくみる</FrontButton>
+        </div>
+      </div>
+    </div>
   </div>
+  <img class="p-keynote__bg u-hidden--sp" src={keynote.imagePc} alt="上田信行氏" width="2184" height="1273" />
 </section>

@@ -1,36 +1,22 @@
 ---
-import { site } from "../../data/site";
+// トップ最上部のヒーロー（p-hero）
 ---
 
-<section class="relative overflow-hidden bg-white px-6 py-20 text-center sm:py-28">
-  <div class="mx-auto max-w-3xl">
-    <p class="text-accent font-mono text-sm tracking-widest">DojoCon Japan 2026 Theme</p>
-
-    <h1
-      class="mt-4 bg-gradient-to-r from-sky-500 via-indigo-500 to-rose-500 bg-clip-text text-4xl font-bold text-transparent sm:text-6xl"
-    >
-      {site.theme}
+<div class="p-hero">
+  <div class="p-hero__inner">
+    <h1 class="p-hero__heading">
+      <img class="p-hero__logo" src="/images/common/logo.webp" alt="DojoCon Japan 2026" width="553" height="173" />
+      <img
+        class="p-hero__tagline"
+        src="/images/front/tagline.svg"
+        alt="わかちあう、わかりあう"
+        width="572"
+        height="45"
+      />
     </h1>
-
-    {
-      site.event.isFree && (
-        <p class="bg-accent mt-6 inline-block rounded-full px-5 py-1.5 text-sm font-bold text-white">参加無料</p>
-      )
-    }
-
-    <p class="text-ink/80 mt-8 text-base leading-relaxed">
-      DojoCon Japan は、日本の CoderDojo コミュニティメンバーが全国から集まる<br class="hidden sm:inline" />
-      カンファレンスイベント (CoderDojo Conference) です。
+    <p class="p-hero__date">
+      2026.11.01 |SUN|<br />
+      岩手県盛岡市中ノ橋通1丁目1-10<br class="u-br--pc-tab-none" />プラザおでって
     </p>
-
-    <div class="text-navy mt-10 flex flex-col items-center justify-center gap-2 font-mono">
-      <p class="text-2xl font-bold sm:text-3xl">{site.event.dateLabel}</p>
-      <p class="text-ink/70 text-sm">
-        {site.event.venueArea}
-        <a href={site.event.venueUrl} target="_blank" rel="noopener noreferrer" class="text-accent underline">
-          {site.event.venueName}
-        </a>
-      </p>
-    </div>
   </div>
-</section>
+</div>
