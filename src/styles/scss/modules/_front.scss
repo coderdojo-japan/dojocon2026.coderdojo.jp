@@ -666,7 +666,7 @@
 
 .p-program__grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(min(100%, 292px), 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 292px), 1fr));
 	gap: 40px;
 }
 
@@ -1020,7 +1020,7 @@
 
 .p-staff__grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 140px), 1fr));
 	gap: 56px 44px;
   max-width: 960px;
   margin-inline: auto;
