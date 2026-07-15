@@ -1,22 +1,19 @@
 ---
-import Section from "../Section.astro";
+// お知らせセクション（p-news）。最新5件をコレクションから表示。
+import Heading from "../Heading.astro";
 import NewsList from "../NewsList.astro";
+import FrontButton from "../FrontButton.astro";
 import { getNews } from "../../lib/news";
 
-// 最新 5 件を表示
 const posts = await getNews(5);
 ---
 
-<Section id="news" title="News" subtitle="お知らせ">
-  <NewsList posts={posts} />
-
-  {
-    posts.length > 0 && (
-      <p class="mt-8 text-center">
-        <a href="/news" class="text-accent underline">
-          &raquo; お知らせ一覧を見る
-        </a>
-      </p>
-    )
-  }
-</Section>
+<section class="p-news">
+  <div class="p-news__inner l-inner">
+    <Heading title="News" subtitle="お知らせ" />
+    <NewsList posts={posts} />
+    <div class="p-news__more">
+      <FrontButton href="/news/">全てのお知らせをみる</FrontButton>
+    </div>
+  </div>
+</section>

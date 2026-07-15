@@ -1,0 +1,32 @@
+---
+// 一覧ページ共通枠（p-archive）。見出しはページ主見出しとして h1 で表示する。
+import BaseLayout from "./BaseLayout.astro";
+import Heading from "../components/Heading.astro";
+
+interface Props {
+  /** 英題（例: "Session"） */
+  title: string;
+  /** 日本語サブタイトル（例: "セッション"） */
+  subtitle: string;
+  /** <title> / meta。省略時は subtitle から生成 */
+  pageTitle?: string;
+  description?: string;
+}
+const {
+  title,
+  subtitle,
+  pageTitle = `${subtitle} | DojoCon Japan 2026`,
+  description = `${subtitle}一覧`,
+} = Astro.props;
+---
+
+<BaseLayout title={pageTitle} description={description}>
+  <main>
+    <section class="p-archive">
+      <div class="p-archive__inner l-inner">
+        <Heading as="h1" title={title} subtitle={subtitle} />
+        <slot />
+      </div>
+    </section>
+  </main>
+</BaseLayout>

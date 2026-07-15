@@ -1,33 +1,40 @@
 ---
-import { site } from "../data/site";
+// サイト共通フッター（モックの l-footer を移植）
+const CONTACT_URL = "https://forms.gle/TMX7WMkjz2tADSGe6";
+
+const snsLinks = [
+  { href: "https://x.com/DojoConJapan", icon: "/images/common/icon_x.svg", alt: "X（旧Twitter）" },
+  { href: "https://www.facebook.com/dojoconjapan/", icon: "/images/common/icon_facebook.svg", alt: "Facebook" },
+  { href: "https://www.youtube.com/@dojoconjapan", icon: "/images/common/icon_youtube.svg", alt: "YouTube" },
+];
 ---
 
-<footer class="bg-navy px-6 py-12 text-center text-white">
-  <div class="mx-auto max-w-4xl">
-    <img src="/images/logo.webp" alt="" class="mx-auto mb-4 h-12 w-12" />
-    <p class="font-mono text-lg font-bold">{site.shortTitle}</p>
-    <p class="mt-1 text-sm text-white/80">{site.theme}</p>
-
-    <nav class="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
-      <a href={site.links.x} target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-white"
-        >X (Twitter)</a
-      >
-      <a href={site.links.github} target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-white"
-        >GitHub</a
-      >
-      <a
-        href={site.links.dojoconJapan}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-white/80 hover:text-white"
-      >
-        DojoCon Japan（全国イベント）
-      </a>
-    </nav>
-
-    <div class="mt-8 text-xs leading-relaxed text-white/60">
-      <p>DojoCon Japan 実行委員会</p>
-      <p>一般社団法人 CoderDojo Japan</p>
+<footer class="l-footer">
+  <div class="l-footer__inner l-inner">
+    <a href="/" class="l-footer__logo">
+      <img src="/images/common/logo.webp" alt="DojoCon Japan 2026" width="250" height="79" />
+    </a>
+    <ul class="l-footer__sns">
+      {
+        snsLinks.map((sns) => (
+          <li class="l-footer__sns-item">
+            <a class="l-footer__sns-link" href={sns.href} target="_blank" rel="noopener noreferrer">
+              <img class="l-footer__sns-icon" src={sns.icon} width="42" height="42" alt={sns.alt} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="l-footer__nav">
+      <ul class="l-footer__nav-list">
+        <li><a class="l-footer__nav-link" href="/">ホーム</a></li>
+        <li><a class="l-footer__nav-link" href="/code-of-conduct">行動規範</a></li>
+        <li><a class="l-footer__nav-link" href="/privacy">プライバシーポリシー</a></li>
+        <li>
+          <a class="l-footer__nav-link" href={CONTACT_URL} target="_blank" rel="noopener noreferrer">お問い合わせ</a>
+        </li>
+      </ul>
     </div>
+    <p class="l-footer__copyright">© 2026 DojoCon Japan実行委員会</p>
   </div>
 </footer>

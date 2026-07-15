@@ -1,0 +1,29 @@
+---
+import ArchiveLayout from "../../layouts/ArchiveLayout.astro";
+import ProgramCard from "../../components/ProgramCard.astro";
+import { getEvents, EVENT_NO_IMAGE } from "../../lib/program";
+
+const events = await getEvents();
+---
+
+<ArchiveLayout title="Event" subtitle="イベント">
+  {
+    events.length === 0 ? (
+      <p class="p-program__empty">イベントは準備中です。お楽しみに！</p>
+    ) : (
+      <div class="p-program__grid">
+        {events.map((item) => (
+          <ProgramCard
+            variant="event"
+            href={`/events/${item.id}`}
+            title={item.data.title}
+            image={item.data.image ?? EVENT_NO_IMAGE}
+            type={item.data.type}
+            target={item.data.target}
+            needsReservation={item.data.needsReservation}
+          />
+        ))}
+      </div>
+    )
+  }
+</ArchiveLayout>

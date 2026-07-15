@@ -161,7 +161,7 @@
     top: calc(-870 / 1697 * 88.3vw);
     width: 88.3vw;
     aspect-ratio: 1697 / 2869;
-    background-image: url('../../public/images/front/bg_iwate.webp');
+    background-image: url('/images/front/bg_iwate.webp');
     background-size: contain;
     background-repeat: no-repeat;
     z-index: -1;
@@ -288,7 +288,7 @@
     top: 0;
     width: 45.3vw;
     aspect-ratio: 870 / 945;
-    background-image: url('../../public/images/front/coderdojo_logo_mark.webp');
+    background-image: url('/images/front/coderdojo_logo_mark.webp');
     background-size: contain;
     background-repeat: no-repeat;
     z-index: -1;
@@ -485,7 +485,7 @@
 	text-align: center;
   color: s.$text-color;
   font-weight: bold;
-  background-image: url('../../public/images/front/btn.svg');
+  background-image: url('/images/front/btn.svg');
   background-size: contain;
 	background-repeat: no-repeat;
   text-decoration: none;
@@ -493,7 +493,7 @@
   @include s.mq-down() {
     max-width: 320px;
     aspect-ratio: 320 / 51;
-    background-image: url('../../public/images/front/btn_sp.svg');
+    background-image: url('/images/front/btn_sp.svg');
   }
 
   &:hover {

@@ -1,33 +1,41 @@
 ---
-import Section from "../Section.astro";
-import { staff } from "../../data/staff";
-
-/** 名前の先頭1文字（アバター未設定時のフォールバック表示用） */
-function initial(name: string): string {
-  return name.trim().charAt(0);
-}
+// スタッフセクション（p-staff）。url があればカードをリンクにする。
+import Heading from "../Heading.astro";
+import { staff, STAFF_NO_IMAGE } from "../../data/staff";
 ---
 
-<Section id="staff" title="Staff" subtitle="スタッフ" alt>
-  {
-    staff.length === 0 ? (
-      <p class="text-ink/60 text-center">スタッフ紹介は準備中です。</p>
-    ) : (
-      <ul class="grid grid-cols-3 gap-6 sm:grid-cols-4 md:grid-cols-6">
-        {staff.map((member) => (
-          <li class="flex flex-col items-center gap-2 text-center">
-            {member.avatar ? (
-              <img src={member.avatar} alt={member.name} class="h-20 w-20 rounded-full object-cover" />
-            ) : (
-              <span class="bg-accent-light text-accent flex h-20 w-20 items-center justify-center rounded-full text-2xl font-bold">
-                {initial(member.name)}
-              </span>
-            )}
-            <span class="text-ink/90 text-sm font-medium">{member.name}</span>
-            {member.role && <span class="text-ink/60 text-xs">{member.role}</span>}
-          </li>
-        ))}
-      </ul>
-    )
-  }
-</Section>
+<section class="p-staff">
+  <div class="p-staff__inner l-inner">
+    <Heading title="Staff" subtitle="スタッフ" />
+    {
+      staff.length === 0 ? (
+        <p class="p-staff__empty">スタッフ紹介は準備中です。</p>
+      ) : (
+        <ul class="p-staff__grid">
+          {staff.map((member) => {
+            const Card = member.url ? "a" : "div";
+            return (
+              <li class="p-staff__item">
+                <Card
+                  class="p-staff__card"
+                  {...(member.url ? { href: member.url, target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
+                  <div class="p-staff__img-wrap">
+                    <img
+                      class="p-staff__img"
+                      src={member.avatar ?? STAFF_NO_IMAGE}
+                      width="150"
+                      height="150"
+                      alt={member.name}
+                    />
+                  </div>
+                  <p class="p-staff__name">{member.name}</p>
+                </Card>
+              </li>
+            );
+          })}
+        </ul>
+      )
+    }
+  </div>
+</section>

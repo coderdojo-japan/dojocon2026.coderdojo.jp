@@ -1,21 +1,11 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import SectionHeading from "../../components/SectionHeading.astro";
+import ArchiveLayout from "../../layouts/ArchiveLayout.astro";
 import NewsList from "../../components/NewsList.astro";
 import { getNews } from "../../lib/news";
 
 const posts = await getNews();
 ---
 
-<BaseLayout title="お知らせ | DojoCon Japan 2026 in 岩手">
-  <section class="px-6 py-16 sm:py-20">
-    <div class="mx-auto max-w-5xl">
-      <SectionHeading title="News" subtitle="お知らせ" />
-      <NewsList posts={posts} />
-
-      <p class="mt-12 text-center">
-        <a href="/" class="text-accent underline">&laquo; トップページに戻る</a>
-      </p>
-    </div>
-  </section>
-</BaseLayout>
+<ArchiveLayout title="News" subtitle="お知らせ">
+  <NewsList posts={posts} />
+</ArchiveLayout>

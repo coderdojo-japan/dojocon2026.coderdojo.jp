@@ -1,0 +1,67 @@
+---
+// 詳細/固定ページ共通枠（p-single）＋本文プロース（c-prose）。
+// 使い方は2通り:
+//   (a) コンポーネントとして: <SingleLayout title=... eyecatch=... back=...><slot(meta)/>本文</SingleLayout>
+//   (b) Markdown の layout: として。frontmatter.title を見出しに、本文を c-prose に流し込む（固定ページ）。
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title?: string;
+  /** Markdown の layout: 経由で渡ってくる frontmatter */
+  frontmatter?: { title: string; description?: string };
+  /** アイキャッチ画像（任意）。指定時のみ表示 */
+  eyecatch?: { src: string; alt: string };
+  /** 戻るリンク（任意）。指定時のみ表示 */
+  back?: { href: string; label: string };
+  /** <title>。省略時は "タイトル | DojoCon Japan 2026" */
+  pageTitle?: string;
+  description?: string;
+  ogType?: "website" | "article";
+  ogImage?: string;
+}
+const { title, frontmatter, eyecatch, back, pageTitle, description, ogType, ogImage } = Astro.props;
+
+const resolvedTitle = title ?? frontmatter?.title ?? "";
+const resolvedPageTitle = pageTitle ?? `${resolvedTitle} | DojoCon Japan 2026`;
+const resolvedDescription = description ?? frontmatter?.description ?? resolvedTitle;
+const hasMeta = Astro.slots.has("meta");
+---
+
+<BaseLayout title={resolvedPageTitle} description={resolvedDescription} ogType={ogType} ogImage={ogImage}>
+  <main>
+    <article class="p-single">
+      <div class="p-single__inner">
+        <div class="p-single__head">
+          <h1 class="p-single__title">{resolvedTitle}</h1>
+          {
+            hasMeta && (
+              <div class="p-single__meta">
+                <slot name="meta" />
+              </div>
+            )
+          }
+        </div>
+
+        {
+          eyecatch && (
+            <figure class="p-single__eyecatch">
+              <img src={eyecatch.src} alt={eyecatch.alt} width="380" height="199" />
+            </figure>
+          )
+        }
+
+        <div class="c-prose">
+          <slot />
+        </div>
+
+        {
+          back && (
+            <p class="p-single__back">
+              <a href={back.href}>&laquo; {back.label}</a>
+            </p>
+          )
+        }
+      </div>
+    </article>
+  </main>
+</BaseLayout>

@@ -1,0 +1,57 @@
+---
+// セッション/イベントのカード（p-program__item）。variant で中身を切り替える。
+//   session … 画像上に種別バッジ、メタは 登壇者(任意)+対象
+//   event   … 画像上に「要申し込み」バッジ(任意)、メタ枠に 種別+対象
+interface Props {
+  href: string;
+  title: string;
+  image: string;
+  type: string;
+  target: string;
+  variant: "session" | "event";
+  speaker?: string;
+  needsReservation?: boolean;
+}
+const { href, title, image, type, target, variant, speaker, needsReservation = false } = Astro.props;
+---
+
+<article class="p-program__item">
+  <a class="p-program__link" href={href}>
+    <h3 class="p-program__title">{title}</h3>
+    <div class="p-program__img-wrap">
+      <img class="p-program__img" src={image} alt="" width="380" height="199" />
+      {variant === "session" && <span class="p-program__type">{type}</span>}
+      {
+        variant === "event" && needsReservation && (
+          <span class="p-program__type p-event__type--required">要申し込み</span>
+        )
+      }
+    </div>
+    {
+      variant === "session" ? (
+        <dl class="p-program__meta">
+          {speaker && (
+            <div class="p-program__meta-row">
+              <dt class="p-program__meta-key">登壇者：</dt>
+              <dd class="p-program__meta-value">{speaker}</dd>
+            </div>
+          )}
+          <div class="p-program__meta-row">
+            <dt class="p-program__meta-key">対象：</dt>
+            <dd class="p-program__meta-value">{target}</dd>
+          </div>
+        </dl>
+      ) : (
+        <div class="p-event__meta-wrap">
+          <span class="p-event__type">{type}</span>
+          <dl class="p-program__meta">
+            <div class="p-program__meta-row">
+              <dt class="p-program__meta-key">対象：</dt>
+              <dd class="p-program__meta-value">{target}</dd>
+            </div>
+          </dl>
+        </div>
+      )
+    }
+  </a>
+</article>

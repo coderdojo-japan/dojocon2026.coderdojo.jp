@@ -1,23 +1,23 @@
 ---
-import Section from "../Section.astro";
-import { site } from "../../data/site";
+// お問い合わせセクション（p-contact）
+import Heading from "../Heading.astro";
+import FrontButton from "../FrontButton.astro";
+
+const CONTACT_URL = "https://forms.gle/TMX7WMkjz2tADSGe6";
 ---
 
-<Section id="contact" title="Contact" subtitle="お問い合わせ">
-  <div class="mx-auto max-w-2xl text-center">
-    <p class="text-ink/80 text-base leading-relaxed">
-      DojoCon Japan 2026 に関するお問い合わせは、CoderDojo Japan までお気軽にご連絡ください。
-      スポンサー・協賛のご相談も歓迎しています。
-    </p>
-    <p class="mt-6">
-      <a
-        href={site.links.x}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="bg-accent inline-block rounded-full px-6 py-2.5 font-bold text-white transition hover:opacity-90"
-      >
-        X (Twitter) で連絡する
-      </a>
-    </p>
+<section class="p-contact" id="contact">
+  <div class="p-contact__inner l-inner">
+    <Heading title="Contact" subtitle="お問い合わせ" />
+    <div class="p-contact__body">
+      <p class="p-contact__text">
+        DojoCon Japan 2026についてのお問い合わせは<br
+          class="u-br--sp-none"
+        />以下のリンク先（Googleフォーム）よりお願いいたします。
+      </p>
+    </div>
+    <div class="p-contact__btn">
+      <FrontButton href={CONTACT_URL} external>お問い合わせフォーム</FrontButton>
+    </div>
   </div>
-</Section>
+</section>
