@@ -3,7 +3,7 @@ title: 誰でもできる！CoderDojoを立ち上げてみよう！
 type: 対話
 speaker: 鈴木次郎
 target: チャンピオン
-draft: true
+draft: false
 ---
 
 「自分の地域でもCoderDojoをやってみたい」——そう思ったときに知っておきたいことを、これから立ち上げる人・立ち上げたばかりの人と一緒に考える対話型のセッションです。

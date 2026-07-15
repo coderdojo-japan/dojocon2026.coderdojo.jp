@@ -3,7 +3,7 @@ title: みんなでつくるロボットコンテスト
 type: 展示
 target: メンター
 needsReservation: false
-draft: true
+draft: false
 ---
 
 各地のCoderDojoで生まれた作品やロボットが集まる展示企画です。申し込み不要で、当日ふらっと立ち寄って楽しめます。
