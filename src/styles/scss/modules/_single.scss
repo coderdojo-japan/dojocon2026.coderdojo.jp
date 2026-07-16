@@ -37,6 +37,10 @@
 	border-radius: 8px;
 	box-shadow: 0 0 6px 1px rgb(0 0 0 / 10%);
 
+  img {
+    width: 100%;
+  }
+
   @include s.mq-down() {
     margin-bottom: 32px;
   }
