@@ -7,7 +7,7 @@ export const site = {
   shortTitle: "DojoCon Japan 2026",
   theme: "わかちあう、わかりあう",
   description:
-    "DojoCon Japan とは日本の CoderDojo コミュニティメンバーが全国から集まるカンファレンスイベント (CoderDojo Conference) です。2026年11月1日（日）、岩手県盛岡市 プラザおでってで開催します。",
+    "DojoCon Japan とは日本の CoderDojo コミュニティメンバーが全国から集まるカンファレンスイベントです。2026年度は11月1日（日）、岩手県盛岡市 プラザおでってで開催します。",
 
   event: {
     dateLabel: "2026.11.01 SUN",
