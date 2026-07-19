@@ -2,6 +2,7 @@
 import { render } from "astro:content";
 import SingleLayout from "../../layouts/SingleLayout.astro";
 import { getNews, formatNewsDate } from "../../lib/news";
+import { excerpt } from "../../lib/excerpt";
 
 // 公開対象のお知らせを静的ページとして生成する（draft は本番で除外）
 export async function getStaticPaths() {
@@ -13,7 +14,12 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<SingleLayout title={post.data.title} ogType="article" back={{ href: "/news/", label: "お知らせ一覧に戻る" }}>
+<SingleLayout
+  title={post.data.title}
+  description={excerpt(post.body)}
+  ogType="article"
+  back={{ href: "/news/", label: "お知らせ一覧に戻る" }}
+>
   <Fragment slot="meta">
     <time class="p-single__date" datetime={post.data.date.toISOString().slice(0, 10)}>
       {formatNewsDate(post.data.date)}

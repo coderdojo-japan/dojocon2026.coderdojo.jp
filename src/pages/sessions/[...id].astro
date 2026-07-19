@@ -2,6 +2,7 @@
 import { render } from "astro:content";
 import SingleLayout from "../../layouts/SingleLayout.astro";
 import { getSessions, SESSION_NO_IMAGE } from "../../lib/program";
+import { excerpt } from "../../lib/excerpt";
 
 // 公開対象のセッションを静的ページとして生成する（draft は本番で除外）
 export async function getStaticPaths() {
@@ -16,6 +17,7 @@ const eyecatch = item.data.image ?? SESSION_NO_IMAGE;
 
 <SingleLayout
   title={item.data.title}
+  description={excerpt(item.body)}
   ogType="article"
   ogImage={item.data.image}
   eyecatch={{ src: eyecatch, alt: item.data.title }}
