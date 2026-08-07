@@ -33,15 +33,11 @@ jobs:
           node-version: 22
           cache: npm
 
-      # npm/cli#4828 回避:
-      # コミット済み package-lock.json には生成した OS (macOS) 用の
-      # ネイティブ依存しか実体エントリが無く、Linux の npm ci/install では
-      # @rollup/rollup-linux-x64-gnu が入らずビルドが失敗する。
-      # CI ではロックファイルを作り直してから入れ、Linux 用バイナリを確実に取得する。
+      # package-lock.json は全プラットフォームのネイティブ依存
+      # (@rollup/rollup-*, @esbuild/*) を含んでいるので、そのまま npm ci で入る。
+      # ロックファイルどおりに入れることで、CI と手元のビルドが必ず一致する。
       - name: Install dependencies
-        run: |
-          rm -f package-lock.json
-          npm install
+        run: npm ci
 
       - name: Build site
         run: npm run build
