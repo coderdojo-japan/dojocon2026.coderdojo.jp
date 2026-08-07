@@ -1,0 +1,7 @@
+# npm が生成・管理するファイル。prettier で触ると npm の出力形式と
+# ずれて差分が出る恐れがあるため、整形対象から外す。
+package-lock.json
+
+# ビルド成果物
+dist/
+.astro/
