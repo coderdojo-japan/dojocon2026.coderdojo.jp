@@ -2,6 +2,7 @@
 title: mBotを動かしてみよう
 type: ワークショップ
 target: チャンピオン・メンター・ニンジャ
+image: /images/events/mbot-workshop.jpg
 needsReservation: false
 draft: false
 ---
