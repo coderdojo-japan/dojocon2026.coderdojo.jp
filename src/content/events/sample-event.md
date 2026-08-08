@@ -1,5 +1,5 @@
 ---
-title: [サンプル]micro:bitではじめる電子工作ワークショップ
+title: "[サンプル]micro:bitではじめる電子工作ワークショップ"
 type: ワークショップ
 target: ニンジャ
 needsReservation: true

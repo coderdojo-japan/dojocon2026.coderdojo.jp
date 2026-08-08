@@ -1,5 +1,5 @@
 ---
-title: [サンプル]みんなでつくるロボットコンテスト
+title: "[サンプル]みんなでつくるロボットコンテスト"
 type: 展示
 target: メンター
 needsReservation: false
