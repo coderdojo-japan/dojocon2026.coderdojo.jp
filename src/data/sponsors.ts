@@ -36,10 +36,7 @@ export const sponsorTiers: SponsorTier[] = [
     title: "Gold Sponsor",
     subtitle: "ゴールドスポンサー",
     display: "logo",
-    sponsors: [
-      { name: "企業名", url: "#", logo: "/images/sponsors/gold_logo.png" },
-      { name: "企業名", url: "#", logo: "/images/sponsors/gold_logo2.png" },
-    ],
+    sponsors: [],
   },
   {
     key: "silver",
@@ -47,8 +44,12 @@ export const sponsorTiers: SponsorTier[] = [
     subtitle: "シルバースポンサー",
     display: "logo",
     sponsors: [
-      { name: "企業名", url: "#", logo: "/images/sponsors/silver_logo.png" },
-      { name: "企業名", url: "#", logo: "/images/sponsors/silver_logo.png" },
+      {
+        name: "さくらインターネット株式会社",
+        url: "https://www.sakura.ad.jp/",
+        logo: "/images/sponsors/sakura-internet.svg",
+      },
+      { name: "株式会社Geolonia", url: "https://www.geolonia.com/", logo: "/images/sponsors/geolonia.svg" },
     ],
   },
   {
@@ -57,10 +58,12 @@ export const sponsorTiers: SponsorTier[] = [
     subtitle: "ブロンズスポンサー",
     display: "logo",
     sponsors: [
-      { name: "企業名", url: "#", logo: "/images/sponsors/bronze_logo.png" },
-      { name: "企業名", url: "#", logo: "/images/sponsors/bronze_logo.png" },
-      { name: "企業名", url: "#", logo: "/images/sponsors/bronze_logo.png" },
-      { name: "企業名", url: "#", logo: "/images/sponsors/bronze_logo.png" },
+      {
+        name: "アールスリーインスティテュート",
+        url: "https://www.r3it.com/",
+        logo: "/images/sponsors/r3-institute.svg",
+      },
+      { name: "特定非営利活動法人codeMo", url: "#", logo: "/images/sponsors/codemo.png" },
     ],
   },
   {
@@ -68,18 +71,13 @@ export const sponsorTiers: SponsorTier[] = [
     title: "In-Kind Sponsor",
     subtitle: "インカインドスポンサー",
     display: "logo",
-    sponsors: [
-      { name: "企業名", url: "#", logo: "/images/sponsors/bronze_logo.png" },
-      { name: "企業名", url: "#", logo: "/images/sponsors/bronze_logo.png" },
-      { name: "企業名", url: "#", logo: "/images/sponsors/bronze_logo.png" },
-      { name: "企業名", url: "#", logo: "/images/sponsors/bronze_logo.png" },
-    ],
+    sponsors: [],
   },
   {
     key: "individual",
     title: "Individual Sponsor",
     subtitle: "個人スポンサー",
     display: "name",
-    sponsors: [{ name: "細谷崇", url: "#" }, { name: "山田花子" }, { name: "田中太郎", url: "#" }],
+    sponsors: [{ name: "細谷崇", url: "https://ht79.info/" }],
   },
 ];
