@@ -63,7 +63,7 @@ export const sponsorTiers: SponsorTier[] = [
         url: "https://www.r3it.com/",
         logo: "/images/sponsors/r3-institute.svg",
       },
-      { name: "特定非営利活動法人codeMo", url: "#", logo: "/images/sponsors/codemo.png" },
+      { name: "特定非営利活動法人codeMo", url: "https://codemo.jp/", logo: "/images/sponsors/codemo.png" },
     ],
   },
   {
