@@ -26,7 +26,7 @@ const activeTiers = sponsorTiers.filter((tier) => tier.sponsors.length > 0);
               <ul class={`p-sponsor__logos p-sponsor__logos--${tier.key}`}>
                 {tier.sponsors.map((sponsor) => (
                   <li class="p-sponsor__logo-item">
-                    <a class="p-sponsor__logo-link" href={sponsor.url ?? "#"}>
+                    <a class="p-sponsor__logo-link" href={sponsor.url ?? "#"} target="_blank" rel="noopener noreferrer">
                       <img class="p-sponsor__logo-img" src={sponsor.logo} alt={sponsor.name} />
                     </a>
                   </li>

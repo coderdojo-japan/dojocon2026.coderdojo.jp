@@ -1,6 +1,6 @@
 ---
-title: 開催日・会場が決定しました（SAVE THE DATE）
-date: 2026-03-01
+title: 開催日・会場が決定しました
+date: 2026-03-06
 label: お知らせ
 color: news
 ---

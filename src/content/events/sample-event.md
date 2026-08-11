@@ -1,10 +1,10 @@
 ---
-title: micro:bitではじめる電子工作ワークショップ
+title: "[サンプル]micro:bitではじめる電子工作ワークショップ"
 type: ワークショップ
 target: ニンジャ
 needsReservation: true
 image: /images/events/event_dammy02.png
-draft: false
+draft: true
 ---
 
 小さなコンピューター「micro:bit」を使って、光ったり音が鳴ったりする作品をつくってみよう！プログラミングがはじめての子でも大丈夫。スタッフがそばでサポートします。

@@ -796,7 +796,7 @@
 }
 
 .p-sponsor__tier {
-	margin-top: 80px;
+	margin-top: 100px;
 
   @include s.mq-down() {
     margin-top: 48px;
@@ -837,7 +837,7 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	gap: 40px;
+	gap: 40px 60px;
 
   @include s.mq-down() {
     gap: 32px;
@@ -967,6 +967,53 @@
     font-size: s.fz(18);
   }
 }
+
+.p-organizer__list--support {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+
+  @include s.mq-down() {
+    justify-content: flex-start;
+    gap: 12px 24px;
+  }
+}
+
+.p-organizer__item--support {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: s.fz(18);
+
+  @include s.mq-down() {
+    font-size: s.fz(16);
+  }
+}
+
+.p-organizer__item-icon {
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.p-organizer__item-icon--morioka {
+  aspect-ratio: 1 / 1;
+
+  @include s.mq-down() {
+    width: 26px;
+  }
+}
+
+.p-organizer__item-icon--takizawa {
+  aspect-ratio: 28 / 25;
+
+  @include s.mq-down() {
+    width: 24px;
+  }
+}
+
 
 /*****************************************************
 	お問い合わせ
