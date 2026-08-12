@@ -54,4 +54,4 @@ https://forms.gle/Vh1oiEEJs8QNYKws8
 ## 8. ライセンスと帰属
 
 この行動規範は、Open Source Bridge の記述をお借りし、当イベント情報に合わせて書き換えたものです。
-原文は http://opensourcebridge.org/about/code-of-conduct/ （[アーカイブ](https://web.archive.org/web/20191024152904/opensourcebridge.org/about/code-of-conduct/)）にて [Creative Commons 表示 – 継承](https://creativecommons.org/licenses/by-sa/3.0/deed.ja)ライセンスのもとにリリースされています。
+原文は <a href="http://opensourcebridge.org/about/code-of-conduct/" target="_blank" rel="noopener noreferrer">http://opensourcebridge.org/about/code-of-conduct/</a> （<a href="https://web.archive.org/web/20191024152904/opensourcebridge.org/about/code-of-conduct/" target="_blank" rel="noopener noreferrer">アーカイブ</a>）にて <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.ja" target="_blank" rel="noopener noreferrer">Creative Commons 表示 – 継承</a>ライセンスのもとにリリースされています。
