@@ -71,3 +71,5 @@ Cookie の受け取りを希望されない場合は、お使いのブラウザ�
 
 DojoCon Japan 実行委員会<br>
 メール: dojocon2026@coderdojo.jp
+
+最終更新日: 2026年6月25日
