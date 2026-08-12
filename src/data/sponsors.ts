@@ -63,7 +63,7 @@ export const sponsorTiers: SponsorTier[] = [
         url: "https://www.r3it.com/",
         logo: "/images/sponsors/r3-institute.svg",
       },
-      { name: "特定非営利活動法人codeMo", url: "https://codemo.jp/", logo: "/images/sponsors/codemo.png" },
+      { name: "特定非営利活動法人codeMo", url: "https://codemo.jp/", logo: "/images/sponsors/codemo.webp" },
     ],
   },
   {
@@ -71,7 +71,7 @@ export const sponsorTiers: SponsorTier[] = [
     title: "In-Kind Sponsor",
     subtitle: "インカインドスポンサー",
     display: "logo",
-    sponsors: [],
+    sponsors: [{ name: "YassLab 株式会社", url: "https://yasslab.jp/", logo: "/images/sponsors/yasslab.webp" }],
   },
   {
     key: "individual",
