@@ -285,8 +285,8 @@
     content: '';
     position: absolute;
     right: 0;
-    top: 0;
-    width: 45.3vw;
+    top: 50%;
+    width: min(45.3vw, 870px);
     aspect-ratio: 870 / 945;
     background-image: url('/images/front/coderdojo_logo_mark.webp');
     background-size: contain;
