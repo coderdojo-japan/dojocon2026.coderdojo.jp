@@ -15,5 +15,5 @@ export const keynote = {
   /** 背景写真（PC 用） */
   imagePc: "/images/front/keynote_ueda.webp",
   /** 「基調講演を詳しくみる」リンク先（未定なら "#"） */
-  moreUrl: "#",
+  moreUrl: "sessions/keynote",
 } as const;
