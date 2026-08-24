@@ -491,7 +491,7 @@
   text-decoration: none;
 
   @include s.mq-down() {
-    max-width: 320px;
+    max-width: 360px;
     aspect-ratio: 320 / 51;
     background-image: url('/images/front/btn_sp.svg');
   }
@@ -644,6 +644,7 @@
 
     @include s.mq-down() {
       margin-inline: auto;
+      line-height: 1.2;
     }
   }
 }
@@ -796,10 +797,10 @@
 }
 
 .p-sponsor__tier {
-	margin-top: 100px;
+	margin-top: 120px;
 
   @include s.mq-down() {
-    margin-top: 48px;
+    margin-top: 64px;
   }
 }
 
