@@ -32,6 +32,7 @@ export const staff: Staff[] = [
   { name: "横川裕隆", avatar: "/images/staff/yokokawa.png" },
   { name: "Jun1", avatar: "/images/staff/Jun1.jpg", url: "https://coderdojokibi.connpass.com/" },
   { name: "渕崎愛", avatar: "/images/staff/shinozaki.jpg", url: "https://deradesign.jp/" },
+  { name: "Katz Ueno", avatar: "/images/staff/katzueno.jpg", url: "https://coderdojoowari.org/" },
   { name: "高井和之", avatar: "/images/staff/takai.jpg", url: "https://coderdojo-koga.hyasynth.com/" },
   { name: "土居安佳里", avatar: "/images/staff/doi.jpg", url: "https://akarihonokani.com/" },
   { name: "長嶺建市", avatar: "/images/staff/nagamine.jpg", url: "https://www.sstn.jp/" },
