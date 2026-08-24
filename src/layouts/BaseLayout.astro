@@ -54,6 +54,18 @@ const ogImageURL = new URL(ogImage, Astro.site);
     <link rel="icon" href="/images/common/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/images/common/apple-touch-icon-180x180.png" />
     <meta name="theme-color" content="#ffffff" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async is:inline src="https://www.googletagmanager.com/gtag/js?id=G-TJ6P4STFKH"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-TJ6P4STFKH");
+    </script>
   </head>
   <body>
     <Header />
