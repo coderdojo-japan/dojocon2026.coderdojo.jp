@@ -69,6 +69,11 @@ export const sponsorTiers: SponsorTier[] = [
         url: "https://www.sonicgarden.jp/",
         logo: "/images/sponsors/sonic-garden.webp",
       },
+      {
+        name: "キッズAIプログラミングスクール ハック",
+        url: "https://8x9.jp/",
+        logo: "/images/sponsors/89.svg",
+      },
     ],
   },
   {
