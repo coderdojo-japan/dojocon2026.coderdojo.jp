@@ -64,6 +64,11 @@ export const sponsorTiers: SponsorTier[] = [
         logo: "/images/sponsors/r3-institute.svg",
       },
       { name: "特定非営利活動法人codeMo", url: "https://codemo.jp/", logo: "/images/sponsors/codemo.webp" },
+      {
+        name: "株式会社ソニックガーデン",
+        url: "https://www.sonicgarden.jp/",
+        logo: "/images/sponsors/sonic-garden.webp",
+      },
     ],
   },
   {
@@ -71,7 +76,10 @@ export const sponsorTiers: SponsorTier[] = [
     title: "In-Kind Sponsor",
     subtitle: "インカインドスポンサー",
     display: "logo",
-    sponsors: [{ name: "YassLab 株式会社", url: "https://yasslab.jp/", logo: "/images/sponsors/yasslab.webp" }],
+    sponsors: [
+      { name: "YassLab 株式会社", url: "https://yasslab.jp/", logo: "/images/sponsors/yasslab.webp" },
+      { name: "Backlog 株式会社ヌーラボ", url: "https://backlog.com/ja/", logo: "/images/sponsors/backlog.svg" },
+    ],
   },
   {
     key: "individual",
