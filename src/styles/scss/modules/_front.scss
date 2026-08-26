@@ -905,8 +905,10 @@
 	gap: 16px 40px;
 
   @include s.mq-down() {
+    width: fit-content;
     justify-content: flex-start;
     gap: 12px 24px;
+    margin-inline: auto;
   }
 }
 
