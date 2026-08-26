@@ -1,7 +1,7 @@
 ---
 title: 来場記念にサインの交換をしよう
 type: イベント
-target: 当日来場者
+target: どなたでも
 needsReservation: false
 draft: false
 ---

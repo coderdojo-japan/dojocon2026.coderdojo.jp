@@ -1,7 +1,7 @@
 ---
 title: セッション グラフィックレコーディング展示
 type: セッション
-target: 当日来場者
+target: どなたでも
 needsReservation: false
 draft: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: スタンプラリー
 type: イベント
-target: 当日来場者
+target: どなたでも
 needsReservation: false
 draft: true
 ---
