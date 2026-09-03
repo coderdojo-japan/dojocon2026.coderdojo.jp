@@ -74,6 +74,16 @@ export const sponsorTiers: SponsorTier[] = [
         url: "https://8x9.jp/",
         logo: "/images/sponsors/89.svg",
       },
+      {
+        name: "株式会社岩手日報社",
+        url: "https://company.iwate-np.co.jp/",
+        logo: "/images/sponsors/iwate-np.svg",
+      },
+      {
+        name: "ユニーク・アイネット株式会社",
+        url: "https://www.unique-inet.co.jp/",
+        logo: "/images/sponsors/unique-i-net.webp",
+      },
     ],
   },
   {
