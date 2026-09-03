@@ -1001,11 +1001,19 @@
   object-fit: contain;
 }
 
+.p-organizer__item-icon--iwate {
+  aspect-ratio: 28 / 31;
+
+  @include s.mq-down() {
+    max-width: 26px;
+  }
+}
+
 .p-organizer__item-icon--morioka {
   aspect-ratio: 1 / 1;
 
   @include s.mq-down() {
-    width: 26px;
+    max-width: 26px;
   }
 }
 
@@ -1013,7 +1021,7 @@
   aspect-ratio: 28 / 25;
 
   @include s.mq-down() {
-    width: 24px;
+    max-width: 24px;
   }
 }
 
