@@ -84,6 +84,11 @@ export const sponsorTiers: SponsorTier[] = [
         url: "https://www.unique-inet.co.jp/",
         logo: "/images/sponsors/unique-i-net.webp",
       },
+      {
+        name: "サニーサイドシステムズ合同会社",
+        url: "https://www.sunnyside-sys.com/",
+        logo: "/images/sponsors/sunnyside-systems.webp",
+      },
     ],
   },
   {
