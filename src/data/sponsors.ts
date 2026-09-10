@@ -99,6 +99,7 @@ export const sponsorTiers: SponsorTier[] = [
     sponsors: [
       { name: "YassLab 株式会社", url: "https://yasslab.jp/", logo: "/images/sponsors/yasslab.webp" },
       { name: "Backlog 株式会社ヌーラボ", url: "https://backlog.com/ja/", logo: "/images/sponsors/backlog.svg" },
+      { name: "株式会社サステナ", url: "https://www.sstn.jp/", logo: "/images/sponsors/sustinere.webp" },
     ],
   },
   {
