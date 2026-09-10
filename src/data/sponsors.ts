@@ -101,6 +101,11 @@ export const sponsorTiers: SponsorTier[] = [
     title: "Individual Sponsor",
     subtitle: "個人スポンサー",
     display: "name",
-    sponsors: [{ name: "細谷崇", url: "https://ht79.info/" }, { name: "天沼倫太郎" }, { name: "長嶺建市" }],
+    sponsors: [
+      { name: "細谷崇", url: "https://ht79.info/" },
+      { name: "天沼倫太郎" },
+      { name: "長嶺建市" },
+      { name: "畠山将樹" },
+    ],
   },
 ];
