@@ -21,9 +21,14 @@
     "prepare": "husky",
     "sass-compile": "sass src/styles/scss:src/styles",
     "autoprefixer": "postcss src/styles/style.css --use autoprefixer --replace",
-    "sass-all": "npm run sass-compile && npm run autoprefixer",
+    "sass-all": "npm run sass-compile && npm run autoprefixer && prettier --write src/styles/style.css",
     "sass": "npm run sass-all && onchange src/styles/scss/ -- npm run sass-all"
   },
+  "browserslist": [
+    "defaults",
+    "not op_mini all",
+    "not kaios > 0"
+  ],
   "lint-staged": {
     "*.{astro,js,jsx,ts,tsx,css,json,md,mdx,webmanifest}": "prettier --write"
   },
