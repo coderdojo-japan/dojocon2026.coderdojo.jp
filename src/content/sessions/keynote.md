@@ -1,5 +1,5 @@
 ---
-title: 基調ワークショップ〜タイトル検討中〜
+title: 基調ワークショップ
 type: ワークショップ
 speaker: 上田信行
 target: CoderDojoに関係する人全員
