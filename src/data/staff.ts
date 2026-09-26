@@ -39,5 +39,4 @@ export const staff: Staff[] = [
   { name: "土居安佳里", avatar: "/images/staff/doi.jpg", url: "https://akarihonokani.com/" },
   { name: "長嶺建市", avatar: "/images/staff/nagamine.jpg", url: "https://www.sstn.jp/" },
   { name: "井川健一", avatar: "/images/staff/igawa.jpg", url: "https://coderdojo-mito.com/" },
-  { name: "若林健一", avatar: "/images/staff/kwaka1208.png", url: "https://crssrds.jp/" },
 ];
