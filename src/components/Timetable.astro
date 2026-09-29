@@ -1,0 +1,118 @@
+---
+// タイムテーブル（p-timetable）。縦軸=時間 / 横軸=場所（スロット）。
+// 中身は CSS Grid だけで組んでいるので JavaScript は使わない。
+//
+// グリッドの行は「ヘッダー行 1 行 + stepMinutes 刻みの行 × totalRows」。
+// そのため src/lib/timetable.ts が返す行番号には HEADER_ROWS を足してから使う。
+//
+// 画面が狭いときは全部の場所を横に並べず、場所を1つずつ切り替えて見せる。
+// 切り替えは name を共有したラジオボタンで行い、CSS の :checked で表示を差し替える
+// （そのためラジオは .p-timetable__tabs と .p-timetable__scroll より前に置くこと）。
+// 各要素の data-col は「何列目のものか」を表し、CSS が表示/非表示の判定に使う。
+//
+// 見出しは置かない。どこに置くかはページ側（/timetable なら ArchiveLayout）の担当。
+import { getTimetable } from "../lib/timetable";
+import { timetableConfig } from "../data/timetable";
+
+/** ヘッダー（場所名）が占める行数 */
+const HEADER_ROWS = 1;
+
+const { columns, ticks, totalRows, rowsPerTick, isEmpty } = await getTimetable();
+
+// 寸法の既定値は SCSS 側に持たせ、データから決まる値だけカスタムプロパティで渡す
+const gridStyle = [`--tt-cols:${columns.length}`, `--tt-rows:${totalRows}`, `--tt-rows-per-tick:${rowsPerTick}`].join(
+  ";",
+);
+---
+
+<div class="p-timetable">
+  {
+    isEmpty ? (
+      <p class="p-timetable__empty">タイムテーブルは準備中です。決まり次第お知らせします。</p>
+    ) : (
+      <>
+        {/* 場所の切り替え（狭い画面でのみ使う）。見た目はラベル側に持たせる */}
+        {columns.map((column, index) => (
+          <input
+            class="p-timetable__radio"
+            type="radio"
+            name="timetable-slot"
+            id={`timetable-slot-${column.slot.id}`}
+            checked={index === 0}
+          />
+        ))}
+
+        <div class="p-timetable__tabs" role="group" aria-label="表示する場所を選ぶ">
+          {columns.map((column) => (
+            <label class="p-timetable__tab" for={`timetable-slot-${column.slot.id}`}>
+              {column.slot.name}
+            </label>
+          ))}
+        </div>
+
+        <p class="p-timetable__hint" aria-hidden="true">
+          表が入りきらないときは横にスクロールできます →
+        </p>
+
+        <div class="p-timetable__scroll">
+          <div class="p-timetable__grid" style={gridStyle}>
+            {/* 左の時間軸の下地。横スクロール時にコマが目盛りへ重なるのを防ぐ */}
+            <div class="p-timetable__axis" style={`grid-row:1 / -1`} aria-hidden="true" />
+
+            {/* 場所名（横軸の見出し） */}
+            {columns.map((column, index) => (
+              <div class="p-timetable__slot" data-col={index + 1} style={`grid-column:${index + 2}`}>
+                <span class="p-timetable__slot-name">{column.slot.name}</span>
+                {column.slot.note && <span class="p-timetable__slot-note">{column.slot.note}</span>}
+              </div>
+            ))}
+
+            {/* 各列の背景と横罫線。コマより先に置いて背面にする */}
+            {columns.map((_column, index) => (
+              <div
+                class="p-timetable__lane"
+                data-col={index + 1}
+                style={`grid-column:${index + 2};grid-row:${HEADER_ROWS + 1} / -1`}
+                aria-hidden="true"
+              />
+            ))}
+
+            {/* 左の時間軸の目盛り */}
+            {ticks.map((tick) => (
+              <div class="p-timetable__tick" style={`grid-row:${tick.row + HEADER_ROWS}`} aria-hidden="true">
+                <span class="p-timetable__tick-label">{tick.label}</span>
+              </div>
+            ))}
+
+            {/* コマ本体 */}
+            {columns.map((column, index) =>
+              column.entries.map((entry) => (
+                <a
+                  class={`p-timetable__entry p-timetable__entry--${entry.kind}`}
+                  data-col={index + 1}
+                  href={entry.href}
+                  style={`grid-column:${index + 2};grid-row:${entry.rowStart + HEADER_ROWS} / ${entry.rowEnd + HEADER_ROWS}`}
+                >
+                  <span class="p-timetable__entry-time">
+                    {entry.timeLabel}
+                    {/* 画面では列の見出しでわかるが、読み上げ用に場所も持たせる */}
+                    <span class="p-timetable__entry-slot">（{column.slot.name}）</span>
+                  </span>
+                  <span class="p-timetable__entry-title">{entry.title}</span>
+                  <span class="p-timetable__entry-meta">
+                    <span class={`p-timetable__entry-type p-timetable__entry-type--${entry.kind}`}>{entry.type}</span>
+                    {entry.speaker && <span class="p-timetable__entry-speaker">{entry.speaker}</span>}
+                  </span>
+                </a>
+              )),
+            )}
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  <p class="p-timetable__caption">
+    {timetableConfig.startTime}-{timetableConfig.endTime}／時間・場所は変更になる場合があります。
+  </p>
+</div>

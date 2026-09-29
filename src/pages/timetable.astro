@@ -1,0 +1,16 @@
+---
+// タイムテーブルページ（/timetable）。
+// 表の中身は各セッション / イベントの Markdown のフロントマター（timetable:）から集計する。
+// 時間の範囲と場所（スロット）の並び順は src/data/timetable.ts で決める。
+import ArchiveLayout from "../layouts/ArchiveLayout.astro";
+import Timetable from "../components/Timetable.astro";
+import { site } from "../data/site";
+---
+
+<ArchiveLayout
+  title="Timetable"
+  subtitle="タイムテーブル"
+  description={`${site.shortTitle}（${site.event.dateText}／${site.event.venueName}）のタイムテーブル。セッションとイベントの時間と場所の一覧です。`}
+>
+  <Timetable />
+</ArchiveLayout>

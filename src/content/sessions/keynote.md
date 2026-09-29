@@ -4,6 +4,10 @@ type: ワークショップ
 speaker: 上田信行
 target: CoderDojoに関係する人全員
 image: /images/sessions/no_image.webp
+timetable:
+  slot: ホール
+  start: "10:00"
+  end: "12:00"
 draft: false
 ---
 

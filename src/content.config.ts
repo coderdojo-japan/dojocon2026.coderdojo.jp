@@ -2,6 +2,31 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro:schema";
 
+/** "HH:MM"（24時間表記）だけを受け付ける */
+const TIME_PATTERN = /^([01]\d|2[0-3]):[0-5]\d$/;
+
+/**
+ * タイムテーブル掲載用の情報（任意）。
+ * 書かなければタイムテーブルには載らない（カード一覧には従来どおり表示される）。
+ *   timetable:
+ *     slot: ホール      # 場所。src/data/timetable.ts の slots にある id か name
+ *     start: "13:00"    # 開始時刻（"HH:MM"。クォートを付ける）
+ *     end: "14:30"      # 終了時刻（開始より後）
+ */
+const timetable = z
+  .object({
+    // 場所（表の横軸）。src/data/timetable.ts に登録した id または name を書く
+    slot: z.string(),
+    // 開始時刻
+    start: z.string().regex(TIME_PATTERN, '開始時刻は "13:00" のように "HH:MM" で書いてください'),
+    // 終了時刻
+    end: z.string().regex(TIME_PATTERN, '終了時刻は "14:30" のように "HH:MM" で書いてください'),
+  })
+  .refine((v) => v.start < v.end, {
+    message: "終了時刻は開始時刻より後にしてください",
+    path: ["end"],
+  });
+
 /**
  * お知らせ（News）コレクション。
  * src/content/news/ に Markdown ファイルを置くと、自動でお知らせとして扱われる。
@@ -43,6 +68,8 @@ const sessions = defineCollection({
     target: z.string(),
     // アイキャッチ画像（任意）。未指定なら no_image.webp を使う
     image: z.string().optional(),
+    // タイムテーブル掲載情報（任意。未記入ならタイムテーブルには載らない）
+    timetable: timetable.optional(),
     // 下書き
     draft: z.boolean().default(false),
   }),
@@ -65,6 +92,8 @@ const events = defineCollection({
     needsReservation: z.boolean().default(false),
     // アイキャッチ画像（任意）。未指定なら no_image.webp を使う
     image: z.string().optional(),
+    // タイムテーブル掲載情報（任意。未記入ならタイムテーブルには載らない）
+    timetable: timetable.optional(),
     // 下書き
     draft: z.boolean().default(false),
   }),
