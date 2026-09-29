@@ -59,6 +59,7 @@ GitHub Pages が dist/ を配信 → 利用者のブラウザ
 | `src/pages/privacy.md`           | `/privacy`   |
 | `src/pages/news/index.astro`     | `/news/`     |
 | `src/pages/sessions/index.astro` | `/sessions/` |
+| `src/pages/timetable.astro`      | `/timetable` |
 
 ### 動的ルート（`[ ]` 付きファイル）
 
@@ -185,7 +186,8 @@ src/styles/scss/
     ├── _common.scss        … ヘッダー・フッター・戻るボタン・ユーティリティ
     ├── _front.scss         … トップページ各セクション
     ├── _archive.scss       … 一覧ページ共通枠（.p-archive）
-    └── _single.scss        … 詳細/固定ページ共通枠（.p-single）＋本文プロース（.c-prose）
+    ├── _single.scss        … 詳細/固定ページ共通枠（.p-single）＋本文プロース（.c-prose）
+    └── _timetable.scss     … タイムテーブル（.p-timetable）
 ```
 
 ### FLOCSS 命名（接頭辞で役割が分かる）
@@ -216,8 +218,8 @@ src/styles/scss/
 ```
 src/content.config.ts        ← 3コレクションの「型（スキーマ）」を定義
         │  news:     title / date / label / color / draft
-        │  sessions: title / type / speaker? / target / image? / draft
-        │  events:   title / type / target / needsReservation / image? / draft
+        │  sessions: title / type / speaker? / target / image? / timetable? / draft
+        │  events:   title / type / target / needsReservation / image? / timetable? / draft
         ▼
 src/content/{news,sessions,events}/*.md   ← 記事の実体（1ファイル＝1件）
         │
@@ -234,6 +236,7 @@ src/lib/program.ts  … getSessions() / getEvents()（draft 除外）
 - **News のカテゴリは `label`（表示名・自由）＋ `color`（色・選択式 enum）の2軸**。色は `p-news__category--{color}` に対応（session/event/sponsor/news/highlight）
 - **画像は任意**。未指定なら `no_image.webp` にフォールバック（`src/lib/program.ts` の `SESSION_NO_IMAGE` / `EVENT_NO_IMAGE`）
 - **OGP画像**は詳細ページのアイキャッチを使い、無ければ共通の `ogp.webp`（`BaseLayout` の `ogImage` 既定値）
+- **`timetable` は任意**（`slot` / `start` / `end`）。書いたものだけが `/timetable` の表に並ぶ（→ 10章）。**時刻の形式（`"HH:MM"`）と `start < end` は Zod が検証するのでビルドが落ちる**が、場所名の誤り・範囲外・時間の重なりは `src/lib/timetable.ts` の `console.warn` 止まり（ビルドは通る）
 
 <br>
 
@@ -253,7 +256,49 @@ Sponsor / Staff は「配列が空なら準備中/募集中、要素があれば
 
 <br>
 
-## 10. よく使う作業の早見表（コーダー向け）
+## 10. タイムテーブルの仕組み（`/timetable`）
+
+タイムテーブルは**専用のデータファイルを持ちません**。「表の枠組み」と「1 コマずつの中身」を別々の場所から集めて組み立てます。
+
+```
+src/data/timetable.ts                     ← 枠組み（時間の範囲・目盛り・場所の並び順）
+        │   timetableConfig: startTime / endTime / tickMinutes / stepMinutes / slots[]
+        │
+src/content/{sessions,events}/*.md        ← 中身（frontmatter の timetable: slot / start / end）
+        │
+        ▼
+src/lib/timetable.ts  … getTimetable()    ← 両方を突き合わせて CSS Grid の行番号に変換
+        │   columns[] / ticks[] / totalRows / rowsPerTick / isEmpty を返す
+        ▼
+src/components/Timetable.astro            ← 受け取った値をそのまま Grid に流し込む
+        ▼
+src/pages/timetable.astro（ArchiveLayout） → /timetable
+```
+
+### 押さえておきたい点
+
+- **時間の計算は `src/lib/timetable.ts` に閉じている。** 時刻は `toMinutes()` で「0時からの分数」に直し、`stepMinutes`（既定 5 分）で割って `rowStart` / `rowEnd`（`grid-row`）にする。コンポーネント側は行番号を受け取るだけで、時刻の計算をしない
+- **`Timetable.astro` が返す行番号には `HEADER_ROWS`（＝1）を足して使う。** Grid の 1 行目は場所名のヘッダーが占めているため
+- **JavaScript は使っていない。** 狭い画面での場所の切り替えは、`name` を共有したラジオボタン＋CSS の `:checked` で実現している。そのため**ラジオを `.p-timetable__tabs` と `.p-timetable__scroll` より前に置く**という並び順の制約がある（`~` で後ろの要素を選ぶため）。各要素の `data-col` が「何列目か」を表し、CSS が表示/非表示を判定する
+- **データの不備は握りつぶさず警告する。** 場所名が `slots` に無い・時刻が表の範囲外なら `console.warn` してそのコマを捨て、同じ場所で時間が重なっていれば警告だけ出して両方描く（`[timetable]` で始まるログ）
+- **1 コマも置けなければ `isEmpty` が立ち**、表の代わりに「準備中」の文言を出す
+- 見出しはコンポーネントに持たせていない。`/timetable` では `ArchiveLayout` が `<h1>` を出す
+
+### 変えたいときに触る場所
+
+| やりたいこと                     | 編集する場所                                                   |
+| -------------------------------- | -------------------------------------------------------------- |
+| 時間の範囲・目盛り・場所を変える | `src/data/timetable.ts`（`timetableConfig`）                   |
+| コマを足す・時間や場所を変える   | 各 `src/content/{sessions,events}/*.md` の `timetable:`        |
+| 行番号の決め方・警告の条件       | `src/lib/timetable.ts`                                         |
+| 表のマークアップ・切り替えの構造 | `src/components/Timetable.astro`                               |
+| 表の見た目（色・幅・高さ）       | `src/styles/scss/modules/_timetable.scss`（`.p-timetable__*`） |
+
+> 編集者向けの書き方は [コンテンツ編集ガイド「5. タイムテーブルに載せる」](./content-editing.md) にあります。
+
+<br>
+
+## 11. よく使う作業の早見表（コーダー向け）
 
 | やりたいこと                       | 編集する場所                                               |
 | ---------------------------------- | ---------------------------------------------------------- |
@@ -267,10 +312,11 @@ Sponsor / Staff は「配列が空なら準備中/募集中、要素があれば
 | `<head>`・OGP・共通レイアウト      | `src/layouts/BaseLayout.astro`                             |
 | カード一覧の中身を足す             | `src/content/{sessions,events}/` に Markdown               |
 | お知らせ・プログラムの項目を増やす | `src/content.config.ts`（スキーマ）                        |
+| タイムテーブルの時間帯・場所を変更 | `src/data/timetable.ts`（`timetableConfig`）               |
 
 <br>
 
-## 11. 触るときの注意
+## 12. 触るときの注意
 
 - `dist/` `node_modules/` `.astro/` は**自動生成**。コミットしない（`.gitignore` 済み）。
 - `public/CNAME` は公開ドメイン設定。**むやみに変えない**。

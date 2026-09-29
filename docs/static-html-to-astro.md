@@ -228,9 +228,9 @@ public/images/
 - **ダミーデータ**: カードの件数・タイトル・登壇者・日付・ダミー画像（`*_dammy*`）は仮。実データに差し替え前提。
 - **スポンサーのティア**: モックは現在 **Gold / Silver / Bronze / In-Kind / Individual** のみ。今後、上位ティアとして **Platinum・Diamond**（**Diamond が最上位**）が追加される可能性がある。順位は上から `Diamond → Platinum → Gold → Silver → Bronze → In-Kind → Individual`。ティアはデータ駆動（`src/data/sponsors.ts`）で扱い、ロゴ表示サイズは `.p-sponsor__logos--*` を1つ足すだけで拡張できるようにしておくとよい。
 - **`no_image.webp` はダミーではなく「画像未設定時のフォールバック」**: 記事に画像を入れなかったときに各カテゴリ（`sessions/` `events/`）の `no_image.webp` を出す、という**仕様上の既定画像**。差し替えて消すものではない。Astro でも実現可能で、frontmatter の `image` を**任意**にして、コンポーネント側で既定値を与えればよい（例：`const image = post.data.image ?? '/images/sessions/no_image.webp'`）。
-- **未接続リンク（`href="#"`）**: 参加登録・お問い合わせ・タイムテーブル・フッターの行動規範/プライバシーポリシー・詳細ページのスラッグなどは未設定。Astro化時に実URL/ルートへ。（※フッターのSNSアイコン3種は実URL設定済み）
+- **未接続リンク（`href="#"`）**: 参加登録・お問い合わせ・フッターの行動規範/プライバシーポリシー・詳細ページのスラッグなどは未設定。Astro化時に実URL/ルートへ。（※フッターのSNSアイコン3種は実URL設定済み）
 - **固定ページ**: `page/index.html` は**どこからもリンクされていない**テンプレート。プライバシーポリシー・行動規範等はまだ作っていない（`page/` を複製して本文差し替え＋フッターリンク接続する想定）。
-- **タイムテーブル**: ナビに項目はあるがページは**未作成（現状ダミー、リンクは `#`）**。上記 8章(b) の**専用 `.astro` ページ**として作る（Markdown・`page/` テンプレは使わない）。内容がセッション／イベント確定に依存するため、**ラインナップが固まってから公開**する。
+- **タイムテーブル**: 上記 8章(b) の方針どおり**専用 `.astro` ページとして実装済み**（`src/pages/timetable.astro` → `/timetable`、`p-timetable__*` ＋ `_timetable.scss`）。ただしデータは `src/data/` の配列ではなく、**枠組み（`src/data/timetable.ts`）＋ 各セッション / イベントの frontmatter の `timetable:`** から組み立てる。仕組みは [architecture.md「タイムテーブルの仕組み」](./architecture.md)、書き方は [content-editing.md](./content-editing.md) を参照。部屋名は**仮のまま**なので、会場レイアウト確定後に差し替える。
 - **相対パス**: 前述の通りモック専用。Astro では絶対パス/importに変換。
 - **命名**: FLOCSS を維持。`p-program`（セッション/イベント共通カード）と `p-event`（イベント固有）の使い分け、`p-single` を固定ページにも流用している点に注意。
 

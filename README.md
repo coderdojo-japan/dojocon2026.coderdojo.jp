@@ -115,14 +115,15 @@ npm run dev
 「サイトの○○を直したい」ときの編集場所は **[コンテンツ編集ガイド](./docs/content-editing.md)** にまとめています。
 よく使うものは以下のとおりです。
 
-| やりたいこと                     | 編集する場所                           |
-| -------------------------------- | -------------------------------------- |
-| 開催日・会場・テーマ・各種リンク | `src/data/site.ts`                     |
-| お知らせを追加                   | `src/content/news/` に Markdown を追加 |
-| セッション／イベントを追加       | `src/data/program.ts`                  |
-| スポンサーを追加                 | `src/data/sponsors.ts`                 |
-| スタッフを追加                   | `src/data/staff.ts`                    |
-| ページを追加                     | `src/pages/` に `.astro` を追加        |
+| やりたいこと                     | 編集する場所                                          |
+| -------------------------------- | ----------------------------------------------------- |
+| 開催日・会場・テーマ・各種リンク | `src/data/site.ts`                                    |
+| お知らせを追加                   | `src/content/news/` に Markdown を追加                |
+| セッション／イベントを追加       | `src/data/program.ts`                                 |
+| タイムテーブルの時間・場所       | 各 Markdown の `timetable:` / `src/data/timetable.ts` |
+| スポンサーを追加                 | `src/data/sponsors.ts`                                |
+| スタッフを追加                   | `src/data/staff.ts`                                   |
+| ページを追加                     | `src/pages/` に `.astro` を追加                       |
 
 > Session / Event / Sponsor / Staff は、データが空の間は自動で「準備中」と表示されます。
 > `src/data/` の各ファイルに追記すると、その内容がそのままサイトに反映されます。

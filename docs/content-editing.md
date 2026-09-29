@@ -17,19 +17,21 @@
 
 ## どこに何があるか（早見表）
 
-| やりたいこと                     | 編集するファイル                                         |
-| -------------------------------- | -------------------------------------------------------- |
-| 開催日・会場・テーマ・各種リンク | `src/data/site.ts`                                       |
-| お知らせ（News）を追加・編集     | `src/content/news/` に Markdown を追加                   |
-| セッションを追加・編集           | `src/content/sessions/` に Markdown を追加               |
-| イベントを追加・編集             | `src/content/events/` に Markdown を追加                 |
-| スポンサーを追加                 | `src/data/sponsors.ts`                                   |
-| スタッフを追加                   | `src/data/staff.ts`                                      |
-| 基調講演の登壇者情報             | `src/data/keynote.ts`                                    |
-| 各セクションの説明文             | `src/components/sections/` の各ファイル                  |
-| セクションの並び順               | `src/pages/index.astro`                                  |
-| ヘッダーのナビゲーション         | `src/components/Header.astro`                            |
-| 固定ページ（規約など）を追加     | `src/pages/` に Markdown を追加（`SingleLayout` を使う） |
+| やりたいこと                               | 編集するファイル                                          |
+| ------------------------------------------ | --------------------------------------------------------- |
+| 開催日・会場・テーマ・各種リンク           | `src/data/site.ts`                                        |
+| お知らせ（News）を追加・編集               | `src/content/news/` に Markdown を追加                    |
+| セッションを追加・編集                     | `src/content/sessions/` に Markdown を追加                |
+| イベントを追加・編集                       | `src/content/events/` に Markdown を追加                  |
+| タイムテーブルに載せる・時間や場所を変える | 各セッション / イベントの Markdown に `timetable:` を追記 |
+| タイムテーブルの時間の範囲・場所の並び順   | `src/data/timetable.ts`                                   |
+| スポンサーを追加                           | `src/data/sponsors.ts`                                    |
+| スタッフを追加                             | `src/data/staff.ts`                                       |
+| 基調講演の登壇者情報                       | `src/data/keynote.ts`                                     |
+| 各セクションの説明文                       | `src/components/sections/` の各ファイル                   |
+| セクションの並び順                         | `src/pages/index.astro`                                   |
+| ヘッダーのナビゲーション                   | `src/components/Header.astro`                             |
+| 固定ページ（規約など）を追加               | `src/pages/` に Markdown を追加（`SingleLayout` を使う）  |
 
 > このサイトのデザインは **FLOCSS 設計の SCSS**（`src/styles/scss/`）で組まれています。
 > 文章・データを直すだけなら SCSS を触る必要はありません。`class="..."` はそのままにしてください。
@@ -132,20 +134,25 @@ type: セミナー
 speaker: 山田 太郎（CoderDojo 盛岡）
 target: メンター
 image: /images/sessions/creative-coding.png
+timetable:
+  slot: ホール
+  start: "13:00"
+  end: "14:30"
 draft: false
 ---
 
 ここにセッションの説明を Markdown で書きます。
 ```
 
-| 項目      | 必須 | 説明                                                       |
-| --------- | ---- | ---------------------------------------------------------- |
-| `title`   | ○    | タイトル                                                   |
-| `type`    | ○    | 種別。例: セミナー / パネルディスカッション / 対話         |
-| `speaker` | -    | 登壇者                                                     |
-| `target`  | ○    | 対象。例: メンター / ニンジャ / チャンピオン               |
-| `image`   | -    | カード・アイキャッチ画像。**省略すると `no_image` になる** |
-| `draft`   | -    | `true` で本番非表示                                        |
+| 項目        | 必須 | 説明                                                                                                  |
+| ----------- | ---- | ----------------------------------------------------------------------------------------------------- |
+| `title`     | ○    | タイトル                                                                                              |
+| `type`      | ○    | 種別。例: セミナー / パネルディスカッション / 対話                                                    |
+| `speaker`   | -    | 登壇者                                                                                                |
+| `target`    | ○    | 対象。例: メンター / ニンジャ / チャンピオン                                                          |
+| `image`     | -    | カード・アイキャッチ画像。**省略すると `no_image` になる**                                            |
+| `timetable` | -    | タイムテーブルに載せる時間と場所（→ 下記「5. タイムテーブルに載せる」）。**省略すると表には載らない** |
+| `draft`     | -    | `true` で本番非表示                                                                                   |
 
 <br>
 
@@ -160,24 +167,95 @@ type: ワークショップ
 target: ニンジャ
 needsReservation: true
 image: /images/events/microbit.png
+timetable:
+  slot: ワークショップ
+  start: "10:30"
+  end: "12:00"
 draft: false
 ---
 
 ここにイベントの説明を Markdown で書きます。
 ```
 
-| 項目               | 必須 | 説明                                                            |
-| ------------------ | ---- | --------------------------------------------------------------- |
-| `title`            | ○    | タイトル                                                        |
-| `type`             | ○    | 種別。例: 展示 / ワークショップ / 企画                          |
-| `target`           | ○    | 対象                                                            |
-| `needsReservation` | -    | `true` でカード・詳細に「要申し込み」バッジが付く（既定 false） |
-| `image`            | -    | 画像。省略すると `no_image`                                     |
-| `draft`            | -    | `true` で本番非表示                                             |
+| 項目               | 必須 | 説明                                                                                                  |
+| ------------------ | ---- | ----------------------------------------------------------------------------------------------------- |
+| `title`            | ○    | タイトル                                                                                              |
+| `type`             | ○    | 種別。例: 展示 / ワークショップ / 企画                                                                |
+| `target`           | ○    | 対象                                                                                                  |
+| `needsReservation` | -    | `true` でカード・詳細に「要申し込み」バッジが付く（既定 false）                                       |
+| `image`            | -    | 画像。省略すると `no_image`                                                                           |
+| `timetable`        | -    | タイムテーブルに載せる時間と場所（→ 下記「5. タイムテーブルに載せる」）。**省略すると表には載らない** |
+| `draft`            | -    | `true` で本番非表示                                                                                   |
 
 <br>
 
-## 5. スポンサーを追加する — `src/data/sponsors.ts`
+## 5. タイムテーブルに載せる — 各 Markdown ＋ `src/data/timetable.ts`
+
+`/timetable` のタイムテーブル（時間割表）は、**セッション / イベントの Markdown を集めて自動で組み立てられます**。
+専用の一覧ファイルはありません。載せたいものの Markdown に `timetable:` を書き足すだけです。
+
+### 表に 1 コマ載せる
+
+```markdown
+---
+title: Scratch ではじめる creative coding
+type: セミナー
+target: メンター
+timetable:
+  slot: ホール
+  start: "13:00"
+  end: "14:30"
+draft: false
+---
+```
+
+| 項目    | 必須 | 説明                                                         |
+| ------- | ---- | ------------------------------------------------------------ |
+| `slot`  | ○    | 場所（表の横の列）。`src/data/timetable.ts` にある名前を書く |
+| `start` | ○    | 開始時刻。`"13:00"` のように **`"HH:MM"`（24時間表記）**     |
+| `end`   | ○    | 終了時刻。開始より後にすること                               |
+
+**注意点**
+
+- **`timetable:` を書かなければ、表には載りません。** セッション / イベントの一覧カードには従来どおり表示されます。「まだ時間が決まっていない」ものは書かずに置いておけば大丈夫です
+- **時刻は必ずクォート（`"`）で囲んでください。** `start: 13:00` とクォートなしで書いたり、`end` を `start` より前にしたりすると、**`npm run dev` / ビルドがエラーで止まり**、どのファイルのどこが悪いか教えてくれます。慌てずメッセージのとおりに直してください
+- 次の 3 つは**エラーにならず、ターミナルに `[timetable]` で始まる警告が出るだけ**です。表に出ないときはターミナルを確認してください
+  - `slot` に `src/data/timetable.ts` に無い場所名を書いた → **そのコマは表から外れます**
+  - `start` / `end` が表の範囲（既定 10:00〜17:00）からはみ出している → **そのコマは表から外れます**
+  - 同じ場所で時間が重なっている → 警告は出ますが**表には両方描かれ、重なって表示されます**
+
+### 表の枠組みを変える — `src/data/timetable.ts`
+
+「表の上端と下端の時刻」「どんな場所を、どの順番で横に並べるか」は、このファイルにまとまっています。
+
+```ts
+export const timetableConfig: TimetableConfig = {
+  startTime: "10:00", // 表の上端の時刻
+  endTime: "17:00", // 表の下端の時刻
+  tickMinutes: 30, // 左の時間軸に目盛りを入れる間隔（分）
+  stepMinutes: 5, // コマの高さ・位置の最小単位（分）
+
+  slots: [
+    { id: "hall", name: "ホール" },
+    { id: "room-a", name: "大会議室A" },
+    { id: "room-b", name: "大会議室B" },
+    { id: "workshop", name: "ワークショップ" },
+  ],
+};
+```
+
+- **`slots` に並べた順番が、そのまま表の左から右の順番**になります。部屋を足す・並べ替えるときはこの配列を編集します
+- Markdown の `slot:` には、`id`（`hall`）と `name`（`ホール`）の**どちらを書いても構いません**
+- `name` の後ろに `note: "3F"` を足すと、見出しの下に補足として表示されます
+- まだ 1 コマも入っていない場所も、`slots` に書いてあれば**空の列として表示**されます
+- 1 コマも `timetable:` が書かれていない間は、ページ全体が「タイムテーブルは準備中です。」の表示になります
+
+> **現在の部屋名は仮です。** 会場のレイアウトが決まったら `src/data/timetable.ts` の `slots` を実際の部屋名に差し替えてください（ファイル内に TODO コメントがあります）。
+> 差し替えたら、各 Markdown の `slot:` も合わせて直すのを忘れずに。
+
+<br>
+
+## 6. スポンサーを追加する — `src/data/sponsors.ts`
 
 tier（Gold / Silver / Bronze / In-Kind / Individual）ごとの `sponsors` 配列に追記します。
 **1 件も登録がない tier は表示されません。**
@@ -201,7 +279,7 @@ export const sponsorTiers: SponsorTier[] = [
 
 <br>
 
-## 6. スタッフを追加する — `src/data/staff.ts`
+## 7. スタッフを追加する — `src/data/staff.ts`
 
 `staff` 配列に追記します。**配列が空の間は「準備中」と表示されます。**
 
@@ -220,7 +298,7 @@ export const staff: Staff[] = [
 
 <br>
 
-## 7. 基調講演を変更する — `src/data/keynote.ts`
+## 8. 基調講演を変更する — `src/data/keynote.ts`
 
 ```ts
 export const keynote = {
@@ -240,7 +318,7 @@ export const keynote = {
 
 <br>
 
-## 8. 各セクションの文章を直す — `src/components/sections/`
+## 9. 各セクションの文章を直す — `src/components/sections/`
 
 「コーダー道場とは？」などの説明文は、それぞれのセクションファイルにあります。
 
@@ -258,7 +336,7 @@ HTML タグ（`<p>` など）や `class="..."` の部分は触らないのが安
 
 <br>
 
-## 9. セクションの並び順を変える・消す — `src/pages/index.astro`
+## 10. セクションの並び順を変える・消す — `src/pages/index.astro`
 
 トップページは、セクションを縦に並べているだけです。
 順番を入れ替えたり、不要なセクションの行を消したり（コメントアウトしたり）できます。
@@ -276,7 +354,7 @@ HTML タグ（`<p>` など）や `class="..."` の部分は触らないのが安
 
 <br>
 
-## 10. 固定ページ（規約など）を追加する — `src/pages/` に Markdown
+## 11. 固定ページ（規約など）を追加する — `src/pages/` に Markdown
 
 プライバシーポリシー・行動規範のような「タイトル＋文章」のページは、Markdown で作れます。
 `src/pages/privacy.md` / `src/pages/code-of-conduct.md` が実例です。
