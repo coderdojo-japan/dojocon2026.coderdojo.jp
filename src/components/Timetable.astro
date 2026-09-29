@@ -1,12 +1,15 @@
 ---
 // タイムテーブル（p-timetable）。縦軸=時間 / 横軸=場所（スロット）。
-// 中身は CSS Grid だけで組んでいるので JavaScript は使わない。
+// 中身は CSS Grid で組んでいる。JavaScript を使うのは現在時刻ラインだけ。
 //
 // グリッドの行は「ヘッダー行 1 行 + stepMinutes 刻みの行 × totalRows」。
 // そのため src/lib/timetable.ts が返す行番号には HEADER_ROWS を足してから使う。
 //
 // 色は場所（スロット）ごと。src/data/timetable.ts の color（未指定なら既定パレット）を
 // --tt-slot-color として列ごとに流し込み、見出し・コマ・タブの配色を SCSS 側で組み立てる。
+//
+// コマが1つも入っていない場所は列ごと出さない。会場のレイアウトが先に決まって
+// セッションが後から埋まる進み方でも、空の列が並ばずに済む。
 //
 // 画面が狭いときは全部の場所を横に並べず、場所を1つずつ切り替えて見せる。
 // 切り替えは name を共有したラジオボタンで行い、CSS の :checked で表示を差し替える
@@ -16,16 +19,29 @@
 // 見出しは置かない。どこに置くかはページ側（/timetable なら ArchiveLayout）の担当。
 import { getTimetable } from "../lib/timetable";
 import { timetableConfig } from "../data/timetable";
+import { site } from "../data/site";
 
 /** ヘッダー（場所名）が占める行数 */
 const HEADER_ROWS = 1;
 
-const { columns, ticks, totalRows, rowsPerTick, hourRows, isEmpty } = await getTimetable();
+const { columns: allColumns, ticks, totalRows, rowsPerTick, hourRows, isEmpty } = await getTimetable();
+
+// コマが入っていない場所は列ごと省く
+const columns = allColumns.filter((column) => column.entries.length > 0);
 
 // 寸法の既定値は SCSS 側に持たせ、データから決まる値だけカスタムプロパティで渡す
 const gridStyle = [`--tt-cols:${columns.length}`, `--tt-rows:${totalRows}`, `--tt-rows-per-tick:${rowsPerTick}`].join(
   ";",
 );
+
+// 現在時刻ラインの位置決めに使う値。描画はブラウザ側（開催当日のみ）
+const nowData = {
+  "data-date": site.event.date,
+  "data-start": timetableConfig.startTime,
+  "data-end": timetableConfig.endTime,
+  "data-step": String(timetableConfig.stepMinutes),
+  "data-header-rows": String(HEADER_ROWS),
+};
 ---
 
 <div class="p-timetable">
@@ -126,6 +142,11 @@ const gridStyle = [`--tt-cols:${columns.length}`, `--tt-rows:${totalRows}`, `--t
                 </a>
               )),
             )}
+
+            {/* 現在時刻ライン。開催当日に見ているときだけスクリプトが位置を入れて表示する */}
+            <div class="p-timetable__now" id="js-timetable-now" hidden aria-hidden="true" {...nowData}>
+              <span class="p-timetable__now-label" />
+            </div>
           </div>
         </div>
       </>
@@ -136,3 +157,50 @@ const gridStyle = [`--tt-cols:${columns.length}`, `--tt-rows:${totalRows}`, `--t
     {timetableConfig.startTime}-{timetableConfig.endTime}／時間・場所は変更になる場合があります。
   </p>
 </div>
+
+<script>
+  // 現在時刻ライン。開催当日に、開催時間内に見ているときだけ出す。
+  // 当日かどうかも位置も、閲覧者の端末の時計（ローカル時刻）で決める。
+  const line = document.getElementById("js-timetable-now");
+
+  if (line instanceof HTMLElement) {
+    const label = line.querySelector(".p-timetable__now-label");
+
+    /** "10:00" → 600（0時からの分数） */
+    const toMinutes = (time: string): number => {
+      const [hour = "0", minute = "0"] = time.split(":");
+      return Number(hour) * 60 + Number(minute);
+    };
+
+    /** 12 → "12"、9 → "09" */
+    const pad = (value: number): string => String(value).padStart(2, "0");
+
+    const eventDate = line.dataset.date ?? "";
+    const tableStart = toMinutes(line.dataset.start ?? "00:00");
+    const tableEnd = toMinutes(line.dataset.end ?? "00:00");
+    const step = Number(line.dataset.step ?? "5");
+    const headerRows = Number(line.dataset.headerRows ?? "1");
+
+    const update = (): void => {
+      const now = new Date();
+      const today = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+      const minutes = now.getHours() * 60 + now.getMinutes();
+
+      // 開催当日の、開催時間内だけ
+      if (today !== eventDate || minutes < tableStart || minutes > tableEnd) {
+        line.hidden = true;
+        return;
+      }
+
+      // 行は step 分刻み。端数は行の高さに対する割合として下にずらす
+      const offset = minutes - tableStart;
+      line.style.gridRow = String(Math.floor(offset / step) + 1 + headerRows);
+      line.style.transform = `translateY(calc(var(--tt-row-height) * ${(offset % step) / step}))`;
+      if (label) label.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())} いまここ`;
+      line.hidden = false;
+    };
+
+    update();
+    window.setInterval(update, 30_000);
+  }
+</script>
