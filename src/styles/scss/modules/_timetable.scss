@@ -62,6 +62,13 @@
 }
 
 .p-timetable__tab {
+	// --tt-slot-color は場所ごとにコンポーネントから渡される
+	--tt-slot-ink: #{s.darken(s.$main-blue, 6%)};
+	--tt-slot-ink: color-mix(in srgb, var(--tt-slot-color) 55%, #{s.$text-color});
+
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
 	padding: 7px 14px;
 	border: 1px solid rgba(s.$text-color, 0.2);
 	border-radius: 999px;
@@ -74,6 +81,16 @@
 		background-color 0.2s ease,
 		border-color 0.2s ease,
 		color 0.2s ease;
+
+  // 選んでいないときも、どの色の場所かがわかるように丸を添える
+  &::before {
+    content: '';
+    flex: 0 0 auto;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--tt-slot-color);
+  }
 }
 
 .p-timetable__scroll {
@@ -88,7 +105,10 @@
 	--tt-row-height: 12px; // 5分（stepMinutes）1つ分の高さ。1時間 = 144px
 	--tt-axis-width: 58px; // 左の時間軸の幅
 	--tt-col-min: 172px; // 1列の最小幅。これを下回るときは横スクロールになる
-	--tt-line: #{rgba(s.$text-color, 0.12)};
+	--tt-line: #{rgba(s.$text-color, 0.12)}; // 目盛り（30分）ごとの細い線
+	--tt-line-hour: #{rgba(s.$text-color, 0.3)}; // 毎時00分の区切り線
+	// 場所ごとの色。実際の値はコンポーネントが列単位で上書きする（ここは保険の既定値）
+	--tt-slot-color: #{s.$main-blue};
 
 	display: grid;
 	grid-template-columns: var(--tt-axis-width) repeat(var(--tt-cols), minmax(var(--tt-col-min), 1fr));
@@ -122,6 +142,10 @@
 }
 
 .p-timetable__slot {
+	// 見出しの上に色帯を出して、その列の色を示す
+	--tt-slot-tint: #{rgba(s.$main-blue, 0.08)};
+	--tt-slot-tint: color-mix(in srgb, var(--tt-slot-color) 8%, #fff);
+
 	grid-row: 1;
 	display: flex;
 	flex-direction: column;
@@ -130,6 +154,8 @@
 	padding: 10px 8px;
 	border-left: 1px solid var(--tt-line);
 	border-bottom: 1px solid var(--tt-line);
+	border-top: 3px solid var(--tt-slot-color);
+	background-color: var(--tt-slot-tint);
 }
 
 .p-timetable__slot-name {
@@ -144,8 +170,11 @@
 	color: rgba(s.$text-color, 0.6);
 }
 
-// 列の背景。目盛りの間隔ごとに横罫線を引く
+// 列の背景。目盛り（30分）の間隔ごとに細い横罫線を引く。
+// 毎時00分の濃い線は .p-timetable__hourline が別に担当する
 .p-timetable__lane {
+	background-color: #{rgba(s.$main-blue, 0.03)};
+	background-color: color-mix(in srgb, var(--tt-slot-color) 4%, #fff);
 	border-left: 1px solid var(--tt-line);
 	background-image: repeating-linear-gradient(
 		to bottom,
@@ -154,6 +183,15 @@
 		transparent 1px,
 		transparent calc(var(--tt-row-height) * var(--tt-rows-per-tick))
 	);
+}
+
+// 毎時00分の区切り線。高さ0の箱を全列にまたがらせ、上辺だけを濃く引く。
+// レーンより後・コマより前に置いてあるので、地色の上・コマの下に入る
+.p-timetable__hourline {
+	grid-column: 2 / -1;
+	height: 0;
+	border-top: 1px solid var(--tt-line-hour);
+	pointer-events: none;
 }
 
 // 目盛りは高さ0の箱に置き、ラベルを罫線の上に重ねる
@@ -173,7 +211,21 @@
 	white-space: nowrap;
 }
 
+// 毎時00分は濃く太くして、30分の目盛りと見分けられるようにする
+.p-timetable__tick--hour .p-timetable__tick-label {
+	font-size: s.fz(13);
+	font-weight: bold;
+	color: s.$text-color;
+}
+
 .p-timetable__entry {
+	// 色は場所ごと。--tt-slot-color から、文字用の濃い色と背景の淡い色を作る
+	// （color-mix が使えない環境では前の行の単色にフォールバックする）
+	--tt-slot-ink: #{s.darken(s.$main-blue, 6%)};
+	--tt-slot-ink: color-mix(in srgb, var(--tt-slot-color) 55%, #{s.$text-color});
+	--tt-slot-tint: #{rgba(s.$main-blue, 0.14)};
+	--tt-slot-tint: color-mix(in srgb, var(--tt-slot-color) 14%, #fff);
+
 	// 読み上げ用に隠している場所名（.p-timetable__entry-slot）の位置の基準になる。
 	// これが無いと body 基準で配置され、横スクロール枠を飛び出して文書の幅を広げてしまう
 	position: relative;
@@ -184,8 +236,9 @@
 	margin: 2px 4px 2px 5px;
 	padding: 8px 10px;
 	border-radius: 8px;
-	border-left: 4px solid currentColor;
-	color: s.$text-color;
+	border-left: 4px solid var(--tt-slot-color);
+	background-color: var(--tt-slot-tint);
+	color: var(--tt-slot-ink);
 	text-decoration: none;
 	transition:
 		transform 0.2s ease,
@@ -203,15 +256,8 @@
   }
 }
 
-.p-timetable__entry--session {
-	color: s.darken(s.$main-pink, 18%);
-	background-color: rgba(s.$main-pink, 0.16);
-}
-
-.p-timetable__entry--event {
-	color: s.darken(s.$main-violet, 18%);
-	background-color: rgba(s.$main-violet, 0.16);
-}
+// .p-timetable__entry--session / --event はセッションとイベントの区別を表すが、
+// 色は場所ごとに決めるため、ここでは配色を与えない（必要になったときの目印として残す）
 
 .p-timetable__entry-time {
 	flex: 0 0 auto;
@@ -265,16 +311,9 @@
 	padding: 1px 6px;
 	border-radius: 999px;
 	font-weight: bold;
+	background-color: var(--tt-slot-ink);
 	color: #fff;
 	white-space: nowrap;
-}
-
-.p-timetable__entry-type--session {
-	background-color: s.$main-pink;
-}
-
-.p-timetable__entry-type--event {
-	background-color: s.$main-violet;
 }
 
 .p-timetable__entry-speaker {
@@ -314,13 +353,17 @@
     }
 
     .p-timetable__radio:nth-of-type(#{$i}):checked ~ .p-timetable__tabs .p-timetable__tab:nth-child(#{$i}) {
-      background-color: s.$main-blue;
-      border-color: s.$main-blue;
+      background-color: var(--tt-slot-ink);
+      border-color: var(--tt-slot-ink);
       color: #fff;
+
+      &::before {
+        background-color: #fff;
+      }
     }
 
     .p-timetable__radio:nth-of-type(#{$i}):focus-visible ~ .p-timetable__tabs .p-timetable__tab:nth-child(#{$i}) {
-      outline: 2px solid s.$main-blue;
+      outline: 2px solid var(--tt-slot-ink);
       outline-offset: 2px;
     }
   }

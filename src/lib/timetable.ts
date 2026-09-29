@@ -1,11 +1,11 @@
 import { getEvents, getSessions } from "./program";
-import { timetableConfig, type TimetableSlot } from "../data/timetable";
+import { defaultSlotColors, timetableConfig, type TimetableSlot } from "../data/timetable";
 
 /** 表に置く1コマ分。セッションとイベントを同じ形にそろえたもの */
 export interface TimetableEntry {
   /** コレクション内のスラッグ */
   id: string;
-  /** セッションかイベントか（色分けとバッジに使う） */
+  /** セッションかイベントか（リンク先の区別に使う。色は場所ごとに決まる） */
   kind: "session" | "event";
   title: string;
   /** 詳細ページへのリンク先 */
@@ -25,6 +25,8 @@ export interface TimetableEntry {
 /** 1つの場所（列）とそこに入るコマ */
 export interface TimetableColumn {
   slot: TimetableSlot;
+  /** この列に使う色。slot.color か、無ければ既定パレットから決まる */
+  color: string;
   entries: TimetableEntry[];
 }
 
@@ -34,6 +36,8 @@ export interface TimetableTick {
   label: string;
   /** CSS Grid の grid-row */
   row: number;
+  /** 毎時00分か。時間の区切りを濃く見せるのに使う */
+  isHour: boolean;
 }
 
 export interface TimetableData {
@@ -43,6 +47,8 @@ export interface TimetableData {
   totalRows: number;
   /** 1目盛りが何行分か（横罫線の間隔の計算に使う） */
   rowsPerTick: number;
+  /** 毎時00分の区切り線を引く行（CSS Grid の grid-row） */
+  hourRows: number[];
   /** 表に置けたコマが1つもないか */
   isEmpty: boolean;
 }
@@ -169,14 +175,28 @@ export async function getTimetable(): Promise<TimetableData> {
     });
   }
 
-  const columns: TimetableColumn[] = slots.map((slot) => ({
+  const columns: TimetableColumn[] = slots.map((slot, index) => ({
     slot,
+    // 色を書いていない場所には、並び順どおりに既定パレットを配る
+    color: slot.color ?? defaultSlotColors[index % defaultSlotColors.length] ?? defaultSlotColors[0]!,
     entries: (buckets.get(slot.id) ?? []).sort((a, b) => a.rowStart - b.rowStart),
   }));
 
+  /** 分数 → grid-row。表の上端を 1 行目とする */
+  const toRow = (minutes: number): number => Math.floor((minutes - tableStart) / stepMinutes) + 1;
+
   const ticks: TimetableTick[] = [];
   for (let minutes = tableStart; minutes <= tableEnd; minutes += tickMinutes) {
-    ticks.push({ label: toLabel(minutes), row: Math.floor((minutes - tableStart) / stepMinutes) + 1 });
+    ticks.push({ label: toLabel(minutes), row: toRow(minutes), isHour: minutes % 60 === 0 });
+  }
+
+  // 毎時00分の区切り線。表の上端が半端な時刻でもよいよう、最初の正時から数える。
+  // 表の一番上（1行目）は見出しの下線がその役目を果たすので線は引かない
+  const hourRows: number[] = [];
+  const firstHour = Math.ceil(tableStart / 60) * 60;
+  for (let minutes = firstHour; minutes <= tableEnd; minutes += 60) {
+    const row = toRow(minutes);
+    if (row > 1) hourRows.push(row);
   }
 
   return {
@@ -184,6 +204,7 @@ export async function getTimetable(): Promise<TimetableData> {
     ticks,
     totalRows,
     rowsPerTick,
+    hourRows,
     isEmpty: columns.every((column) => column.entries.length === 0),
   };
 }

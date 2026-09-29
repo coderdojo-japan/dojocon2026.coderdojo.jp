@@ -5,6 +5,9 @@
 // グリッドの行は「ヘッダー行 1 行 + stepMinutes 刻みの行 × totalRows」。
 // そのため src/lib/timetable.ts が返す行番号には HEADER_ROWS を足してから使う。
 //
+// 色は場所（スロット）ごと。src/data/timetable.ts の color（未指定なら既定パレット）を
+// --tt-slot-color として列ごとに流し込み、見出し・コマ・タブの配色を SCSS 側で組み立てる。
+//
 // 画面が狭いときは全部の場所を横に並べず、場所を1つずつ切り替えて見せる。
 // 切り替えは name を共有したラジオボタンで行い、CSS の :checked で表示を差し替える
 // （そのためラジオは .p-timetable__tabs と .p-timetable__scroll より前に置くこと）。
@@ -17,7 +20,7 @@ import { timetableConfig } from "../data/timetable";
 /** ヘッダー（場所名）が占める行数 */
 const HEADER_ROWS = 1;
 
-const { columns, ticks, totalRows, rowsPerTick, isEmpty } = await getTimetable();
+const { columns, ticks, totalRows, rowsPerTick, hourRows, isEmpty } = await getTimetable();
 
 // 寸法の既定値は SCSS 側に持たせ、データから決まる値だけカスタムプロパティで渡す
 const gridStyle = [`--tt-cols:${columns.length}`, `--tt-rows:${totalRows}`, `--tt-rows-per-tick:${rowsPerTick}`].join(
@@ -44,7 +47,11 @@ const gridStyle = [`--tt-cols:${columns.length}`, `--tt-rows:${totalRows}`, `--t
 
         <div class="p-timetable__tabs" role="group" aria-label="表示する場所を選ぶ">
           {columns.map((column) => (
-            <label class="p-timetable__tab" for={`timetable-slot-${column.slot.id}`}>
+            <label
+              class="p-timetable__tab"
+              for={`timetable-slot-${column.slot.id}`}
+              style={`--tt-slot-color:${column.color}`}
+            >
               {column.slot.name}
             </label>
           ))}
@@ -61,25 +68,38 @@ const gridStyle = [`--tt-cols:${columns.length}`, `--tt-rows:${totalRows}`, `--t
 
             {/* 場所名（横軸の見出し） */}
             {columns.map((column, index) => (
-              <div class="p-timetable__slot" data-col={index + 1} style={`grid-column:${index + 2}`}>
+              <div
+                class="p-timetable__slot"
+                data-col={index + 1}
+                style={`grid-column:${index + 2};--tt-slot-color:${column.color}`}
+              >
                 <span class="p-timetable__slot-name">{column.slot.name}</span>
                 {column.slot.note && <span class="p-timetable__slot-note">{column.slot.note}</span>}
               </div>
             ))}
 
-            {/* 各列の背景と横罫線。コマより先に置いて背面にする */}
-            {columns.map((_column, index) => (
+            {/* 各列の背景と30分ごとの横罫線。コマより先に置いて背面にする */}
+            {columns.map((column, index) => (
               <div
                 class="p-timetable__lane"
                 data-col={index + 1}
-                style={`grid-column:${index + 2};grid-row:${HEADER_ROWS + 1} / -1`}
+                style={`grid-column:${index + 2};grid-row:${HEADER_ROWS + 1} / -1;--tt-slot-color:${column.color}`}
                 aria-hidden="true"
               />
             ))}
 
+            {/* 毎時00分の区切り線。レーンより後・コマより前に置いて、間にはさむ */}
+            {hourRows.map((row) => (
+              <div class="p-timetable__hourline" style={`grid-row:${row + HEADER_ROWS}`} aria-hidden="true" />
+            ))}
+
             {/* 左の時間軸の目盛り */}
             {ticks.map((tick) => (
-              <div class="p-timetable__tick" style={`grid-row:${tick.row + HEADER_ROWS}`} aria-hidden="true">
+              <div
+                class:list={["p-timetable__tick", tick.isHour && "p-timetable__tick--hour"]}
+                style={`grid-row:${tick.row + HEADER_ROWS}`}
+                aria-hidden="true"
+              >
                 <span class="p-timetable__tick-label">{tick.label}</span>
               </div>
             ))}
@@ -91,7 +111,7 @@ const gridStyle = [`--tt-cols:${columns.length}`, `--tt-rows:${totalRows}`, `--t
                   class={`p-timetable__entry p-timetable__entry--${entry.kind}`}
                   data-col={index + 1}
                   href={entry.href}
-                  style={`grid-column:${index + 2};grid-row:${entry.rowStart + HEADER_ROWS} / ${entry.rowEnd + HEADER_ROWS}`}
+                  style={`grid-column:${index + 2};grid-row:${entry.rowStart + HEADER_ROWS} / ${entry.rowEnd + HEADER_ROWS};--tt-slot-color:${column.color}`}
                 >
                   <span class="p-timetable__entry-time">
                     {entry.timeLabel}
@@ -100,7 +120,7 @@ const gridStyle = [`--tt-cols:${columns.length}`, `--tt-rows:${totalRows}`, `--t
                   </span>
                   <span class="p-timetable__entry-title">{entry.title}</span>
                   <span class="p-timetable__entry-meta">
-                    <span class={`p-timetable__entry-type p-timetable__entry-type--${entry.kind}`}>{entry.type}</span>
+                    <span class="p-timetable__entry-type">{entry.type}</span>
                     {entry.speaker && <span class="p-timetable__entry-speaker">{entry.speaker}</span>}
                   </span>
                 </a>
