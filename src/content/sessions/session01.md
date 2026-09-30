@@ -1,6 +1,8 @@
 ---
 title: 大人が知っておきたい、ニンジャたちの「学び」と「居場所」の選択肢
 type: 対話
+theme: ひろげる
+speaker: 小野寺　綾・田重田 勝一郎
 target: 保護者/チャンピオン/メンター
 image: /images/sessions/no_image.webp
 timetable:

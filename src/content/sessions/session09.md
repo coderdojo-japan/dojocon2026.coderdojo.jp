@@ -1,6 +1,8 @@
 ---
 title: 生成AI時代の〇〇について話そう
 type: 対話
+theme: ひろげる
+speaker: CoderDojo コミュニティ
 target: チャンピオン/メンター/保護者
 image: /images/sessions/session09.png
 timetable:
@@ -28,4 +30,5 @@ draft: true
 
 ## 話題提供
 
-10月12日にプレセッションを実施して、当日のテーマ（キーワード）を決めたいと思います。詳しくは、[CoderDojo JapanのFacebookグループ](https://www.facebook.com/groups/coderdojo.jp)で案内します。
+- CoderDojo コミュニティ　　
+  10月12日にプレセッションを実施して、当日のテーマ（キーワード）を決めたいと思います。詳しくは、[CoderDojo JapanのFacebookグループ](https://www.facebook.com/groups/coderdojo.jp)で案内します。

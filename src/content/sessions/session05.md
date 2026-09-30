@@ -1,6 +1,8 @@
 ---
 title: 教えられなくても、できることがある ― わからないことに、どう寄り添うか
 type: 対話
+theme: つづける
+speaker: 西岡 純生
 target: チャンピオン/メンター
 image: /images/sessions/no_image.webp
 timetable:

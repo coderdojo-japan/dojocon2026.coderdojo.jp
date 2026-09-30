@@ -5,8 +5,9 @@
 // グリッドの行は「ヘッダー行 1 行 + stepMinutes 刻みの行 × totalRows」。
 // そのため src/lib/timetable.ts が返す行番号には HEADER_ROWS を足してから使う。
 //
-// 色は場所（スロット）ごと。src/data/timetable.ts の color（未指定なら既定パレット）を
-// --tt-slot-color として列ごとに流し込み、見出し・コマ・タブの配色を SCSS 側で組み立てる。
+// 色は src/data/timetable.ts の colorBy で、場所（slot）・種別（type）・テーマ（theme）から選ぶ。
+// 列の色は見出し・背景・タブに、コマの色はコマに --tt-slot-color として流し込み、
+// 配色は SCSS 側で組み立てる。場所以外で色分けするときは、表の上に凡例を出す。
 //
 // コマが1つも入っていない場所は列ごと出さない。会場のレイアウトが先に決まって
 // セッションが後から埋まる進み方でも、空の列が並ばずに済む。
@@ -24,7 +25,7 @@ import { site } from "../data/site";
 /** ヘッダー（場所名）が占める行数 */
 const HEADER_ROWS = 1;
 
-const { columns: allColumns, ticks, totalRows, rowsPerTick, hourRows, isEmpty } = await getTimetable();
+const { columns: allColumns, legend, ticks, totalRows, rowsPerTick, hourRows, isEmpty } = await getTimetable();
 
 // コマが入っていない場所は列ごと省く
 const columns = allColumns.filter((column) => column.entries.length > 0);
@@ -72,6 +73,17 @@ const nowData = {
             </label>
           ))}
         </div>
+
+        {/* 色の凡例（種別・テーマで色分けするときだけ） */}
+        {legend.length > 0 && (
+          <ul class="p-timetable__legend" aria-label="色の凡例">
+            {legend.map((item) => (
+              <li class="p-timetable__legend-item" style={`--tt-slot-color:${item.color}`}>
+                {item.label}
+              </li>
+            ))}
+          </ul>
+        )}
 
         <p class="p-timetable__hint" aria-hidden="true">
           表が入りきらないときは横にスクロールできます →
@@ -127,7 +139,7 @@ const nowData = {
                   class={`p-timetable__entry p-timetable__entry--${entry.kind}`}
                   data-col={index + 1}
                   href={entry.href}
-                  style={`grid-column:${index + 2};grid-row:${entry.rowStart + HEADER_ROWS} / ${entry.rowEnd + HEADER_ROWS};--tt-slot-color:${column.color}`}
+                  style={`grid-column:${index + 2};grid-row:${entry.rowStart + HEADER_ROWS} / ${entry.rowEnd + HEADER_ROWS};--tt-slot-color:${entry.color}`}
                 >
                   <span class="p-timetable__entry-time">
                     {entry.timeLabel}
@@ -137,6 +149,7 @@ const nowData = {
                   <span class="p-timetable__entry-title">{entry.title}</span>
                   <span class="p-timetable__entry-meta">
                     <span class="p-timetable__entry-type">{entry.type}</span>
+                    {entry.theme && <span class="p-timetable__entry-theme">{entry.theme}</span>}
                     {entry.speaker && <span class="p-timetable__entry-speaker">{entry.speaker}</span>}
                   </span>
                 </a>

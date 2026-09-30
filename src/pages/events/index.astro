@@ -20,6 +20,7 @@ const events = await getEvents();
             image={item.data.image ?? EVENT_NO_IMAGE}
             type={item.data.type}
             target={item.data.target}
+            speaker={item.data.speaker}
             needsReservation={item.data.needsReservation}
           />
         ))}

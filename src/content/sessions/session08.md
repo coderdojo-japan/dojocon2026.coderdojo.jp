@@ -1,6 +1,8 @@
 ---
 title: CoderDojoだからできる、ニンジャの「まなび」を考える
 type: 対話
+theme: ふかめる
+speaker: 調整中
 target: チャンピオン/メンター
 image: /images/sessions/no_image.webp
 timetable:

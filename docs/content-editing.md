@@ -131,6 +131,7 @@ color: news
 ---
 title: Scratch ではじめる creative coding
 type: セミナー
+theme: ふかめる
 speaker: 山田 太郎（CoderDojo 盛岡）
 target: メンター
 image: /images/sessions/creative-coding.png
@@ -147,8 +148,9 @@ draft: false
 | 項目        | 必須 | 説明                                                                                                  |
 | ----------- | ---- | ----------------------------------------------------------------------------------------------------- |
 | `title`     | ○    | タイトル                                                                                              |
-| `type`      | ○    | 種別。例: セミナー / パネルディスカッション / 対話                                                    |
-| `speaker`   | -    | 登壇者                                                                                                |
+| `type`      | ○    | 種別。**決められた種別から1つ選ぶ**（→ 下記「種別と speaker の見出し」）                              |
+| `theme`     | -    | テーマ。**決められたテーマから1つ選ぶ**（→ 下記「テーマ」）。タイムテーブルの色分けに使う             |
+| `speaker`   | -    | 登壇者など。カードでの見出しは種別で変わる（対話なら「話題提供：」）                                  |
 | `target`    | ○    | 対象。例: メンター / ニンジャ / チャンピオン                                                          |
 | `image`     | -    | カード・アイキャッチ画像。**省略すると `no_image` になる**                                            |
 | `timetable` | -    | タイムテーブルに載せる時間と場所（→ 下記「5. タイムテーブルに載せる」）。**省略すると表には載らない** |
@@ -158,12 +160,13 @@ draft: false
 
 ## 4. イベントを追加する — `src/content/events/` に Markdown
 
-セッションとほぼ同じですが、`speaker` の代わりに `needsReservation`（要申し込み）があります。
+セッションとほぼ同じですが、`needsReservation`（要申し込み）が加わります。
 
 ```markdown
 ---
 title: micro:bit ではじめる電子工作ワークショップ
 type: ワークショップ
+speaker: CoderDojo 盛岡
 target: ニンジャ
 needsReservation: true
 image: /images/events/microbit.png
@@ -180,12 +183,65 @@ draft: false
 | 項目               | 必須 | 説明                                                                                                  |
 | ------------------ | ---- | ----------------------------------------------------------------------------------------------------- |
 | `title`            | ○    | タイトル                                                                                              |
-| `type`             | ○    | 種別。例: 展示 / ワークショップ / 企画                                                                |
+| `type`             | ○    | 種別。セッションと同じく**決められた種別から1つ選ぶ**                                                 |
+| `theme`            | -    | テーマ。セッションと同じく**決められたテーマから1つ選ぶ**                                             |
+| `speaker`          | -    | 出展者など。カードでの見出しは種別で変わる（展示なら「担当：」）                                      |
 | `target`           | ○    | 対象                                                                                                  |
 | `needsReservation` | -    | `true` でカード・詳細に「要申し込み」バッジが付く（既定 false）                                       |
 | `image`            | -    | 画像。省略すると `no_image`                                                                           |
 | `timetable`        | -    | タイムテーブルに載せる時間と場所（→ 下記「5. タイムテーブルに載せる」）。**省略すると表には載らない** |
 | `draft`            | -    | `true` で本番非表示                                                                                   |
+
+### 種別（speaker の見出しと色） — `src/data/programTypes.ts`
+
+セッション / イベントの `type` には、次の種別のどれか1つを書きます。**一覧にない種別を書くと、`npm run dev` / ビルドがエラーで止まります。**
+`speaker` を書くと、カードには種別に応じた見出しで表示されます。
+
+| `type`         | `speaker` の見出し |
+| -------------- | ------------------ |
+| ワークショップ | ファシリテーター   |
+| 対話           | 話題提供           |
+| 聴講           | 登壇               |
+| セミナー       | 登壇               |
+| 展示           | 担当               |
+| イベント       | 担当               |
+| セッション     | 担当               |
+
+種別を増やす・見出しや色を変えるときは、`src/data/programTypes.ts` の一覧を編集します。
+1 行が 1 種別で、**種別名・`speaker` の見出し・色をセットで書きます**。色はタイムテーブルを種別で色分けするとき（→「コマの色分けを変える」）に使います。
+
+```ts
+export const programTypes = [
+  { name: "ワークショップ", speakerLabel: "ファシリテーター", color: "#89c3a0" },
+  { name: "対話", speakerLabel: "話題提供", color: "#ee859a" },
+  // 追加するときは同じ形で1行足す
+] as const satisfies readonly { name: string; speakerLabel: string; color: string }[];
+```
+
+### テーマ（と色） — `src/data/programThemes.ts`
+
+セッション / イベントの `theme`（任意）には、`src/data/programThemes.ts` にあるテーマのどれか1つを書きます。**一覧にないテーマを書くと、`npm run dev` / ビルドがエラーで止まります。**
+1 行が 1 テーマで、**テーマ名と色をセットで書きます**。色はタイムテーブルをテーマで色分けするときに使います。
+
+```ts
+export const programThemes = [
+  { name: "わかちあう", color: "#f0a33a" },
+  { name: "はじめる", color: "#00b1a9" },
+  { name: "つづける", color: "#89c3a0" },
+  { name: "ふかめる", color: "#ee859a" },
+  { name: "ひろげる", color: "#9699cb" },
+] as const satisfies readonly { name: string; color: string }[];
+```
+
+各テーマの内容は次のとおりです。セッション / イベントを追加するときは、内容に合うものを選んでください。
+
+| `theme`    | 内容                                           |
+| ---------- | ---------------------------------------------- |
+| わかちあう | 基調ワークショップなど、全員が対象のプログラム |
+| はじめる   | 道場の立ち上げ・これから関わる人向けの基本     |
+| つづける   | 運営やメンターを無理なく続けるための工夫       |
+| ふかめる   | ニンジャの学びや道場の中での関わりを深める     |
+| ひろげる   | 地域・社会・これからの時代へ視野を広げる       |
 
 <br>
 
@@ -236,19 +292,37 @@ export const timetableConfig: TimetableConfig = {
   stepMinutes: 5, // コマの高さ・位置の最小単位（分）
 
   slots: [
-    { id: "hall", name: "ホール" },
-    { id: "room-a", name: "大会議室A" },
-    { id: "room-b", name: "大会議室B" },
-    { id: "workshop", name: "ワークショップ" },
+    { id: "hall", name: "ホール", color: "#00b1a9" },
+    { id: "room-a", name: "大会議室A", color: "#ee859a" },
+    { id: "room-b", name: "大会議室B", color: "#9699cb" },
+    { id: "workshop", name: "ワークショップ", color: "#89c3a0" },
   ],
 };
 ```
 
 - **`slots` に並べた順番が、そのまま表の左から右の順番**になります。部屋を足す・並べ替えるときはこの配列を編集します
+- 1 行が 1 場所で、**`id`・表示名（`name`）・色（`color`）をセットで書きます**。色は場所で色分けするときに使います
 - Markdown の `slot:` には、`id`（`hall`）と `name`（`ホール`）の**どちらを書いても構いません**
 - `name` の後ろに `note: "3F"` を足すと、見出しの下に補足として表示されます
 - まだ 1 コマも入っていない場所も、`slots` に書いてあれば**空の列として表示**されます
 - 1 コマも `timetable:` が書かれていない間は、ページ全体が「タイムテーブルは準備中です。」の表示になります
+
+### コマの色分けを変える — `colorBy`
+
+コマの色を「場所」「種別」「テーマ」のどれで分けるかを、同じファイルの `colorBy` で選べます。
+
+```ts
+  colorBy: "type", // "slot"（場所）/ "type"（種別）/ "theme"（テーマ）
+```
+
+| `colorBy` | 何で分けるか        | 色の定義                                      |
+| --------- | ------------------- | --------------------------------------------- |
+| `"slot"`  | 場所                | `src/data/timetable.ts` の `slots` の `color` |
+| `"type"`  | Markdown の `type`  | `src/data/programTypes.ts` の `color`         |
+| `"theme"` | Markdown の `theme` | `src/data/programThemes.ts` の `color`        |
+
+- `"theme"` のとき、**`theme` を書いていないコマはグレー（「テーマなし」）**になります
+- `"type"` / `"theme"` のときは、表の上に**色の凡例**が出ます。列の見出しは場所を区別しないメインカラーになります
 
 > **現在の部屋名は仮です。** 会場のレイアウトが決まったら `src/data/timetable.ts` の `slots` を実際の部屋名に差し替えてください（ファイル内に TODO コメントがあります）。
 > 差し替えたら、各 Markdown の `slot:` も合わせて直すのを忘れずに。

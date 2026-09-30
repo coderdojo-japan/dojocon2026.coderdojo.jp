@@ -1,6 +1,8 @@
 ---
 title: ニンジャ同士がつながる道場づくり〜教え合い・発表・質問が自然に生まれる仕組みを考える〜
 type: 対話
+theme: ふかめる
+speaker: 細谷 崇
 target: チャンピオン/メンター
 image: /images/sessions/no_image.webp
 timetable:

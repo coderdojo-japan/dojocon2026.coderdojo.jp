@@ -9,7 +9,7 @@
  *     end: "14:30"
  *
  * と書くと、この設定に従って表に配置される。
- * 「表の縦の範囲」「横に並べる場所の順番」「場所ごとの色」を変えたいときは、
+ * 「表の縦の範囲」「横に並べる場所の順番」「色分けのしかた」「色」を変えたいときは、
  * まずこのファイルを直す。
  */
 
@@ -22,25 +22,20 @@ export interface TimetableSlot {
   /** 見出しの下に添える補足（任意）。例: "3F" */
   note?: string;
   /**
-   * この場所のコマに使う色（CSS の色値。例: "#00b1a9"）。
+   * この場所の色（CSS の色値。例: "#00b1a9"）。colorBy が "slot" のときに使う。
    * 見出しの色帯・コマの背景と文字・種別バッジが、この色から自動で作られる。
-   * 省略した場合は defaultSlotColors が slots の並び順に割り当てられる。
    * 濃すぎる色より、メインカラー程度の濃さの色のほうが表が見やすい。
    */
-  color?: string;
+  color: string;
 }
 
 /**
- * color を書かなかった場所に、slots の並び順で割り当てる既定色。
- * 場所の数がこの配列より多いときは先頭に戻って繰り返す。
+ * コマの色を何で分けるか。
+ * - "slot":  場所ごと（下の slots の color）
+ * - "type":  種別ごと（フロントマターの type。色は src/data/programTypes.ts）
+ * - "theme": テーマごと（フロントマターの theme。色は src/data/programThemes.ts）
  */
-export const defaultSlotColors: string[] = [
-  "#00b1a9", // $main-blue
-  "#ee859a", // $main-pink
-  "#9699cb", // $main-violet
-  "#89c3a0", // $main-green
-  "#e8a33d", // $main-yellow を文字にも使える濃さにしたもの
-];
+export type TimetableColorBy = "slot" | "type" | "theme";
 
 export interface TimetableConfig {
   /** 表の上端の時刻（"HH:MM"）。開催時間に合わせる */
@@ -59,6 +54,8 @@ export interface TimetableConfig {
    * セッションがまだ入っていない場所も、ここに書いてあれば空の列として表示される。
    */
   slots: TimetableSlot[];
+  /** コマの色を何で分けるか（→ TimetableColorBy）。"slot" 以外では表の上に凡例が出る */
+  colorBy: TimetableColorBy;
 }
 
 export const timetableConfig: TimetableConfig = {
@@ -68,11 +65,13 @@ export const timetableConfig: TimetableConfig = {
   stepMinutes: 5,
 
   // TODO: 会場のレイアウトが決まったら実際の部屋名に差し替える（現在は仮）
-  // 色を指定したいときは color を足す。例: { id: "hall", name: "ホール", color: "#00b1a9" }
   slots: [
-    { id: "hall", name: "ホール" },
-    { id: "room-a", name: "大会議室A" },
-    { id: "room-b", name: "大会議室B" },
-    { id: "workshop", name: "ワークショップ" },
+    { id: "hall", name: "ホール", color: "#00b1a9" },
+    { id: "room-a", name: "大会議室A", color: "#ee859a" },
+    { id: "room-b", name: "大会議室B", color: "#9699cb" },
+    { id: "workshop", name: "ワークショップ", color: "#89c3a0" },
   ],
+
+  // 色分けのしかた。"slot"（場所）/ "type"（種別）/ "theme"（テーマ）
+  colorBy: "theme",
 };

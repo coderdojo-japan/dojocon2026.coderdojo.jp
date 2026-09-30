@@ -1,6 +1,7 @@
 ---
 title: 基調ワークショップ
 type: ワークショップ
+theme: わかちあう
 speaker: 上田信行
 target: CoderDojoに関係する人全員
 image: /images/sessions/no_image.webp

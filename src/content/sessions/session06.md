@@ -1,6 +1,8 @@
 ---
-title: 道場運営の基本を考える
+title: Dojo運営の基本を考える
 type: 対話
+theme: はじめる
+speaker: 高田　悠
 target: チャンピオン/メンター
 image: /images/sessions/no_image.webp
 timetable:

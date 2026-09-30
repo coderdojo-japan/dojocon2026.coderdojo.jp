@@ -1,6 +1,8 @@
 ---
 title: 地域とつながると、道場は変わる？ ― 学校・自治体・地域団体との関わり方
 type: 対話
+theme: ひろげる
+speaker: 調整中
 target: チャンピオン/メンター
 image: /images/sessions/no_image.webp
 timetable:

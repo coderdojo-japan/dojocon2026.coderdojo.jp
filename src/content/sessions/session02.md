@@ -1,6 +1,8 @@
 ---
 title: 知ってる人はあらためて、これから関わる人はご一緒に！　子どものセーフガーディングについて学ぼう！
 type: 対話
+theme: はじめる
+speaker: 畠山 将樹・とがぞの
 target: 保護者/チャンピオン/メンター
 image: /images/sessions/no_image.webp
 timetable:

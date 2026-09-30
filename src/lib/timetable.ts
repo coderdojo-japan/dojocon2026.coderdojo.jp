@@ -1,19 +1,25 @@
 import { getEvents, getSessions } from "./program";
-import { defaultSlotColors, timetableConfig, type TimetableSlot } from "../data/timetable";
+import { programTypes, typeColor, type ProgramType } from "../data/programTypes";
+import { noThemeColor, noThemeLabel, programThemes, themeColor, type ProgramTheme } from "../data/programThemes";
+import { timetableConfig, type TimetableSlot } from "../data/timetable";
 
 /** 表に置く1コマ分。セッションとイベントを同じ形にそろえたもの */
 export interface TimetableEntry {
   /** コレクション内のスラッグ */
   id: string;
-  /** セッションかイベントか（リンク先の区別に使う。色は場所ごとに決まる） */
+  /** セッションかイベントか（リンク先の区別に使う。色は colorBy の設定で決まる） */
   kind: "session" | "event";
   title: string;
   /** 詳細ページへのリンク先 */
   href: string;
   /** 種別（"対話" "ワークショップ" など） */
-  type: string;
+  type: ProgramType;
+  /** テーマ（未記入なら undefined） */
+  theme?: ProgramTheme;
   target: string;
   speaker?: string;
+  /** このコマの色。colorBy に応じて場所・種別・テーマのどれかから決まる */
+  color: string;
   /** "13:00 - 14:30" のような表示用ラベル */
   timeLabel: string;
   /** CSS Grid の grid-row の開始行（1 始まり） */
@@ -25,9 +31,18 @@ export interface TimetableEntry {
 /** 1つの場所（列）とそこに入るコマ */
 export interface TimetableColumn {
   slot: TimetableSlot;
-  /** この列に使う色。slot.color か、無ければ既定パレットから決まる */
+  /**
+   * この列の見出し・背景・タブに使う色。colorBy が "slot" なら slot.color、
+   * それ以外なら場所で色を分けないので columnNeutralColor
+   */
   color: string;
   entries: TimetableEntry[];
+}
+
+/** 凡例1項目分（colorBy が "slot" 以外のときに表の上に出す） */
+export interface TimetableLegendItem {
+  label: string;
+  color: string;
 }
 
 /** 左の時間軸に出す目盛り1つ分 */
@@ -42,6 +57,8 @@ export interface TimetableTick {
 
 export interface TimetableData {
   columns: TimetableColumn[];
+  /** 色の凡例。colorBy が "slot" のときは空（場所は列の見出しでわかるため） */
+  legend: TimetableLegendItem[];
   ticks: TimetableTick[];
   /** 表全体の行数（grid-template-rows の repeat 回数） */
   totalRows: number;
@@ -52,6 +69,9 @@ export interface TimetableData {
   /** 表に置けたコマが1つもないか */
   isEmpty: boolean;
 }
+
+/** colorBy が "slot" 以外のとき、列の見出し・背景・タブに使う色（$main-blue） */
+const columnNeutralColor = "#00b1a9";
 
 /** "13:05" → 785（0時からの分数） */
 function toMinutes(time: string): number {
@@ -78,7 +98,7 @@ function warn(message: string): void {
  *   といった場合はビルド時に警告を出す
  */
 export async function getTimetable(): Promise<TimetableData> {
-  const { startTime, endTime, tickMinutes, stepMinutes, slots } = timetableConfig;
+  const { startTime, endTime, tickMinutes, stepMinutes, slots, colorBy } = timetableConfig;
   const tableStart = toMinutes(startTime);
   const tableEnd = toMinutes(endTime);
   const totalRows = Math.ceil((tableEnd - tableStart) / stepMinutes);
@@ -99,7 +119,8 @@ export async function getTimetable(): Promise<TimetableData> {
     kind: TimetableEntry["kind"];
     base: string;
     title: string;
-    type: string;
+    type: ProgramType;
+    theme?: ProgramTheme;
     target: string;
     speaker?: string;
     placement: { slot: string; start: string; end: string };
@@ -128,8 +149,11 @@ export async function getTimetable(): Promise<TimetableData> {
       title: source.title,
       href: where,
       type: source.type,
+      theme: source.theme,
       target: source.target,
       speaker: source.speaker,
+      // 色は全部置き終わってから決める（出てきた順に既定パレットを配るため）
+      color: "",
       timeLabel: `${toLabel(start)} - ${toLabel(end)}`,
       rowStart: Math.floor((start - tableStart) / stepMinutes) + 1,
       rowEnd: Math.ceil((end - tableStart) / stepMinutes) + 1,
@@ -156,6 +180,7 @@ export async function getTimetable(): Promise<TimetableData> {
       base: "/sessions",
       title: item.data.title,
       type: item.data.type,
+      theme: item.data.theme,
       target: item.data.target,
       speaker: item.data.speaker,
       placement: item.data.timetable,
@@ -170,17 +195,43 @@ export async function getTimetable(): Promise<TimetableData> {
       base: "/events",
       title: item.data.title,
       type: item.data.type,
+      theme: item.data.theme,
       target: item.data.target,
+      speaker: item.data.speaker,
       placement: item.data.timetable,
     });
   }
 
-  const columns: TimetableColumn[] = slots.map((slot, index) => ({
+  const columns: TimetableColumn[] = slots.map((slot) => ({
     slot,
-    // 色を書いていない場所には、並び順どおりに既定パレットを配る
-    color: slot.color ?? defaultSlotColors[index % defaultSlotColors.length] ?? defaultSlotColors[0]!,
+    color: colorBy === "slot" ? slot.color : columnNeutralColor,
     entries: (buckets.get(slot.id) ?? []).sort((a, b) => a.rowStart - b.rowStart),
   }));
+
+  // コマの色を決める。種別・テーマの色は src/data/programTypes.ts / programThemes.ts の定義から引く
+  const used = new Set<string>();
+  for (const column of columns) {
+    for (const entry of column.entries) {
+      if (colorBy === "slot") {
+        entry.color = column.color;
+      } else if (colorBy === "type") {
+        entry.color = typeColor(entry.type);
+        used.add(entry.type);
+      } else {
+        entry.color = entry.theme ? themeColor(entry.theme) : noThemeColor;
+        used.add(entry.theme ?? noThemeLabel);
+      }
+    }
+  }
+
+  // 凡例は表に出てくるものだけを、定義の順に並べる。「テーマなし」は最後
+  const legend: TimetableLegendItem[] = [];
+  if (colorBy !== "slot") {
+    for (const item of colorBy === "type" ? programTypes : programThemes) {
+      if (used.has(item.name)) legend.push({ label: item.name, color: item.color });
+    }
+    if (used.has(noThemeLabel)) legend.push({ label: noThemeLabel, color: noThemeColor });
+  }
 
   /** 分数 → grid-row。表の上端を 1 行目とする */
   const toRow = (minutes: number): number => Math.floor((minutes - tableStart) / stepMinutes) + 1;
@@ -201,6 +252,7 @@ export async function getTimetable(): Promise<TimetableData> {
 
   return {
     columns,
+    legend,
     ticks,
     totalRows,
     rowsPerTick,

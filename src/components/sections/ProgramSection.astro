@@ -37,7 +37,7 @@ const noImage = variant === "session" ? SESSION_NO_IMAGE : EVENT_NO_IMAGE;
               image={item.data.image ?? noImage}
               type={item.data.type}
               target={item.data.target}
-              speaker={variant === "session" ? (item as CollectionEntry<"sessions">).data.speaker : undefined}
+              speaker={item.data.speaker}
               needsReservation={variant === "event" ? (item as CollectionEntry<"events">).data.needsReservation : false}
             />
           ))}

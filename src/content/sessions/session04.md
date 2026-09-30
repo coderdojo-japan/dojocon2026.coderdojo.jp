@@ -1,6 +1,8 @@
 ---
 title: 続けたいと思える道場のつくり方 ― 運営者のやりがいとモチベーション
 type: 対話
+theme: つづける
+speaker: 澤 佳祐・高田 悠
 target: チャンピオン/メンター
 image: /images/sessions/no_image.webp
 timetable:
