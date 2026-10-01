@@ -3,7 +3,7 @@ title: CoderDojoだからできる、ニンジャの「まなび」を考える
 type: 対話
 theme: ふかめる
 speaker: 調整中
-target: チャンピオン/メンター
+target: チャンピオン・メンター
 image: /images/sessions/no_image.webp
 timetable:
   slot: 大会議室A
@@ -24,10 +24,12 @@ draft: true
 
 現場での悩みや疑問を持ち寄り、ニンジャの「まなび」と「つぎへのいっぽ」について、みんなで語り合ってみませんか？
 
-## 話題提供
-
-- 調整中
-
 ## 進行
 
-- 佐藤 由久（CoderDojo 鶴岡）
+### 佐藤 由久
+
+CoderDojo 鶴岡 チャンピオン
+
+## 話題提供者紹介
+
+### 調整中

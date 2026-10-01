@@ -3,7 +3,7 @@ title: Dojo運営の基本を考える
 type: 対話
 theme: はじめる
 speaker: 高田　悠
-target: チャンピオン/メンター
+target: チャンピオン・メンター
 image: /images/sessions/no_image.webp
 timetable:
   slot: 大会議室B
@@ -26,10 +26,8 @@ draft: true
 
 ほかの道場の取り組みを知り、これからの運営に生かせるヒントを一緒に見つけませんか。
 
-## 話題提供
+## 進行・話題提供者紹介
 
-- 高田　悠（CoderDojo磐田）
+### 高田　悠
 
-## 進行
-
-- 高田　悠（CoderDojo磐田）
+CoderDojo磐田 チャンピオン

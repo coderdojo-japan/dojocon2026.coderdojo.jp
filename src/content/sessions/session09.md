@@ -3,7 +3,7 @@ title: 生成AI時代の〇〇について話そう
 type: 対話
 theme: ひろげる
 speaker: CoderDojo コミュニティ
-target: チャンピオン/メンター/保護者
+target: チャンピオン・メンター・保護者
 image: /images/sessions/session09.png
 timetable:
   slot: 大会議室A
@@ -26,9 +26,12 @@ draft: false
 
 ## 進行
 
-- 宮島 衣瑛（CoderDojo 西条・CoderDojo Japan　理事）
+### 宮島 衣瑛
 
-## 話題提供
+CoderDojo 西条・CoderDojo Japan　理事
 
-- CoderDojo コミュニティ 　
-  10月12日にプレセッションを実施して、当日のテーマ（キーワード）を決めたいと思います。詳しくは、[CoderDojo JapanのFacebookグループ](https://www.facebook.com/groups/coderdojo.jp)で案内します。
+## 話題提供者紹介
+
+### CoderDojo コミュニティ
+
+10月12日にプレセッションを実施して、当日のテーマ（キーワード）を決めたいと思います。詳しくは、[CoderDojo JapanのFacebookグループ](https://www.facebook.com/groups/coderdojo.jp)で案内します。

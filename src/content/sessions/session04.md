@@ -3,7 +3,7 @@ title: 続けたいと思える道場のつくり方 ― 運営者のやりが�
 type: 対話
 theme: つづける
 speaker: 澤 佳祐・高田 悠
-target: チャンピオン/メンター
+target: チャンピオン・メンター
 image: /images/sessions/no_image.webp
 timetable:
   slot: 大会議室B
@@ -24,11 +24,6 @@ draft: true
 
 それぞれの理由と工夫を持ち寄り、明日からまた続けていくためのヒントを一緒に見つけられたらと思います。
 
-## 話題提供
-
-- 澤 佳祐（CoderDojo たまち）
-- 高田 悠（CoderDOjo 磐田）
-
 ## 進行
 
 - はじめに：道場名と立場（チャンピオン／メンター／その他）を簡単に紹介する
@@ -39,4 +34,12 @@ draft: true
 
 ## 進行
 
-- 澤 佳祐（CoderDojo たまち）
+### 澤 佳祐
+
+CoderDojo たまち チャンピオン
+
+## 話題提供者紹介
+
+### 高田 悠
+
+CoderDojo 磐田 チャンピオン
