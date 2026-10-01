@@ -24,13 +24,13 @@ draft: false
 
 専門知識はいりません。一緒にワイワイ話しましょう！
 
-## 進行
+## 進行役
 
 ### 宮島 衣瑛
 
 CoderDojo 西条・CoderDojo Japan　理事
 
-## 話題提供者紹介
+## 話題提供者
 
 ### CoderDojo コミュニティ
 
