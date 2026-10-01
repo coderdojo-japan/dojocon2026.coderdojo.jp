@@ -28,6 +28,6 @@ draft: false
 
 CoderDojo奈良 チャンピオン
 
-## 話題提供者w
+## 話題提供者
 
 ### 調整中
