@@ -4,7 +4,7 @@ type: 対話
 theme: ひろげる
 speaker: 小野寺　綾・田重田 勝一郎
 target: チャンピオン・メンター・保護者
-image: /images/sessions/no_image.webp
+image: /images/sessions/session01.png
 timetable:
   slot: 大会議室A
   start: "12:30"
