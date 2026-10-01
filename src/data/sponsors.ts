@@ -89,6 +89,11 @@ export const sponsorTiers: SponsorTier[] = [
         url: "https://www.sunnyside-sys.com/",
         logo: "/images/sponsors/sunnyside-systems.webp",
       },
+      {
+        name: "合同会社フライバイ",
+        url: "https://flyby.jp/",
+        logo: "/images/sponsors/flyby.webp",
+      },
     ],
   },
   {
