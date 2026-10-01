@@ -1,13 +1,16 @@
 ---
 // セッション/イベントのカード（p-program__item）。variant で中身を切り替える。
-//   session … 種別バッジ（ピンク）＋メタは 登壇者(任意)+対象
-//   event   … 種別バッジ（紫）＋「要申し込み」バッジ(任意)を横並び、メタは 対象
+//   session … 種別バッジ（ピンク）＋メタは 登壇者など(任意)+対象
+//   event   … 種別バッジ（紫）＋「要申し込み」バッジ(任意)を横並び、メタは 出展者など(任意)+対象
+// speaker の見出し（「話題提供：」など）は種別で変わる。対応は src/data/programTypes.ts
+import { speakerLabel, type ProgramType } from "../data/programTypes";
+
 // バッジは画像の上ではなくタイトルの下（本文エリア）に表示する。
 interface Props {
   href: string;
   title: string;
   image: string;
-  type: string;
+  type: ProgramType;
   target: string;
   variant: "session" | "event";
   speaker?: string;
@@ -33,9 +36,9 @@ const { href, title, image, type, target, variant, speaker, needsReservation = f
       </div>
       <dl class="p-program__meta">
         {
-          variant === "session" && speaker && (
+          speaker && (
             <div class="p-program__meta-row">
-              <dt class="p-program__meta-key">登壇者：</dt>
+              <dt class="p-program__meta-key">{speakerLabel(type)}：</dt>
               <dd class="p-program__meta-value">{speaker}</dd>
             </div>
           )

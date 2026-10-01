@@ -1,6 +1,8 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro:schema";
+import { programTypeNames } from "./data/programTypes";
+import { programThemeNames } from "./data/programThemes";
 
 /** "HH:MM"（24時間表記）だけを受け付ける */
 const TIME_PATTERN = /^([01]\d|2[0-3]):[0-5]\d$/;
@@ -60,9 +62,12 @@ const sessions = defineCollection({
   schema: z.object({
     // タイトル（必須）
     title: z.string(),
-    // 種別（必須）。例: "セミナー" "パネルディスカッション" "対話"
-    type: z.string(),
-    // 登壇者（任意）
+    // 種別（必須・択一）。src/data/programTypes.ts にある種別のどれか。例: "対話" "聴講"
+    type: z.enum(programTypeNames),
+    // テーマ（任意・択一）。src/data/programThemes.ts にあるテーマのどれか
+    // タイムテーブルを theme で色分けするときに使う（src/data/timetable.ts の colorBy）
+    theme: z.enum(programThemeNames).optional(),
+    // 登壇者など（任意）。見出しは種別で変わる（対話なら「話題提供」。src/data/programTypes.ts）
     speaker: z.string().optional(),
     // 対象（必須）。例: "メンター" "ニンジャ" "チャンピオン"
     target: z.string(),
@@ -84,8 +89,12 @@ const events = defineCollection({
   schema: z.object({
     // タイトル（必須）
     title: z.string(),
-    // 種別（必須）。例: "展示" "ワークショップ" "企画"
-    type: z.string(),
+    // 種別（必須・択一）。セッションと同じく src/data/programTypes.ts にある種別のどれか
+    type: z.enum(programTypeNames),
+    // テーマ（任意・択一）。セッションの theme と同じ使い方
+    theme: z.enum(programThemeNames).optional(),
+    // 出展者など（任意）。見出しは種別で変わる（展示なら「担当」。src/data/programTypes.ts）
+    speaker: z.string().optional(),
     // 対象（必須）
     target: z.string(),
     // 要申し込みかどうか（true でカードと詳細に「要申し込み」バッジを表示）

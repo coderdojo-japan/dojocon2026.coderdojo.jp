@@ -93,6 +93,34 @@
   }
 }
 
+// 色の凡例（colorBy が "slot" 以外のときだけ出る）
+.p-timetable__legend {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 16px;
+	margin: 0 0 12px;
+	padding: 0;
+	list-style: none;
+}
+
+.p-timetable__legend-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: s.fz(13);
+	line-height: 1.4;
+	color: rgba(s.$text-color, 0.8);
+
+  &::before {
+    content: '';
+    flex: 0 0 auto;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    background-color: var(--tt-slot-color);
+  }
+}
+
 .p-timetable__scroll {
 	overflow-x: auto;
 	overscroll-behavior-x: contain;
@@ -219,7 +247,7 @@
 }
 
 .p-timetable__entry {
-	// 色は場所ごと。--tt-slot-color から、文字用の濃い色と背景の淡い色を作る
+	// 色は colorBy に応じてコマごとに渡される。--tt-slot-color から、文字用の濃い色と背景の淡い色を作る
 	// （color-mix が使えない環境では前の行の単色にフォールバックする）
 	--tt-slot-ink: #{s.darken(s.$main-blue, 6%)};
 	--tt-slot-ink: color-mix(in srgb, var(--tt-slot-color) 55%, #{s.$text-color});
@@ -322,6 +350,17 @@
 	font-weight: bold;
 	background-color: var(--tt-slot-ink);
 	color: #fff;
+	white-space: nowrap;
+}
+
+// テーマは種別と見分けられるよう、塗りつぶさず枠線だけにする
+.p-timetable__entry-theme {
+	padding: 0 5px;
+	border: 1px solid var(--tt-slot-ink);
+	border-radius: 999px;
+	font-weight: bold;
+	background-color: #fff;
+	color: var(--tt-slot-ink);
 	white-space: nowrap;
 }
 
