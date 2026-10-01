@@ -30,5 +30,5 @@ draft: false
 
 ## 話題提供
 
-- CoderDojo コミュニティ　　
+- CoderDojo コミュニティ 　
   10月12日にプレセッションを実施して、当日のテーマ（キーワード）を決めたいと思います。詳しくは、[CoderDojo JapanのFacebookグループ](https://www.facebook.com/groups/coderdojo.jp)で案内します。
