@@ -22,7 +22,14 @@ draft: false
 
 ## 進行役
 
-### 調整中
+### 土居安佳里
+
+![土居安佳里氏](/images/sessions/doi.jpg)
+
+CoderDojo 梅田・CoderDojo 西宮 メンター
+
+普段はパンフレット、冊子などのデザインや、Webサイトを制作するフリーランスのWebデザイナー・マークアップエンジニア。2012年の12月、CoderDojo西宮に娘を連れて行ったのがCoderDojoとの出会い。プログラミングの知識はほぼありませんがそれからメンターとして活動しています。  
+古いですが[CoderDojo西宮・梅田のサイトに掲載されているメンターインタビュー記事はこちら](https://coderdojo-nishinomiya.info/interview-doi/)。
 
 ## 話題提供者
 
