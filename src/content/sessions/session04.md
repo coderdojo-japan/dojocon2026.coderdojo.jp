@@ -32,7 +32,7 @@ CoderDojo たまち チャンピオン
 
 ### 高田 悠
 
-![高田悠氏](/images/sessions/takada.png)
+![高田悠氏](/images/sessions/takada.jpg)
 
 CoderDojo 磐田 チャンピオン
 
