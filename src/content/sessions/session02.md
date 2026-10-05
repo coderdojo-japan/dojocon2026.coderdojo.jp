@@ -4,7 +4,7 @@ type: 対話
 theme: はじめる
 speaker: 畠山 将樹・とがぞの
 target: チャンピオン・メンター・保護者
-image: /images/sessions/no_image.webp
+image: /images/sessions/session02.png
 timetable:
   slot: ホール
   start: "14:30"
