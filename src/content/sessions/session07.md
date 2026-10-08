@@ -7,8 +7,8 @@ target: チャンピオン・メンター
 image: /images/sessions/no_image.webp
 timetable:
   slot: 大会議室B
-  start: "13:35"
-  end: "14:30"
+  start: "14:05"
+  end: "15:00"
 draft: false
 ---
 

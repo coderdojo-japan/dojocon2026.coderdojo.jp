@@ -7,8 +7,8 @@ target: チャンピオン・メンター・保護者
 image: /images/sessions/session09.png
 timetable:
   slot: 大会議室A
-  start: "14:35"
-  end: "15:30"
+  start: "15:05"
+  end: "16:05"
 draft: false
 ---
 
