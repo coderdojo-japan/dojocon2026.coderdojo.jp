@@ -6,8 +6,8 @@ speaker: 西岡 純生
 target: チャンピオン・メンター
 image: /images/sessions/no_image.webp
 timetable:
-  slot: 大会議室A
-  start: "14:15"
+  slot: 大会議室B
+  start: "14:05"
   end: "15:00"
 draft: false
 ---
