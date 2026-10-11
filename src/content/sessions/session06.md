@@ -6,7 +6,7 @@ speaker: 高田　悠
 target: チャンピオン・メンター
 image: /images/sessions/session06.webp
 timetable:
-  slot: 大会議室B
+  slot: 大会議室A
   start: "16:10"
   end: "17:00"
 draft: false

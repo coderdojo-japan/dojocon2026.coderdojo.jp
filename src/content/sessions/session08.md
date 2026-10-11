@@ -6,7 +6,7 @@ speaker: 調整中
 target: チャンピオン・メンター
 image: /images/sessions/no_image.webp
 timetable:
-  slot: 大会議室A
+  slot: 大会議室B
   start: "16:10"
   end: "17:00"
 draft: false
