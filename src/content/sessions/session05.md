@@ -4,7 +4,7 @@ type: 対話
 theme: つづける
 speaker: 西岡 純生
 target: チャンピオン・メンター
-image: /images/sessions/no_image.webp
+image: /images/sessions/session05.webp
 timetable:
   slot: 大会議室B
   start: "14:05"
