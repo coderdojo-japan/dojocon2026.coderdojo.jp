@@ -117,6 +117,7 @@ export const sponsorTiers: SponsorTier[] = [
       { name: "天沼倫太郎" },
       { name: "長嶺建市" },
       { name: "畠山将樹" },
+      { name: "Katz Ueno", url: "https://coderdojoowari.org" },
     ],
   },
 ];
