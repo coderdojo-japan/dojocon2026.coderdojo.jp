@@ -1,7 +1,7 @@
 ---
 title: toioプレイグラウンド コマンドを使ってみよう
 type: ワークショップ
-target: チャンピオン・メンター・ニンジャ
+target: どなたでも
 needsReservation: false
 image: /images/events/toio.jpg
 draft: false
