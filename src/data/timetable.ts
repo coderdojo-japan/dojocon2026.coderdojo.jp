@@ -59,8 +59,8 @@ export interface TimetableConfig {
 }
 
 export const timetableConfig: TimetableConfig = {
-  startTime: "10:00",
-  endTime: "17:00",
+  startTime: "09:50",
+  endTime: "17:30",
   tickMinutes: 30,
   stepMinutes: 5,
 

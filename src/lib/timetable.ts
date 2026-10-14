@@ -22,6 +22,8 @@ export interface TimetableEntry {
   color: string;
   /** "13:00 - 14:30" のような表示用ラベル */
   timeLabel: string;
+  /** コマの長さ（分）。短いコマを詰めた表示にするかの判定に使う */
+  durationMinutes: number;
   /** CSS Grid の grid-row の開始行（1 始まり） */
   rowStart: number;
   /** CSS Grid の grid-row の終了行（この行の直前までを占める） */
@@ -64,6 +66,8 @@ export interface TimetableData {
   totalRows: number;
   /** 1目盛りが何行分か（横罫線の間隔の計算に使う） */
   rowsPerTick: number;
+  /** 最初の目盛りが表の上端から何行下にあるか（横罫線の位置合わせに使う） */
+  tickOffsetRows: number;
   /** 毎時00分の区切り線を引く行（CSS Grid の grid-row） */
   hourRows: number[];
   /** 表に置けたコマが1つもないか */
@@ -155,6 +159,7 @@ export async function getTimetable(): Promise<TimetableData> {
       // 色は全部置き終わってから決める（出てきた順に既定パレットを配るため）
       color: "",
       timeLabel: `${toLabel(start)} - ${toLabel(end)}`,
+      durationMinutes: end - start,
       rowStart: Math.floor((start - tableStart) / stepMinutes) + 1,
       rowEnd: Math.ceil((end - tableStart) / stepMinutes) + 1,
     };
@@ -236,8 +241,12 @@ export async function getTimetable(): Promise<TimetableData> {
   /** 分数 → grid-row。表の上端を 1 行目とする */
   const toRow = (minutes: number): number => Math.floor((minutes - tableStart) / stepMinutes) + 1;
 
+  // 目盛りは tickMinutes の倍数の時刻（30分なら毎時00分と30分）に置く。
+  // 表の上端が半端な時刻（09:50 など）でも、09:50 から数えて :20 / :50 にならないようにする
+  const firstTick = Math.ceil(tableStart / tickMinutes) * tickMinutes;
+  const tickOffsetRows = (firstTick - tableStart) / stepMinutes;
   const ticks: TimetableTick[] = [];
-  for (let minutes = tableStart; minutes <= tableEnd; minutes += tickMinutes) {
+  for (let minutes = firstTick; minutes <= tableEnd; minutes += tickMinutes) {
     ticks.push({ label: toLabel(minutes), row: toRow(minutes), isHour: minutes % 60 === 0 });
   }
 
@@ -256,6 +265,7 @@ export async function getTimetable(): Promise<TimetableData> {
     ticks,
     totalRows,
     rowsPerTick,
+    tickOffsetRows,
     hourRows,
     isEmpty: columns.every((column) => column.entries.length === 0),
   };

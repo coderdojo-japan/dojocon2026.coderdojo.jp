@@ -129,8 +129,8 @@
 }
 
 .p-timetable__grid {
-	// --tt-cols / --tt-rows / --tt-rows-per-tick はコンポーネント側から渡される
-	--tt-row-height: 12px; // 5分（stepMinutes）1つ分の高さ。1時間 = 144px
+	// --tt-cols / --tt-rows / --tt-rows-per-tick / --tt-tick-offset-rows はコンポーネント側から渡される
+	--tt-row-height: 16px; // 5分（stepMinutes）1つ分の高さ。1時間 = 192px
 	--tt-axis-width: 58px; // 左の時間軸の幅
 	--tt-col-min: 200px; // 1列の最小幅。これを下回るときは横スクロールになる
 	--tt-line: #{rgba(s.$text-color, 0.12)}; // 目盛り（30分）ごとの細い線
@@ -144,7 +144,7 @@
 	min-width: 100%;
 
   @include s.mq-down() {
-    --tt-row-height: 11px; // 1時間 = 132px
+    --tt-row-height: 15px; // 1時間 = 180px
     --tt-axis-width: 50px;
   }
 }
@@ -199,6 +199,7 @@
 }
 
 // 列の背景。目盛り（30分）の間隔ごとに細い横罫線を引く。
+// 表の上端が半端な時刻のときは、最初の目盛りの位置まで模様をずらす。
 // 毎時00分の濃い線は .p-timetable__hourline が別に担当する
 .p-timetable__lane {
 	background-color: #{rgba(s.$main-blue, 0.03)};
@@ -211,6 +212,7 @@
 		transparent 1px,
 		transparent calc(var(--tt-row-height) * var(--tt-rows-per-tick))
 	);
+	background-position: 0 calc(var(--tt-row-height) * var(--tt-tick-offset-rows, 0));
 }
 
 // 毎時00分の区切り線。高さ0の箱を全列にまたがらせ、上辺だけを濃く引く。
@@ -290,6 +292,58 @@
   @include s.mq-down() {
     gap: 2px;
     padding: 6px 8px;
+  }
+}
+
+// 短いコマ（10分など）は縦に3段積む高さがないので、時刻とタイトルを横1行に詰める。
+// 種別・テーマ・登壇者は詳細ページで見られるため、ここでは隠す
+.p-timetable__entry--short {
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+	padding-top: 0;
+	padding-bottom: 0;
+
+	.p-timetable__entry-title {
+		display: block;
+		min-width: 0;
+		line-height: 1.2;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+	.p-timetable__entry-meta {
+		display: none;
+	}
+
+  @include s.mq-down() {
+    gap: 6px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+// 中くらいのコマ（20分など）は、時刻1行とタイトル最大2行だけにする。
+// 4行分（PCで約60px・スマホで約56px）に収まるよう、余白と行間も詰める
+.p-timetable__entry--medium {
+	justify-content: center;
+	gap: 2px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+
+	.p-timetable__entry-title {
+		flex-shrink: 0;
+		line-height: 1.25;
+		-webkit-line-clamp: 2;
+	}
+
+	.p-timetable__entry-meta {
+		display: none;
+	}
+
+  @include s.mq-down() {
+    padding-top: 3px;
+    padding-bottom: 3px;
   }
 }
 

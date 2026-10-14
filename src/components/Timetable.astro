@@ -25,15 +25,33 @@ import { site } from "../data/site";
 /** ヘッダー（場所名）が占める行数 */
 const HEADER_ROWS = 1;
 
-const { columns: allColumns, legend, ticks, totalRows, rowsPerTick, hourRows, isEmpty } = await getTimetable();
+/** この長さ（分）以下のコマは、時刻とタイトルだけを1行に詰めて見せる */
+const SHORT_ENTRY_MINUTES = 15;
+
+/** この長さ（分）以下のコマは、時刻とタイトルだけを2段に詰めて見せる */
+const MEDIUM_ENTRY_MINUTES = 20;
+
+const {
+  columns: allColumns,
+  legend,
+  ticks,
+  totalRows,
+  rowsPerTick,
+  tickOffsetRows,
+  hourRows,
+  isEmpty,
+} = await getTimetable();
 
 // コマが入っていない場所は列ごと省く
 const columns = allColumns.filter((column) => column.entries.length > 0);
 
 // 寸法の既定値は SCSS 側に持たせ、データから決まる値だけカスタムプロパティで渡す
-const gridStyle = [`--tt-cols:${columns.length}`, `--tt-rows:${totalRows}`, `--tt-rows-per-tick:${rowsPerTick}`].join(
-  ";",
-);
+const gridStyle = [
+  `--tt-cols:${columns.length}`,
+  `--tt-rows:${totalRows}`,
+  `--tt-rows-per-tick:${rowsPerTick}`,
+  `--tt-tick-offset-rows:${tickOffsetRows}`,
+].join(";");
 
 // 現在時刻ラインの位置決めに使う値。描画はブラウザ側（開催当日のみ）
 const nowData = {
@@ -136,7 +154,14 @@ const nowData = {
             {columns.map((column, index) =>
               column.entries.map((entry) => (
                 <a
-                  class={`p-timetable__entry p-timetable__entry--${entry.kind}`}
+                  class:list={[
+                    "p-timetable__entry",
+                    `p-timetable__entry--${entry.kind}`,
+                    entry.durationMinutes <= SHORT_ENTRY_MINUTES && "p-timetable__entry--short",
+                    entry.durationMinutes > SHORT_ENTRY_MINUTES &&
+                      entry.durationMinutes <= MEDIUM_ENTRY_MINUTES &&
+                      "p-timetable__entry--medium",
+                  ]}
                   data-col={index + 1}
                   href={entry.href}
                   style={`grid-column:${index + 2};grid-row:${entry.rowStart + HEADER_ROWS} / ${entry.rowEnd + HEADER_ROWS};--tt-slot-color:${entry.color}`}
