@@ -8,7 +8,7 @@ image: /images/sessions/no_image.webp
 timetable:
   slot: 大会議室B
   start: "16:10"
-  end: "17:00"
+  end: "17:05"
 draft: false
 ---
 
