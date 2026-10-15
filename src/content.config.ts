@@ -14,8 +14,17 @@ const TIME_PATTERN = /^([01]\d|2[0-3]):[0-5]\d$/;
  *     slot: ホール      # 場所。src/data/timetable.ts の slots にある id か name
  *     start: "13:00"    # 開始時刻（"HH:MM"。クォートを付ける）
  *     end: "14:30"      # 終了時刻（開始より後）
+ *
+ * 1つのセッション / イベントを複数のコマに載せたいときは配列で書く。
+ *   timetable:
+ *     - slot: ホール
+ *       start: "14:00"
+ *       end: "14:15"
+ *     - slot: 大会議室A
+ *       start: "15:30"
+ *       end: "17:00"
  */
-const timetable = z
+const timetableEntry = z
   .object({
     // 場所（表の横軸）。src/data/timetable.ts に登録した id または name を書く
     slot: z.string(),
@@ -28,6 +37,11 @@ const timetable = z
     message: "終了時刻は開始時刻より後にしてください",
     path: ["end"],
   });
+
+// 単体でも配列でも書けるようにし、読み込み後は常に配列にそろえる
+const timetable = z
+  .union([timetableEntry, z.array(timetableEntry).min(1)])
+  .transform((v) => (Array.isArray(v) ? v : [v]));
 
 /**
  * お知らせ（News）コレクション。

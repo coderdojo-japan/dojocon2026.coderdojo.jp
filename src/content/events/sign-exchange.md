@@ -1,6 +1,7 @@
 ---
 title: 来場記念にサインの交換をしよう
 type: イベント
+theme: ひろげる
 target: どなたでも
 needsReservation: false
 image: /images/events/sign-exchange.png

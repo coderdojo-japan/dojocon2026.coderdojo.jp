@@ -1,9 +1,17 @@
 ---
-title: mBotを動かしてみよう
+title: mBotワークショップ
+theme: ひろげる
 type: ワークショップ
 target: どなたでも
 image: /images/events/mbot.png
 needsReservation: false
+timetable:
+  - slot: 特別会議室
+    start: "13:00"
+    end: "14:00"
+  - slot: 特別会議室
+    start: "14:25"
+    end: "15:25"
 draft: false
 ---
 

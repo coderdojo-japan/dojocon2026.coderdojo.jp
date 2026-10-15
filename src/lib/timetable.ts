@@ -177,34 +177,37 @@ export async function getTimetable(): Promise<TimetableData> {
 
   const [sessions, events] = await Promise.all([getSessions(), getEvents()]);
 
+  // timetable は読み込み時に配列へそろえてあるので、1件が複数のコマになることがある
   for (const item of sessions) {
-    if (!item.data.timetable) continue;
-    place({
-      id: item.id,
-      kind: "session",
-      base: "/sessions",
-      title: item.data.title,
-      type: item.data.type,
-      theme: item.data.theme,
-      target: item.data.target,
-      speaker: item.data.speaker,
-      placement: item.data.timetable,
-    });
+    for (const placement of item.data.timetable ?? []) {
+      place({
+        id: item.id,
+        kind: "session",
+        base: "/sessions",
+        title: item.data.title,
+        type: item.data.type,
+        theme: item.data.theme,
+        target: item.data.target,
+        speaker: item.data.speaker,
+        placement,
+      });
+    }
   }
 
   for (const item of events) {
-    if (!item.data.timetable) continue;
-    place({
-      id: item.id,
-      kind: "event",
-      base: "/events",
-      title: item.data.title,
-      type: item.data.type,
-      theme: item.data.theme,
-      target: item.data.target,
-      speaker: item.data.speaker,
-      placement: item.data.timetable,
-    });
+    for (const placement of item.data.timetable ?? []) {
+      place({
+        id: item.id,
+        kind: "event",
+        base: "/events",
+        title: item.data.title,
+        type: item.data.type,
+        theme: item.data.theme,
+        target: item.data.target,
+        speaker: item.data.speaker,
+        placement,
+      });
+    }
   }
 
   const columns: TimetableColumn[] = slots.map((slot) => ({

@@ -1,9 +1,17 @@
 ---
 title: パソコンを分解してみよう
 type: ワークショップ
+theme: はじめる
 target: どなたでも
 needsReservation: false
 image: /images/events/bunkai.png
+timetable:
+  - slot: 特別会議室
+    start: "14:00"
+    end: "14:15"
+  - slot: 特別会議室
+    start: "15:30"
+    end: "17:00"
 draft: false
 ---
 

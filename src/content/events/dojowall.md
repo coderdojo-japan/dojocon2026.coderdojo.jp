@@ -1,6 +1,7 @@
 ---
 title: DojoWall
 type: イベント
+theme: わかちあう
 target: どなたでも
 needsReservation: false
 image: /images/events/dojowall.png

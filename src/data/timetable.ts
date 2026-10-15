@@ -9,6 +9,7 @@
  *     end: "14:30"
  *
  * と書くと、この設定に従って表に配置される。
+ * 複数のコマに載せたいときは配列（"- slot: ..." を並べる）で書ける（src/content.config.ts）。
  * 「表の縦の範囲」「横に並べる場所の順番」「色分けのしかた」「色」を変えたいときは、
  * まずこのファイルを直す。
  */
@@ -69,7 +70,7 @@ export const timetableConfig: TimetableConfig = {
     { id: "hall", name: "ホール", color: "#00b1a9" },
     { id: "room-a", name: "大会議室A", color: "#ee859a" },
     { id: "room-b", name: "大会議室B", color: "#9699cb" },
-    { id: "workshop", name: "ワークショップ", color: "#89c3a0" },
+    { id: "room-c", name: "特別会議室", color: "#89c3a0" },
   ],
 
   // 色分けのしかた。"slot"（場所）/ "type"（種別）/ "theme"（テーマ）

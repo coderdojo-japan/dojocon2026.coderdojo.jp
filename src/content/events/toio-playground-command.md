@@ -1,10 +1,11 @@
 ---
 title: toioプレイグラウンド コマンドを使ってみよう
 type: ワークショップ
+theme: ひろげる
 target: どなたでも
 needsReservation: false
 image: /images/events/toio.jpg
-draft: false
+draft: true
 ---
 
 「toioプレイグラウンド コマンド」を使ってみよう！
