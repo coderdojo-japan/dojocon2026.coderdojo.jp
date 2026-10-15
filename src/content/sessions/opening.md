@@ -9,7 +9,7 @@ timetable:
   slot: ホール
   start: "09:50"
   end: "10:00"
-draft: true
+draft: false
 ---
 
 ## オープニング

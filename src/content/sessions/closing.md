@@ -9,7 +9,7 @@ timetable:
   slot: ホール
   start: "17:10"
   end: "17:30"
-draft: true
+draft: false
 ---
 
 ## CoderDojo Japan活動報告
