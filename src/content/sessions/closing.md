@@ -20,6 +20,8 @@ draft: false
 
 ### 安川 要平（やすかわ ようへい）
 
+![安川要平氏](/images/sessions/yasukawa.jpg)
+
 CoderDojo Japan 代表理事  
 [@yasulab](https://x.com/yasulab)
 
