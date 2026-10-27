@@ -2,7 +2,7 @@
 title: 地域とつながると、Dojoは変わる？ ― 学校・自治体・地域団体との関わり方
 type: 対話
 theme: ひろげる
-speaker: 調整中
+speaker: 石川 博之・石原 淳也・関口　悠
 target: チャンピオン・メンター
 image: /images/sessions/no_image.webp
 timetable:
@@ -24,7 +24,17 @@ draft: false
 
 ## 話題提供者
 
-### 調整中
+### 石川 博之
+
+CoderDojo 光 チャンピオン
+
+### 石原 淳也
+
+CoderDojo 調布／CoderDojo 青山 チャンピオン
+
+### 関口　悠
+
+CoderDojo 前橋 チャンピオン
 
 ## 進行役
 
