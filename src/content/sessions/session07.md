@@ -30,7 +30,11 @@ CoderDojo 光 チャンピオン
 
 ### 石原 淳也
 
+![石原淳也氏](/images/sessions/jishiha.jpg)
+
 CoderDojo 調布／CoderDojo 青山 チャンピオン
+
+ウェブサービスの開発を行うかたわら、CoderDojoの日本での立ち上げに関わり、現在はCoderDojo調布/青山を主宰、「青学つくまなラボ」フェローとしても子供たちにプログラミングを教える活動を続けている。
 
 ### 関口　悠
 
