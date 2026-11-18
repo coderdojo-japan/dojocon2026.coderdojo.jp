@@ -5,6 +5,7 @@ import Theme from "../components/sections/Theme.astro";
 import Outline from "../components/sections/Outline.astro";
 import About from "../components/sections/About.astro";
 import News from "../components/sections/News.astro";
+import Countdown from "../components/sections/Countdown.astro";
 import Keynote from "../components/sections/Keynote.astro";
 import ProgramSection from "../components/sections/ProgramSection.astro";
 import Sponsors from "../components/sections/Sponsors.astro";
@@ -41,6 +42,7 @@ const events = await getEvents(6);
       moreHref="/events/"
       moreLabel="全てのイベントをみる"
     />
+    <Countdown />
     <Sponsors />
     <Organizers />
     <Contact />

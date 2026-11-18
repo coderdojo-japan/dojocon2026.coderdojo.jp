@@ -698,6 +698,102 @@
 }
 
 /*****************************************************
+	カウントダウン DojoCon
+*****************************************************/
+.p-countdown {
+  margin-top: 200px;
+	padding: 0 24px;
+
+  @include s.mq-down(lg) {
+    margin-top: 140px;
+  }
+
+  @include s.mq-down() {
+    margin-top: 100px;
+  }
+}
+
+.p-countdown__grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 32px;
+	list-style: none;
+	padding: 0;
+
+  @include s.mq-down(lg) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  @include s.mq-down() {
+    gap: 16px;
+  }
+}
+
+.p-countdown__link {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	color: s.$text-color;
+	text-decoration: none;
+
+	&:hover {
+		opacity: 0.8;
+		transform: translateY(5px);
+	}
+}
+
+.p-countdown__img-wrap {
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	box-shadow: 0 0 6px 1px rgb(0 0 0 / 10%);
+}
+
+.p-countdown__img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.p-countdown__title {
+	font-size: s.fz(16);
+	font-weight: bold;
+	line-height: 1.6;
+	text-align: center;
+	letter-spacing: 0.1em;
+
+  @include s.mq-down() {
+    font-size: s.fz(14);
+  }
+}
+
+.p-countdown__date {
+	font-size: s.fz(15);
+	text-align: center;
+	letter-spacing: 0.1em;
+	margin-top: -4px;
+
+  @include s.mq-down() {
+    font-size: s.fz(13);
+  }
+}
+
+.p-countdown__more {
+	margin-top: 60px;
+
+  @include s.mq-down() {
+    margin-top: 40px;
+
+    // ラベルが長いので、SPは文字を小さくして2行にし、左右の飾りに重ならないよう余白をとる
+    .c-front-btn {
+      padding-inline: 18%;
+      font-size: s.fz(13);
+      line-height: 1.4;
+    }
+  }
+}
+
+/*****************************************************
 	セッション・イベント
 *****************************************************/
 .p-program {
