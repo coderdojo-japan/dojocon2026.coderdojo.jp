@@ -1,0 +1,42 @@
+---
+// カウントダウン DojoCon セクション（p-countdown）。配信アーカイブは data/countdown.ts。
+import Heading from "../Heading.astro";
+import FrontButton from "../FrontButton.astro";
+import { countdownEpisodes, countdownPlaylistUrl, youtubeUrl, youtubeThumbnail } from "../../data/countdown";
+---
+
+<section class="p-countdown">
+  <div class="p-countdown__inner l-inner">
+    <Heading title="Countdown DojoCon Japan" subtitle="カウントダウン ドージョーコン ジャパン" />
+    <ol class="p-countdown__grid">
+      {
+        countdownEpisodes.map((episode) => (
+          <li class="p-countdown__item">
+            <a class="p-countdown__link" href={youtubeUrl(episode.videoId)} target="_blank" rel="noopener noreferrer">
+              <div class="p-countdown__img-wrap">
+                <img
+                  class="p-countdown__img"
+                  src={youtubeThumbnail(episode.videoId)}
+                  alt=""
+                  width="480"
+                  height="360"
+                  loading="lazy"
+                />
+              </div>
+              <h3 class="p-countdown__title">
+                #{episode.number} {episode.title}
+              </h3>
+              <p class="p-countdown__date">{episode.onAir} ONAIR</p>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+    <div class="p-countdown__more">
+      <FrontButton href={countdownPlaylistUrl} external
+        >全てのカウントダウン<br class="u-br--pc-tab-none" /><span class="u-hidden--sp">&nbsp;</span>ドージョーコン
+        ジャパンをみる</FrontButton
+      >
+    </div>
+  </div>
+</section>
